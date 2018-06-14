@@ -1,0 +1,38 @@
+app_admin_payments:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\PaymentsController::indexAction }
+
+app_admin_payments_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\PaymentsController::ajaxListAction }
+
+app_admin_payments_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\PaymentsController::createAction }
+    methods:  POST
+
+app_admin_payments_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\PaymentsController::deleteAction }
+
+app_admin_payments_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\PaymentsController::editAction }
+
+app_admin_payments_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\PaymentsController::newAction }
+
+app_admin_payments_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\PaymentsController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_payments_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\PaymentsController::showAction }
+
+app_admin_payments_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\PaymentsController::updateAction }
+    methods:  [POST, PUT]

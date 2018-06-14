@@ -1,0 +1,32 @@
+AppBundle\Entity\Settings:
+    type: entity
+    repositoryClass: AppBundle\Repository\SettingsRepository
+    table: Settings
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        name:
+            type: string
+            length: 50
+        value:
+            type: text
+        description:
+            type: string
+            nullable: true
+    manyToOne:
+        client:
+            targetEntity: Clients
+            inversedBy: settings
+            joinColumn:
+                name: clients_id
+                referencedColumnName: id    
+    
+    lifecycleCallbacks: {}
+        # prePersist: [ prePersistSettings ]
+        # preUpdate: [ preUpdateSettings ]

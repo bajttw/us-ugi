@@ -1,0 +1,52 @@
+app_admin_subcontractors:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::indexAction }
+
+app_admin_subcontractors_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::ajaxListAction }    
+
+app_admin_subcontractors_dic:
+    path:     /dic
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::ajaxDicAction }
+
+app_admin_subcontractors_ajax_details:
+    path:     /ajax/details
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::ajaxListDetailsAction }    
+
+app_admin_subcontractors_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::createAction }
+    methods:  POST
+
+app_admin_subcontractors_data:
+    path:     /{id}/data
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::ajaxDataAction }    
+
+app_admin_subcontractors_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::deleteAction }
+
+app_admin_subcontractors_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::editAction }
+
+app_admin_subcontractors_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::newAction }
+
+app_admin_subcontractors_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_subcontractors_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::showAction }
+
+app_admin_subcontractors_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\SubcontractorsController::updateAction }
+    methods:  [POST, PUT]
+
+

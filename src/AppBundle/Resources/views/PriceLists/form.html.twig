@@ -1,0 +1,61 @@
+{% use "blocks.html.twig" %}
+{% use "/Form/blocks.html.twig" %}
+{% use "@App/PriceLists/blocks.html.twig" %}
+{% use "@App/PriceLists/formBlocks.html.twig" %}
+{% set admin = form.vars.attr['data-admin']|default(false) %}
+
+<div class="row-blocks">
+    <div class="col-12">
+        {% set card={ 
+            attr: {
+                class: 'card-sm'
+            },
+            header: { 
+                title: 'pricelists.label.basic'
+            },
+            content: block('pricelists_basic')
+        } %}
+        {{ block("card") }}
+    </div>
+</div>
+<div class="row-blocks">
+    <div class="col-12">
+        {% set card={ 
+            attr: {
+                class: 'card-sm'
+            },
+            header: { 
+                title: 'pricelists.label.serviceCatalog',
+                right_content: block('serviceCatalog_buttons')
+            },
+            block:{
+                attr: {
+                    class: 'scroll'
+                }
+            },
+            content: form_row(form.serviceCatalogPrices) 
+        } %}
+        {{ block("card") }}
+    </div>
+</div>
+<div class="row-blocks">
+    <div class="col-12">
+        {% set card={ 
+            attr: {
+                class: 'card-sm'
+            },
+            header: { 
+                title: 'pricelists.label.serviceOptions',
+                right_content: block('serviceOptions_buttons')
+            },
+            block:{
+                attr: {
+                    class: 'scroll'
+                }
+            },
+            content: form_row(form.serviceOptionsPrices) 
+        } %}
+        {{ block("card") }}
+    </div>
+</div>
+    

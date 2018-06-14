@@ -1,0 +1,20 @@
+{% extends 'Modal/content.html.twig' %}
+{% use "Form/blocks.html.twig" %}
+{% block modal_form_start %}
+    {{ block('b_form_start') }}
+{% endblock %}
+{% block modal_form_errors %}
+    {{ block("b_form_errors") }}
+{% endblock %}
+{% block modal_form_body %}
+    {{ block("b_form_body") }}
+    {{ block("b_form_messages") }}
+{% endblock %}
+{% block modal_form_submit %}
+    {{ block("b_form_submit") }}
+{% endblock %}
+{% block modal_form_end %}
+    {{ block("b_form_end") }}
+{% endblock %}
+{% block modal_js %}
+{% endblock %}

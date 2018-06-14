@@ -1,0 +1,119 @@
+AppBundle\Entity\Clients:
+    type: entity
+    repositoryClass: AppBundle\Repository\ClientsRepository
+    table: Clients
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        code:
+            type: string
+            length: 10
+            options:
+                default: 'N'
+        name:
+            type: string
+            length: 100
+        street:
+            type: string
+            nullable: true
+            length: 100
+        zipCode:
+            type: string
+            column: zip_code
+            nullable: true
+            length: 6
+        city:
+            type: string
+            nullable: true
+            length: 100
+        nip:
+            type: string
+            nullable: true
+            length: 10
+        contact:
+            type: string
+            nullable: true
+            length: 100
+        tel:
+            type: string
+            nullable: true
+            length: 45
+        mobile:
+            type: string
+            nullable: true
+            length: 45
+        email:
+            type: string
+            nullable: true
+            length: 100
+        active:
+            type: boolean
+            nullable: false
+            options:
+                default: true
+        regular:
+            type: boolean
+            nullable: false
+            options:
+                default: false
+        description:
+            type: string
+            nullable: true
+            length: 250
+    oneToMany:
+        serviceOrders:
+            targetEntity: ServiceOrders
+            mappedBy: client
+        serviceRequests:
+            targetEntity: ServiceRequests
+            mappedBy: client
+        settings:
+            targetEntity: Settings
+            mappedBy: client
+    manyToMany:
+        clientGroups:
+            targetEntity: ClientsGroups
+            inversedBy: clients
+            joinTable:
+                name: Clients_ClientsGroups
+                joinColumns:
+                    clients_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    clientsGroups_id:
+                        referencedColumnName: id 
+        users:
+            targetEntity: Users
+            mappedBy: clients  
+        priceLists:
+            targetEntity: PriceLists
+            inversedBy: clients  
+            joinTable:
+                name: Clients_PriceLists
+                joinColumns:
+                    clients_id:
+                        referencedColumnName: id                
+                inverseJoinColumns:
+                    pricelists_id:
+                        referencedColumnName: id
+            cascade: [ "persist" ]
+        notes:
+            targetEntity: Notes
+            joinTable:
+                name: Clients_Notes
+                joinColumns:
+                    clients_id:
+                        referencedColumnName: id
+                        onDelete: CASCADE                        
+                inverseJoinColumns:
+                    notes_id:
+                        referencedColumnName: id 
+            cascade: [ "persist" ]
+
+    lifecycleCallbacks: {  }

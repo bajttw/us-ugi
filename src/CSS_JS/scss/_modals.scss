@@ -1,0 +1,51 @@
+.modal-body{
+    max-height: 80vh;
+    overflow: auto; 
+    .row-blocks{
+        // > div:first-child{
+        //     padding-left: 3px;
+        // }
+        // > div:last-child{
+        //     padding-right: 3px;
+        // }
+    }
+    .card{
+        @extend .card-sm;
+        /*@include full-height;*/
+        /*@include flex-on;*/
+        /*@include flex-column;*/
+        .card-block{
+            /*@include flex-item-auto;*/
+        }
+        /*margin-bottom: 0;*/
+    }
+}
+.modal-xl{
+    max-width: 80%;
+}
+
+.modal-import, .modal-lackers{
+/*    .modal-body{
+        overflow: hidden;
+    }
+    .content-body{
+        overflow: hidden;
+    }*/
+}
+
+.modal-import{
+    .lined, .table-form{
+        height: 60vh;
+    }
+   
+    
+}
+
+footer{
+    span{
+        text-align: center;
+        font-size: 0.7rem;
+        line-height: 2rem;
+    }
+    
+}

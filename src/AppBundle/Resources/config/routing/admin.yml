@@ -1,0 +1,67 @@
+app_admin:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\ClientsController::serviceAction }
+
+app_admin_home:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\ClientsController::serviceAction }
+
+app_admin_test:
+    path:     /test
+    defaults: { _controller: AppBundle\Controller\AppController::testAction }
+
+app_admin_service:
+    path:     /service
+    defaults: { _controller: AppBundle\Controller\AppController::serviceAction }
+    
+app_admin_clients:
+    resource: "@AppBundle/Resources/config/routing/admin/Clients.yml"
+    prefix:   /clients
+
+app_admin_clientsgroups:
+    resource: "@AppBundle/Resources/config/routing/admin/ClientsGroups.yml"
+    prefix:   /clientsgroups
+
+app_admin_subcontractors:
+    resource: "@AppBundle/Resources/config/routing/admin/Subcontractors.yml"
+    prefix:   /subcontractors
+
+app_admin_notes:
+    resource: "@AppBundle/Resources/config/routing/admin/Notes.yml"
+    prefix:   /notes
+
+app_admin_settings:
+    resource: "@AppBundle/Resources/config/routing/admin/Settings.yml"
+    prefix:   /settings
+
+app_admin_users:
+    resource: "@AppBundle/Resources/config/routing/admin/Users.yml"
+    prefix:   /users
+
+app_admin_usersgroups:
+    resource: "@AppBundle/Resources/config/routing/admin/UsersGroups.yml"
+    prefix:   /usersgroups
+
+app_admin_services:
+    resource: "@AppBundle/Resources/config/routing/admin/Services.yml"
+    prefix:   /services
+
+app_admin_servicecatalog:
+    resource: "@AppBundle/Resources/config/routing/admin/ServiceCatalog.yml"
+    prefix:   /servicecatalog
+
+app_admin_serviceoptions:
+    resource: "@AppBundle/Resources/config/routing/admin/ServiceOptions.yml"
+    prefix:   /serviceoptions
+
+app_admin_pricelists:
+    resource: "@AppBundle/Resources/config/routing/admin/PriceLists.yml"
+    prefix:   /pricelists
+
+app_admin_serviceorders:
+    resource: "@AppBundle/Resources/config/routing/admin/ServiceOrders.yml"
+    prefix:   /serviceorders
+
+app_admin_servicerequests:
+    resource: "@AppBundle/Resources/config/routing/admin/ServiceRequests.yml"
+    prefix:   /servicerequests

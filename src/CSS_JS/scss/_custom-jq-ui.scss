@@ -1,0 +1,12 @@
+
+.ui-widget-content {
+    background: $dropdown-bg;
+    background-clip: padding-box;
+    border: $dropdown-border-width solid $dropdown-border-color;
+    @include border-radius($border-radius);
+    @include box-shadow($dropdown-box-shadow);
+}
+
+.ui-widget{
+    font-size: 1rem;
+}

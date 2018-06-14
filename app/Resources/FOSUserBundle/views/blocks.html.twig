@@ -1,0 +1,17 @@
+
+
+{% block begin_fos_row %}
+    <div class="col-12">
+{% endblock begin_fos_row %}
+
+{% block close_fos_row %}
+    </div>
+{% endblock close_fos_row %}
+
+{% block fos_error %}
+    {{ block('begin_fos_row') }}
+        {% if error %}
+            <div class="alert alert-danger mt-2" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+    {{ block('close_fos_row') }}
+{% endblock fos_error %}

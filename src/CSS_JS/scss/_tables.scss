@@ -1,0 +1,371 @@
+
+.row-head, .row-data, .row-info, .row-details, .row-child{
+    @include flex-on;
+    width: 100%;
+    justify-content: left !important;
+}
+
+.row-info{
+    padding-top: 1rem;
+}
+
+.table{
+    * {
+        margin:0;
+    }
+
+    width: 100%;
+       
+    .card-block &{
+        margin-bottom: 0;
+    }
+    @include flex-column;
+
+    &-columns{
+        flex-direction: row;
+        > div{
+            padding-right:0;
+            padding-left: 0;
+            @include flex-column;
+            &+div{
+                border-left: $border;
+            }
+            div+div{
+                border-top: $border;
+            }
+        }
+    }
+    &-body, &-header, &-footer, .row-pos{
+        @include flex-column;
+    }
+    > div, &-header > div, &-body > div, &-footer > div, .row-pos > div{
+        @include flex-on;
+    }
+    &-body > div{
+/*        &:hover > div {
+            @include colors($table-color-hover...);
+        }*/
+        &:hover > div {
+            background-color:  rgba(0,50,50,0.05);
+        }
+        &:nth-child(odd){
+            @include colors($table-color...);
+        }
+        &:nth-child(even){
+            @include colors($table-color-stripe...);
+        }
+    }
+    &-inner{
+        background-color: transparent !important;
+        .table-body > div{
+            &:nth-child(odd){
+                background-color: transparent;
+            }
+            &:nth-child(even){
+                background-color: rgba(100,150,0,0.05);
+            }
+
+        }
+    }
+
+    
+    &-bordered{
+        border: $border;
+        .col-head, .col-data{
+            > div{
+                border-right: $border;
+                &:last-child{
+                    border-bottom: $border;
+                }
+                &:first-child{
+                    border-top: $border;
+                }
+            }
+        }
+        .table-body > div{
+            
+        /*}:not(:last-child){*/
+            border-bottom: $border;
+        }
+/*        .row-head, .row-data{
+            > div{
+                border-bottom: $border;
+                &:last-child{
+                    border-right: $border;
+                }
+                &:first-child{
+                    border-left: $border;
+                }
+            }
+        }*/
+        .row-info{
+            border-top: $border;
+/*            border-bottom: $border;
+            border-left: $border;
+            border-right: $border;*/
+            background-color: inherit;
+        }
+        & .table-inner{           
+            .row-head, .row-data{
+                > div{
+                    &:last-child{
+                        border-right: none;
+                    }
+                    &:first-child{
+                        border-left: none;
+                    }
+                }
+            }
+        }
+    }
+    &-scroll{
+        max-height: 100%;
+        overflow: auto !important;
+    }
+    .row-head, .row-data{
+        > div+div{
+            border-left: $border;
+        }
+    }    
+    /*.row-head > div, .col-head > div, .cell-head{*/
+        
+    .row-head, .col-head, .cell-head{
+        @include colors($table-header-colors...);
+        /*border-top: $border;*/
+        font-weight: bold;
+        text-align: center;
+    }
+
+    &-detail{
+        .row-head, .col-head, .cell-head{
+            @include colors($table-detail-header-colors...);
+            /*border-top: $border;*/
+            font-weight: bold;
+            text-align: center;
+        }
+            
+    }
+    .row-info{
+        padding-bottom: 1rem;
+        padding-top: .5rem;
+        /*display:none;*/
+    }
+    .row-head, .row-data, .col-head, .col-data,{
+        > div{
+            text-align: center;
+            padding: 3px 5px;
+            &.table{
+                padding: 0px;
+                border: none;
+            }
+        }
+    }
+    // .row-data > .c-select{
+    //     background: url('../images/unchecked-square.png') no-repeat center center;
+    //     cursor: pointer;
+    // }
+    // .selected{
+        
+    //     > .c-select{
+    //         background: url('../images/checked-square.png') no-repeat center center;
+    //     }
+    // }
+    &-view{
+        table{
+            width:100%;
+            td, th{
+                padding: .5rem;
+
+            }
+            th{
+                background-color: $table-header-bg;
+            }
+            tr{
+                border: solid 1px {
+                    color: $table-border-color;
+                }
+            }
+        }
+        span.btn{
+            padding: 0 6px;
+            position: relative;
+            margin-bottom: 2px;
+            top:0;
+        }
+    }
+    &-show {
+        font-size: 0.8em;
+        .table-body > div{
+            &:nth-child(odd){
+                @include colors($table-color-show...);
+            }
+            &:nth-child(even){
+                    @include colors($table-color-show-stripe...);
+            }
+        }
+        .row-head, .col-head, .cell-head{
+            @include colors($table-color-show-header...);
+        }
+    }
+    
+    &+.table{
+        margin-top:5px;
+    }
+}
+
+.table-form{
+    @extend .table-bordered;
+    @extend .form-sm;
+    .row-data{
+        border:red;
+        > div{
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            height: 25px;
+            min-height: 1px;
+            padding: 0;        
+            div{
+                display: flex;
+                align-items: stretch;    
+            }
+            > div{
+                width: 100%;
+            }
+            .input-group{
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+            &.c-actions{
+                padding: 2px;
+            }
+            .form-control, .input-group-text {
+                border-radius: 0; 
+            }
+            .btn{
+                display: block;
+                & + .btn{
+                    margin-left: 5px;
+                }
+                .material-icons{
+                    display: block;
+                }
+            }
+        }
+    }
+    .c-lp .form-control{
+        border-color: transparent;
+        box-shadow: none;
+        background-color: transparent;
+    }
+} 
+
+.cell-v{
+    text-align: center;
+    position: relative;
+    min-height: 1px;
+    width: 100%;
+    padding: $cell-padding;
+}
+
+.row-foot{
+    > div{
+        @include colors($table-header-colors...);
+        /*border-top: $border;*/
+        font-weight: bold;
+        text-align: center;
+    }
+}
+
+
+.row-details{
+    $border_details: solid 1px whitesmoke;
+    font-size: .7rem;
+    border-bottom: $border_details;
+    &:nth-child(even){
+        background-color:OldLace;
+    }
+    &:nth-child(odd){
+        background-color: snow;
+    }
+    > div{
+        padding: 2px 8px; 
+        text-align: center;
+    }
+    &:last-child{
+        border-bottom: none;
+    }
+}
+
+.c-auto{
+    flex: 1 1 auto;
+    max-width: 100%; 
+
+}
+
+@each $name, $l in $tab-columns{
+    .c-#{$name}{
+        @if $l== auto{
+            flex: 1 1 auto;
+            max-width: 100%; 
+        }@else{
+            flex: 0 0 $l;
+            max-width: $l; 
+        }
+    }
+}
+
+@for $i from 1 through 10 {
+    .c-#{$i}{
+        flex: 0 0 #{$i}rem;
+        max-width: #{$i}rem; 
+    }                
+}
+
+
+
+.dt-select, .dt-detail, .c-select, .c-detail, .c-control{
+    min-width: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+}
+
+.c-select{
+    background-image: none; 
+}
+
+td.dt-select{
+    background-image: url('../images/#{nth($select-img, 1)}.png');
+}
+
+td.dt-detail, .c-detail{
+    background-image: url('../images/collapsed-square.png');
+    .shown &{
+        background-image: url('../images/expanded-square.png');
+    }
+}
+
+@for $i from 1 through length($select-img) {
+    .sel-#{$i - 1}, .#{nth($sel-names, $i)}{
+        .dt-select, .c-select{
+            background-image:  url('../images/#{nth($select-img, $i)}.png');
+        }
+    }                
+}
+
+.row-pos, .row-data, tr{
+    
+    &.sel-1, &.#{nth($sel-names, 2)}{
+        @include colors-important(nth($select-colors,2)...);
+    }
+
+    // &.sel-2{
+    //     @include colors-important($color-sel2...);
+    // }
+
+    // &.sel-3{
+    //     @include colors-important($color-sel3...);
+    // }
+}

@@ -1,0 +1,70 @@
+{% use "blocks.html.twig" %}
+<div class="modal-header">
+     <h4 class="modal-title">{% block modal_title %}{{ modal.title|default(title|default('...'))|trans }}{% endblock %}</h4>
+     <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+</div>
+{% block modal_form_start %}
+{% endblock %}
+    <div class="modal-body flex-box">
+            <div class="content-header">
+                {% block content_header %}
+                {% endblock %}
+                <div class="row content-info" >
+                    <div class="alert alert-info fade in" {% if panel.info is not defined or panel.info is empty %} style="display: none"{% endif %}>
+        {#                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>    #}
+                        {{ panel.info|default('') }}
+                    </div>
+                </div>
+            </div>
+            <div class="content-body flex-auto flex-box" {#style="overflow:visible;"#}>
+                {% block modal_content_body %}
+                {% endblock %}
+                {% block modal_body %}
+                {% endblock modal_body %}
+                {% block modal_form_body %}
+                {% endblock %}
+                {% block modal_form_messages %}
+                {% endblock %}
+                {% block modal_form_errors %}
+                {% endblock %}
+            </div>
+            <div class="content-footer">
+                {% set div = { attr: { class: 'content-messages' } } %}
+                {{ block('div_messages') }}
+                {% set div = { attr: { class: 'content-errors' } } %}
+                {{ block('div_errors') }}
+                {% block modal_content_footer %}
+                    
+                {% endblock %}
+            </div>
+    </div>
+    <div class="modal-footer">
+        {% block modal_footer %}
+        {% endblock %}
+        {% block modal_form_submit %}
+        {% endblock %}
+        {% block modal_buttons %}
+            {% set btn_en = modal.en|default('') %}
+            {% set buttons = modal.buttons|default({})|merge({
+                    clear : {
+                        block: 'btn_clear',
+                        attr: {
+                            style: "display: none;"
+                        }
+                    },
+                    close : {
+                        block: 'btn_close',
+                        d:{
+                            dismiss : 'modal' 
+                        } 
+                    }
+                })
+            %}
+            {{ block('buttons') }} 
+        {% endblock %}
+    </div>
+{% block modal_form_end %}
+{% endblock %}
+{% block modal_js %}
+{% endblock %}
+

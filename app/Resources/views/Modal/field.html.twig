@@ -1,0 +1,52 @@
+{% extends 'Modal/content.html.twig' %}
+
+{%- block modal_body -%}
+    {% set fieldtype= modal.fieldtype|default('') %}
+    {% set fieldname= 'field-'~modal.attr.id %}
+    <div class="fields-container d-flex flex-wrap form-group justify-content-center" data-field="{{ fieldname }}" >
+        {% set attr = { name: fieldname }|merge(modal.field_attr|default({})|add_class("form-control field")) %}
+        {% if fieldtype == 'textarea' %} 
+            <textarea {{ block("attributes") }} style="width: 100%; height: 203px;"></textarea>     
+        {% elseif fieldtype == 'select' %}
+            <select {{ block("attributes") }}>
+                {% for row in modal.data %}
+                    {% set val= row.v is defined ? row.v : row.id %}
+                    <option value="{{ val }}"  data-n="{{ row.n }}" data-d="{{ row. d }}">{{ row.n }}</option>
+                {% endfor %}
+            </select>
+        {% elseif fieldtype == 'radio' or fieldtype == 'checkbox' %}
+            {% set width = modal.settings.image.width|default('100')~'px' %}
+            {% set height = modal.settings.image.height|default('100')~'px' %}
+            {% set column_count=modal.settings.image.columns|default(2) %}
+            {% for row in modal.data %}
+                {% set val= row.v is defined ? row.v : row.id %}
+                <div class="option-img" >
+                    <input {{ block("attributes") }} type="{{ fieldtype }}" value="{{ val }}" id="{{ fieldname }}{{ val }}" data-n="{{ row.n }}" data-d="{{ row.d }}">
+                    <span>{{ row.n }}</span>
+                    <label title="{{ row.d }}" for="{{ fieldname }}{{ val }}" >
+                        {% if row.u_url|default('') is empty %}
+                            {% set img_src=asset('bundles/images/no_image.jpg') %}
+                        {% else %}
+                            {% set img_src= app.request.basePath~row.u_url~row.u_n %}
+                        {% endif %}
+                       <img  src="{{img_src}}" style="width:{{width}}; height:{{height}};"  >
+                    </label>
+                </div>
+            {% endfor %}
+        {% elseif fieldtype == 'check' %}
+            {% set attr=attr|set_array_value('value', modal.fieldvalue|default('1') ) %}
+            <input type="checkbox" {{ block("attributes") }}/>
+        {% elseif fieldtype == 'hidden' %}
+            <input type="hidden" {{ block("attributes") }}/>
+        {% else %}
+            <input type="text" {{ block("attributes") }}>
+        {% endif %}
+    </div>
+{%- endblock -%}
+{%- block modal_form_submit -%}
+    {% if  modal.showSave is not defined or modal.showSave  %}
+        {{ block("btn_save") }}
+    {% endif %}
+{%- endblock modal_form_submit -%}
+
+

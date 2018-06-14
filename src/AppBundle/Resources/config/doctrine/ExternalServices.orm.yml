@@ -1,0 +1,68 @@
+AppBundle\Entity\ExternalServices:
+    type: entity
+    repositoryClass: AppBundle\Repository\ExternalServicesRepository
+    table: ExternalServices
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        consigned:
+            type: datetime
+        returned:
+            type: datetime
+            nullable: true
+        number:
+            type: string
+            length: 45
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        cost:
+            type: float
+            nullable: true
+            options:
+                default: 0
+        cartage:
+            type: float
+            nullable: true
+            options:
+                default: 0
+        serviceCharge:
+            column: service_charge
+            type: float
+            nullable: true
+            options:
+                default: 0
+        discount: 
+            type: smallint
+            nullable: true
+            options:
+                unsigned: true
+                default: 0
+        summary:
+            type: float
+            options:
+                default: 0
+
+    manyToOne:
+        serviceOrder:
+            targetEntity: ServiceOrders
+            inversedBy: externalServices
+            cascade: [persist]
+            joinColumn:
+                name: serviceOrders_id
+                referencedColumnName: id    
+        subcontractor:
+            targetEntity: Subcontractors
+            inversedBy: externalServices
+            joinColumn:
+                name: subcontractors_id
+                referencedColumnName: id    
+    lifecycleCallbacks: 
+        prePersist: [ prePersistExternalServices ]

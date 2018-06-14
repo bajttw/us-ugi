@@ -1,0 +1,44 @@
+app_admin_usersgroups:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::indexAction }
+
+app_admin_usersgroups_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::ajaxListAction }
+
+app_admin_usersgroups_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::createAction }
+    methods:  POST
+
+app_admin_usersgroups_data:
+    path:     /{id}/data
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::ajaxDataAction }
+
+app_admin_usersgroups_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::deleteAction }
+
+app_admin_usersgroups_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::editAction }
+
+app_admin_usersgroups_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::newAction }
+
+app_admin_usersgroups_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_usersgroups_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::showAction }
+
+app_admin_usersgroups_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\UsersGroupsController::updateAction }
+    methods:  [POST, PUT]
+
+

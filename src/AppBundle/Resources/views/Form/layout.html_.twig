@@ -1,0 +1,118 @@
+{% use "@App/ServiceOrders/blocks.html.twig" %}
+{% use "@App/ServiceOrders/formBlocks.html.twig" %}
+{% use "@App/PriceLists/formBlocks.html.twig" %}
+{% extends "Form/layout.html.twig" %}
+
+
+
+
+{%- block _systembundle_productions_orders_row -%}
+    {% set attr = attr|add_class(['table-body', 'table-processing' ]) %}
+    {% if prototype is defined %}
+        {%- set attr = attr|merge(
+            {
+                'data-prototype': form_row(prototype, { hidden: 1}), 
+                'data-prototype-details': block('order_details')|trim, 
+                'data-prototype-positions': block('order_details_position')|trim, 
+                'data-prototype-lackers': block('order_details_lackers')|trim 
+            }) 
+        -%} {#, 'data-lacker-prototype': block('show_lacker')#}
+    {% endif %}
+    {{- block('form_widget') -}}
+{%- endblock _systembundle_productions_orders_row -%}
+
+{%- block _systembundle_productions_orders_entry_row -%}
+    {% if hidden is defined %}
+        {% set attr = attr|merge({style: (attr.style|default('') ~ ' display:none;')|trim}) -%}
+    {% endif %}
+    {% set attr = attr|add_class(['order', 'row-pos']) %}
+    <div {{ block('widget_container_attributes') }}>
+        {{form_widget(form)}}
+        <div class="row-data" >
+            <div class="col-1" data-name="nr" ></div>
+            <div class="col-1" data-name="cl.cc"></div>
+            <div class="col-2" data-name="g"></div>
+            <div class="col-2" data-name="ap"></div>
+            <div class="col-2" data-name="t"></div>
+            <div class="c-quantity" data-name="q"></div>
+            <div class="c-area" data-name="a" data-trans='{"fn":"floatToStr","par":3}'></div>
+            <div class="c-area" data-name="al" data-trans='{"fn":"floatToStr","par":3}'></div>
+            <div class="col" >
+                {{ block('btn_info') }}
+                {{ block('btn_delete') }}
+            </div>
+        </div>
+        <div class="row-info" style="display:none;">
+        </div>
+    </div>
+{%- endblock _systembundle_productions_orders_entry_row -%}
+
+{%- block _systembundle_shipments_orders_row -%}
+    {% set attr = attr|add_class(['table-body', 'table-processing' ]) %}
+    {% if prototype is defined %}
+        {%- set attr = attr|merge(
+            {
+                'data-prototype': form_row(prototype, { hidden: 1}), 
+                'data-prototype-details': block('order_details')|trim, 
+                'data-prototype-positions': block('order_details_position')|trim, 
+                'data-prototype-lackers': block('order_details_lackers')|trim 
+            }) 
+        -%} {#, 'data-lacker-prototype': block('show_lacker')#}
+    {% endif %}
+    {{- block('form_widget') -}}
+{%- endblock _systembundle_shipments_orders_row -%}
+
+{%- block _systembundle_shipments_orders_entry_row -%}
+    {% if hidden is defined %}
+        {% set attr = attr|merge({style: (attr.style|default('') ~ ' display:none;')|trim}) -%}
+    {% endif %}
+    {% set attr = attr|add_class(['order', 'row-pos']) %}
+    <div {{ block('widget_container_attributes') }}>
+        {{form_widget(form)}}
+        <div class="row-data" >
+            <div class="col-1" data-name="nr" ></div>
+            <div class="col-1" data-name="cl.cc"></div>
+            <div class="col-2" data-name="g"></div>
+            <div class="col-2" data-name="ap"></div>
+            <div class="col-2" data-name="t"></div>
+            <div class="c-quantity" data-name="q"></div>
+            <div class="c-area" data-name="a" data-trans='{"fn":"floatToStr","par":3}'></div>
+            <div class="c-area" data-name="al" data-trans='{"fn":"floatToStr","par":3}'></div>
+            <div class="col" >
+                {{ block('btn_info') }}
+                {{ block('btn_delete') }}
+            </div>
+        </div>
+        <div class="row-info" style="display:none;">
+        </div>
+    </div>
+{%- endblock _systembundle_shipments_orders_entry_row -%}
+
+{%- block _systembundle_positionslacker_row -%}
+lacker
+    {{- block('form_widget') -}}
+{%- endblock _systembundle_positionslacker_row -%}
+
+{% block systembundle_uploads_row -%}
+    {% set upload_options=attr['data-options']|default({})|json_decode() %}    
+    <div class="form-group upload-container collection {% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- block('form_label') -}}
+        {% if not read_only %}
+            {{ block('upload_btn') }}
+        {% endif %}
+{#        {% set attr = attr|add_class('form-control') %}#}
+        {{ form_widget(form) }}
+        {{ block("status_bar") }}
+    </div>
+{%- endblock systembundle_uploads_row -%}
+
+
+{% block systembundle_upload_row -%}
+    {% set upload_options=attr['data-options']|default('[]')|json_decode() %}    
+    {% if attr['data-widget'] is defined and attr['data-widget']=='upload' %}
+        {{ block("upload_widget") }}
+    {% else %}
+        {{ block("upload_row") }}
+    {% endif %}
+{%- endblock systembundle_upload_row -%}
+

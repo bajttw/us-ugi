@@ -1,0 +1,34 @@
+client_serviceorders:
+    path:     /
+    defaults: { _controller: "AppBundle:ServiceOrders:clientIndex" }
+
+client_serviceorders_ajax:
+    path:     /ajax
+    defaults: { _controller: "AppBundle:ServiceOrders:clientAjaxList" }    
+
+client_serviceorders_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:ServiceOrders:new" }
+
+client_serviceorders_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:ServiceOrders:create" }
+    methods:  POST
+
+client_serviceorders_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:ServiceOrders:edit" }
+
+client_serviceorders_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:ServiceOrders:update" }
+    methods:  [POST, PUT]
+
+client_serviceorders_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:ServiceOrders:delete" }
+
+client_serviceorders_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "AppBundle:ServiceOrders:remove" }
+    methods:  [POST, DELETE]

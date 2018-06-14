@@ -1,0 +1,30 @@
+AppBundle\Entity\ServiceOptionsPrices:
+    type: entity
+    repositoryClass: AppBundle\Repository\ServiceOptionsPricesRepository
+    table: ServiceOptionsPrices
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        value:
+            type: float
+            options:
+                default: 0
+
+    manyToOne:
+        priceList:
+            targetEntity: PriceLists
+            inversedBy: serviceOptionsPrices
+            joinColumn:
+                name: priceLists_id
+                referencedColumnName: id         
+        serviceOption:
+            targetEntity: ServiceOptions
+            joinColumn:
+                name: serviceOptions_id
+                referencedColumnName: id         

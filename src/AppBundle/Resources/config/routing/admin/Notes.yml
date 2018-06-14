@@ -1,0 +1,38 @@
+app_admin_notes:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\NotesController::indexAction }
+
+app_admin_notes_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\NotesController::ajaxListAction }
+
+app_admin_notes_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\NotesController::createAction }
+    methods:  POST
+
+app_admin_notes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\NotesController::deleteAction }
+
+app_admin_notes_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\NotesController::editAction }
+
+app_admin_notes_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\NotesController::newAction }
+
+app_admin_notes_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\NotesController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_notes_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\NotesController::showAction }
+
+app_admin_notes_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\NotesController::updateAction }
+    methods:  [POST, PUT]

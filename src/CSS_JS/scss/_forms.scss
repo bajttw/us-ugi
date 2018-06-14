@@ -1,0 +1,245 @@
+form{
+    @include flex-box;
+    .flex-auto &{
+        @include flex-item-auto;
+        .form-body{
+            @include flex-item-auto;
+            @include flex-item-auto;
+
+        }
+    }
+    .form-body{
+        @include flex-column;
+
+    }
+    .form-footer{
+        padding: 5px;
+    }
+    .card{
+        &-header{
+            // background-color: khaki;
+        }
+        &-block{
+            background-color: beige;
+            $gutter: $grid-gutter-width/2;
+            padding: 0.5rem 0;
+            > .row-blocks{
+                padding-left: $gutter;
+                & > div{
+                    padding-left: 0;
+                }
+            
+    /*            & > div:first-child{
+                    padding-left: 0;
+                }
+                & > div:last-child{
+                    padding-right: 0;
+                }*/
+            }
+        }
+    }
+}
+.form-sm{
+    label{
+        font-size: $sm-font-size;
+        margin-bottom: .2rem;
+        
+    }
+    
+    .form-control, .input-group-text, .btn{
+        padding: $sm-padding;
+        font-size: $sm-font-size;
+    }
+    .bootstrap-switch span{
+        padding-top: $sm-padding-vertical;
+        padding-bottom: $sm-padding-vertical;
+
+    }
+    
+}
+div.form-control{
+    min-height: 1.2rem;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space: nowrap;
+    &.details{
+        flex-direction: column !important;
+    }
+    span{
+        display: inline-block;
+    }
+}
+.form-group{
+    .ui-state-disabled{
+        display: none !important;
+    }
+    
+    .bootstrap-switch{
+        display: block;
+    }
+    .cell-v &, .row-data &, .row-blocks &{
+        margin:0;
+    }
+    .field-msg{
+        background-color: whitesmoke;
+        position: absolute;
+        white-space: nowrap;
+        z-index: 8;
+        color: #a94442;
+        border: solid #A9A9A9 1px;
+        box-shadow: 3px 3px 3px -3px #777;       
+        padding: 3px;
+        font-size: 0.8rem;
+        display: none;
+    }
+    @each $name, $colors in $input-info{
+        &.has-#{$name}{
+            .form-control{
+                border-color: nth($colors, 1);
+                background-color: nth($colors, 2);
+            }
+        }
+    }
+            
+    // &.has-error{
+    //     .form-control{
+    //         border-color: $input-error-border;
+    //     }
+        
+    // }
+    // &.has-warning{
+    //     .form-control{
+    //         border-color: $input-error-border;
+    //     }
+        
+    // }
+    // &.has-info{
+    //     .form-control{
+    //         border-color: $input-error-border;
+    //         background-color: $input-error-background;
+    //     }
+        
+    // }
+}
+.form-messages, .form-errors{
+    padding: 10px;
+}
+
+.field-btn .btn{
+    padding: 0.5rem 0.2rem;
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+}
+
+.form-group-btn,
+.custom-combobox{
+    display: flex;
+    .field-widget{
+        width: 100%;
+        min-height: 100%;
+        .form-control{
+            border-top-right-radius:0;
+            border-bottom-right-radius:0;
+        }
+    }
+}
+
+.form-group-btn .custom-combobox .field-btn .btn{
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    border-right-color: rgba(0,0,0,0.2 ); 
+}
+.option-img{
+    padding: 5px;
+    position: relative;
+    $titleHeight : 1.5rem;
+    $labelMargin : .2rem; 
+    input, span{
+        display: block;
+        position: absolute;
+        margin-top: $labelMargin;
+        width:auto;
+    }
+    input{
+        margin-left: 1rem;
+        height: $titleHeight;
+    }
+    span{
+        font-size: 1rem;
+        line-height: $titleHeight;
+        margin-left: 2.5rem;
+    }
+    label{
+        display: block;
+        color: $input-color;
+        background-color: $input-bg;
+        border: $input-btn-border-width solid $input-border-color;
+        @if $enable-rounded {
+            // Manually use the if/else instead of the mixin to account for iOS override
+            border-radius: $input-border-radius;
+        }@else {
+            // Otherwise undo the iOS default
+            border-radius: 0;
+        }
+
+        padding: $labelMargin {
+            top: $labelMargin + $titleHeight;    
+        }
+        /*@include field-border;*/
+        @include box-shadow($input-box-shadow);
+        &:hover{
+            color: $input-focus-color;
+            background-color: $input-focus-bg;
+            border-color: $input-focus-border-color;
+            outline: none;
+            @include box-shadow($input-focus-box-shadow);
+        }
+    }
+/*    & + &{
+        padding-left: 10px; 
+    }*/
+}
+
+/*form.order{
+    @extend .form-sm;
+    
+}*/
+
+
+/*.card-block{
+    > div.row:last-child{
+        margin-bottom: 0;
+    }
+    form{
+        > .row{
+            margin-bottom: 1rem;
+        }
+        > .row:last-child{
+            margin-bottom: 0;
+        }
+    }
+}*/
+
+
+.msg{
+    .msg-child{
+        padding-left: 1rem;
+        padding-top: 10px;
+    }
+    &:last-child{
+        margin-bottom: 0;
+    }
+    .msg-label{
+        padding-right: 1rem;
+        &::after{
+            content: ":"
+        }
+    }
+    > ul{
+        list-style-type: none;
+        padding: 0;
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+}

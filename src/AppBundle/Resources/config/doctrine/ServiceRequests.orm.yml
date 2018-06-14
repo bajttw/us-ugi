@@ -1,0 +1,68 @@
+AppBundle\Entity\ServiceRequests:
+    type: entity
+    repositoryClass: AppBundle\Repository\ServiceRequestsRepository
+    table: ServiceRequests
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        created:
+            type: datetime
+        description:
+            type: text
+            nullable: true
+        type:
+            type: smallint
+            options:
+                unsigned: true
+                default: 1
+        closed:
+            type: datetime
+            nullable: true
+        status:
+            type: smallint
+            options:
+                unsigned: true
+                default: 0
+    oneToOne:
+        serviceOrder:
+            targetEntity: ServiceOrders
+            inversedBy: serviceRequest
+            joinColumn:
+                name: serviceOrders_id
+                referencedColumnName: id    
+
+    manyToOne:
+        user:
+            targetEntity: Users
+            inversedBy: serviceRequests
+            joinColumn:
+                name: user_id
+                referencedColumnName: id    
+        client:
+            targetEntity: Clients
+            inversedBy: serviceRequests
+            joinColumn:
+                name: clients_id
+                referencedColumnName: id    
+            
+    manyToMany:
+        notes:
+            targetEntity: Notes
+            joinTable:
+                name: ServiceRequests_Notes
+                joinColumns:
+                    serviceRequests_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    notes_id:
+                        referencedColumnName: id 
+            cascade: [ persist, remove ]
+    lifecycleCallbacks: 
+        prePersist: [ prePersistServiceRequests ]
+        preUpdate: [ preUpdateServiceRequests ]

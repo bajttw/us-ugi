@@ -1,0 +1,43 @@
+client_settings:
+    path:     /
+    defaults: { _controller: "AppBundle:Settings:clientIndex" }
+
+client_settings_ajax:
+    path:     /ajax
+    defaults: { _controller: "AppBundle:Settings:ajaxList" }
+
+client_settings_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Settings:clientNew" }
+
+client_settings_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Settings:create" }
+    methods:  POST
+
+client_settings_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Settings:edit" }
+
+client_settings_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Settings:update" }
+    methods:  [POST, PUT]
+
+client_settings_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Settings:delete" }
+
+client_settings_remove:
+    path:     /{id}/remove
+    defaults: { _controller: "AppBundle:Settings:remove" }
+    methods:  [POST, DELETE]
+
+client_settings_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Settings:show" }
+
+client_settings_data:
+    path:     /{id}/data
+    defaults: { _controller: "AppBundle:Settings:ajaxData" }
+

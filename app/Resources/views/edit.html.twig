@@ -1,0 +1,68 @@
+{% extends (layout|default('layout'))~'.html.twig' %}
+{% block fos_user_content %}
+    {% block edit_form_start %}
+        {{ block('b_form_start') }}
+    {% endblock %}
+    {% block edit_form_body %}
+        {{ block("b_form_body") }}
+    {% endblock %}
+    {% block edit_form_errors %}
+        {{ block("b_form_errors") }}
+    {% endblock %}
+    {% block edit_form_messages %}
+        {{ block("b_form_messages") }}
+    {% endblock %}
+    {% block edit_form_submit %}
+        <div class="form-footer">
+        <div class="col-12">
+            {{ block("b_form_submit") }}
+            {% set btn_class = 'btn-ctrl ' %}
+            {# {% set referer = app.request.server.get('http-referer')|default('/') %} #}
+            {% if full_view|default(false) %}
+                {% if return_url is defined %}
+                    {% set btn = {
+                            attr: { class: btn_class~'btn-default', href: return_url, "data-return": 1 },
+                        label: 'label.return'
+                    }%}
+                    {{ block("btn") }}
+                {% endif %}
+            {% else %}
+                {%	set btn = {
+                        d: { close: 1 },
+                        attr: {
+                            class: 'btn-default',
+                            id: 'btn_close',
+                        }
+                    } 
+                %}
+                {{ block('btn_close') }}
+            {% endif %}
+                {% block form_buttons %}
+                {% endblock form_buttons %}                
+                {% if form.vars.exp_buttons is defined %}
+                    {% set exp_buttons=form.vars.exp_buttons %}
+                    {{ block("exp_btns") }}
+                {% endif %}
+
+            {#                
+            {% set icons={ 'copy' : 'clipboard', 'pdf' : 'file-pdf-o', 'xls' : 'file-excel-o'} %}
+            {% for  b in [ 'copy', 'pdf', 'xls' ] %}
+                {% set btn = {
+                    attr: { class: btn_class~'btn-secondary btn-exp-'~b }|merge( entity_data is defined ? {} : { style: 'display: none;' }),
+                    label: ('label.exp_'~b),
+                    d: { 
+                        exp: form.vars.id,
+                        action: b 
+                    }
+                }%}
+                {% set icon=icons[b] %}
+                {{ block("btn") }}
+            {% endfor %}
+            #}
+        </div>
+        </div>
+    {% endblock %}
+    {% block edit_form_end %}
+        {{ block("b_form_end") }}
+    {% endblock %}
+{% endblock %}

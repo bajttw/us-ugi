@@ -1,0 +1,7 @@
+{% use "@App/PriceLists/blocks.html.twig" %}
+{% if pdf is not defined %}
+    {{ block('view_pricelist')}}
+{% else %}
+    {{ block('print_pricelist')}}
+{% endif %}
+        

@@ -1,0 +1,24 @@
+services:
+#    serwis.example:
+#        class: AppBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    app.twig_extension:
+        class: App\Twig\AppExtension:
+        arguments: ["@translator"]
+        tags: 
+            - { name: twig.extension }
+    # app.form_entity_hidden:
+    #     class: App\Form\EntityHiddenType:
+    #         arguments: ["@doctrine.orm.entity_manager"]
+    #         tags:
+    #             -  { name: form.type, alias: entity_hidden }
+#    app.form.type.upload:
+#        class: AppBundle\Form\UploadType
+#        arguments: ["@doctrine.orm.entity_manager"]
+#        tags:
+#            - { name: form.type }
+#    app.form.type.switch:
+#        class: AppBundle\Form\SwitchType
+#        arguments: ["@translator.default"]
+#        tags:
+#            - { name: form.type }            

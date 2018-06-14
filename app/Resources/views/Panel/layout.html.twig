@@ -1,0 +1,27 @@
+{% use "blocks.html.twig" %} 
+{% set div={
+    attr: panel.attr|default({})|add_class('panel'),
+    d: panel.d|default({})|set_array_value('ecn', panel.ecn|default('') )
+}%} 
+{{ block("begin_div") }}
+    <div class="panel-header">
+        {% block panel_header %}
+        {% endblock %}
+        {% block panel_toolbars %}
+        {% set toolbars=panel.toolbars|default(null) %}
+            {{ block("toolbars") }}
+        {% endblock %}
+    </div>
+    <div class="panel-content">
+        {% block panel_content %}
+            {% if panel.content is defined and panel.content is not empty %}
+                {% set content=panel.content %}
+                {{ block("content") }}
+            {% endif %}
+        {% endblock panel_content %}
+    </div>
+    <div class="panel-footer">
+        {% block panel_footer %}
+        {% endblock %}
+    </div>
+{{ block("close_div") }}

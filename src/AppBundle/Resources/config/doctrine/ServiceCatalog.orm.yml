@@ -1,0 +1,26 @@
+AppBundle\Entity\ServiceCatalog:
+    type: entity
+    repositoryClass: AppBundle\Repository\ServiceCatalogRepository
+    table: ServiceCatalog
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        title:
+            type: string
+            length: 100
+        description:
+            type: text
+            nullable: true
+        details:
+            type: text
+            nullable: true
+        value:
+            type: float
+            options:
+                default: 0

@@ -1,0 +1,28 @@
+$white:    #fff !default;
+
+$btn-default-color:            #505050 !default;
+$btn-default-bg:               #e5e5e5 !default;
+$btn-default-border:           #ccc !default;
+$font-size-root: 13px !default;
+$font-size-base: .9rem;
+/*$nav-tabs-active-link-hover-bg: $btn-default-bg !default;*/ 
+
+
+$navbar-inverse-hover-bg: rgba(255,255,255,.25) !default;
+$navbar-inverse-active-bg: rgba(255,255,255, .1) !default;
+
+$btn-focus-box-shadow:     0 0 3px 2px rgba(0, 169, 255, .5) !important;
+
+$box-shadow: 0 0 10px 0 rgba(46, 40, 64, 0.2);
+$header-box-shadow: 0 0 20px 0 rgba(46, 40, 64, 0.5);
+
+$navbar-dark-hover-bg:           rgba($white,.15) !default;
+$navbar-dark-active-bg:          rgba($white,.1) !default;
+
+$input-btn-padding-y:         .2rem !default;
+$input-btn-padding-x:         .4rem !default;
+$input-btn-line-height:       1.2 !default;
+$line-height-sm:              1.2 !default;
+// $line-height-base:            1.2 !default;
+//  $input-btn-padding-x;
+// line-height: $input-btn-line-height;

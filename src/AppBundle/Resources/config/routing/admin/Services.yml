@@ -1,0 +1,86 @@
+app_admin_services:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\ServicesController::indexAction }
+
+app_admin_services_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\ServicesController::ajaxListAction }
+
+app_admin_services_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\ServicesController::showAction }
+
+app_admin_services_data:
+    path:     /{id}/data
+    defaults: { _controller: AppBundle\Controller\ServicesController::ajaxDataAction }
+
+app_admin_services_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\ServicesController::newAction }
+
+app_admin_services_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\ServicesController::createAction }
+    methods:  POST
+
+app_admin_services_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\ServicesController::editAction }
+
+app_admin_services_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\ServicesController::updateAction }
+    methods:  [POST, PUT]
+
+app_admin_services_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\ServicesController::deleteAction }
+
+app_admin_services_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\ServicesController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_services_client:
+    path:     /{cid}/client
+    defaults: { _controller: AppBundle\Controller\ServicesController::indexAction }
+
+app_admin_services_client_ajax:
+    path:     /{cid}/client/ajax
+    defaults: { _controller: AppBundle\Controller\ServicesController::clientAjaxListAction }
+
+app_admin_services_client_show:
+    path:     /{cid}/client/{id}/show
+    defaults: { _controller: AppBundle\Controller\ServicesController::showAction }
+
+app_admin_services_client_data:
+    path:     /{cid}/client/{id}/data
+    defaults: { _controller: AppBundle\Controller\ServicesController::ajaxDataAction }
+
+app_admin_services_client_new:
+    path:     /{cid}/client/new
+    defaults: { _controller: AppBundle\Controller\ServicesController::newAction }
+
+app_admin_services_client_create:
+    path:     /{cid}/client/create
+    defaults: { _controller: AppBundle\Controller\ServicesController::createAction }
+    methods:  POST
+
+app_admin_services_client_edit:
+    path:     /{cid}/client/{id}/edit
+    defaults: { _controller: AppBundle\Controller\ServicesController::editAction }
+
+app_admin_services_client_update:
+    path:     /{cid}/client/{id}/update
+    defaults: { _controller: AppBundle\Controller\ServicesController::updateAction }
+    methods:  [POST, PUT]
+
+app_admin_services_client_delete:
+    path:     /{cid}/client/{id}/delete
+    defaults: { _controller: AppBundle\Controller\ServicesController::deleteAction }
+
+app_admin_services_client_remove:
+    path:     /{cid}/client/{id}/remove
+    defaults: { _controller: AppBundle\Controller\ServicesController::removeAction }
+    methods:  [POST, DELETE]
+

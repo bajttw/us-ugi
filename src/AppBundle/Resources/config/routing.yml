@@ -1,0 +1,12 @@
+app_home:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\AppController::loginRedirectAction }
+    # defaults: { _controller: App\Controller\OrdersController::index }
+
+app_admin:
+    resource: "@AppBundle/Resources/config/routing/admin.yml"
+    prefix:   /admin
+
+app_uploads:
+    resource: "@AppBundle/Resources/config/routing/Uploads.yml"
+    prefix:   /uploads

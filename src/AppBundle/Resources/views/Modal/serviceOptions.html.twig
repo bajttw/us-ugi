@@ -1,0 +1,83 @@
+{% set tabHeader={
+    cellOpt: { ownClass: true },
+    cells: [ 
+        { name: 'lp'  },
+        { name: 'name'  },
+        { name: 'type'  },
+        { name: 'value', ownClass: false, addClass: 'c-count' },
+        { name: 'actions' }
+    ]
+}%}
+
+{% extends '@App/Modal/importTable.html.twig' %}
+{% use "blocks.html.twig" %}
+
+{%- block modal_actionsRow -%}
+    {% set btn = {
+        size: 'sm',
+        label: false,
+        d: {
+            toggle: 'confirmation'
+        }
+    } %}
+    {{ block('btn_delete') }}
+{%- endblock modal_actionsRow -%}
+
+{% block disp_serviceOptionType %}
+    {%set disp={
+        attr: {
+            class: 'disp-type',
+        },
+        d: {
+            name: 'type',
+            disp : 's'
+        }
+    } %}
+    {{ block('span_disp') }}
+{% endblock disp_serviceOptionType %}
+
+{% block input_serviceOptionValue %}
+    {% set input = {
+        attr: {
+            class: "",
+            onkeypress: "keyPress.floatValue(event)"
+        },
+        d: {
+            name: 'value',
+            edit: 'value',
+            type: 'float'
+        }
+    } %}
+    {{ block('input_formControl') }}
+{% endblock input_serviceOptionValue %}
+
+{% block input_serviceOptionCount %}
+    {% set input = {
+        attr: {
+            type: 'number',
+            class: "",
+            min: '1',
+            max: '10'
+        },
+        d: {
+            name: 'count',
+            edit: 'count',
+            type: 'number'
+        }
+    } %}
+    {{ block('input_formControl') }}
+{% endblock input_serviceOptionCount %}
+
+{%- block modal_addedRow_data -%}
+    {% set cellOpt = {
+        ownClass: true
+    } %}
+    {% set cells= [ 
+        { name: 'lp', cellData: true  },
+        { name: 'name', cellData: true  },
+        { name: 'type', content : block('disp_serviceOptionType') },
+        { name: 'value', ownClass: false, addClass: 'c-count', content : block('input_serviceOptionValue') },
+        { name: 'actions', content: block('modal_actionsRow') }
+    ] %}
+    {{ block('cells') }}
+{%- endblock modal_addedRow_data -%}

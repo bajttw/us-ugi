@@ -1,0 +1,18 @@
+{% use "@FOSUser/blocks.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
+    {{ block('begin_fos_row') }}
+        <div class="form-group">
+            {% if invalid_username is defined %}
+                <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+            {% endif %}
+            <label for="username" class="control-label required">{{ 'resetting.request.username'|trans }} </label>
+            <input type="text" id="username" name="username" required="required" class="form-control" />
+        </div>    
+    {{ block('close_fos_row') }}
+    {{ block('begin_fos_row') }}
+        <div class="col text-center py-2">
+            <input type="submit" value="{{ 'resetting.request.submit'|trans }}" class="btn btn-default" />
+        </div>    
+    {{ block('close_fos_row') }}
+</form>

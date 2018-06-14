@@ -1,0 +1,17 @@
+{% use "blocks.html.twig" %}
+
+{% block serviceorders_summary %}
+    {% set divTab = { 
+        en: 'summary',
+        attr: { class : 'table-view table-bordered' }, 
+        header: { cells: [ { en: 'serviceorders', name: 'value' } ]  },
+        body: { attr: { },
+            d: { 
+                name: 'content'
+            } 
+        }
+    } %}
+    
+    {{ block("div_table") }}
+{% endblock serviceorders_summary %}
+

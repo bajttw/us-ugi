@@ -1,0 +1,1403 @@
+clients:
+    label:
+        account: Moje konto
+        actions: Akcje
+        active: Status
+        active_no: nieaktywny
+        active_yes: aktywny
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Zapisz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edycja klienta
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Zapisz
+        choice: '-- wybierz klienta --'
+        city: Miejscowość
+        client: Klient
+        clientGroups: Grupy klientów
+        clientNrOrder: Kolejny nr zam. kl.
+        clientNrOrderGenerator: Generator kl.
+        clients: Klienci
+        code: Kod kl.
+        contact: Kontakt
+        description: Opis
+        det: ''
+        edit: Edycja klienta
+        email: Adres e-mail
+        filter:
+            active: Status
+            regular: Stały klient
+            serviceorders:
+                status: Status zamówienia
+        id: ID
+        index: Klienci
+        limits: Limity
+        list: Lista klientów
+        mobile: Tel. kom.
+        name: Nazwa
+        nip: NIP
+        not_selected: Nie wybrano klienta
+        nrOrderGenerator: Generator Nr
+        nr_order: Kolejny nr zam.
+        phone: Telefon
+        regular: Stały klient
+        regular_no: nie
+        regular_yes: tak
+        sel: ''
+        service: Obsługa klientów
+        settings: Ustawienia
+        street: Ulica
+        tel: Telefon
+        update: Aktualizuj
+        uploads: Załączniki
+        users: Użytkownicy
+        ways: Trasy
+        zipCode: Kod poczt.
+    message:
+        create: Utworzono klienta
+        email_exist: Podany adres e-mail znajduje się już w bazie
+        update: Dane klienta
+        updated_post: zostały zaktualizowane
+    title:
+        actions: Akcje
+        active: Status aktywności
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Zapisz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edycja klienta
+            filter: Filtruj
+            new: Nowy klient
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Zapisz
+        choice: Wybierz klienta
+        city: Miejscowość
+        clientGroups: Grupy klientów
+        clients: Klienci
+        code: Kod klienci (numer)
+        contact: Osoba kontaktowa
+        create: Nowy klient
+        delete: Usuwanie klienta
+        edit: Edycja klienta
+        email: Adres e-mail do klienta
+        error:
+            create: Błąd utworzenia nowego klienta
+            user_create: Błąd utworzenia użytkownika klienta
+        filter:
+            active: Status
+            regular: Stały klient
+            serviceorders:
+                status: Status zamówienia
+        index: Klienci
+        list: Lista klientów
+        mobile: Drugi telefon do klienta
+        name: Nazwa klienta
+        new: Nowy klient
+        nip: Numer NIP klienta
+        service: Obsługa klientów
+        street: Ulica
+        tel: Telefon do klienta
+        update: Aktualizacja
+        user_added: Dodano nowego użytkownika dla klienta
+        user_created: Utworzono użytkownika dla klienta
+        zipCode: Kod pocztowy
+    warning:
+        not_found: brak w bazie
+clientsgroups:
+    label:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Zapisz
+        code: Kod
+        create: Utwórz
+        description: Opis
+        id: ID
+        index: Grupy klientów
+        name: Nazwa
+        new: Dodaj
+        update: Aktualizuj
+    title:
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Zapisz
+        delete: Usuwanie grupy klientów
+        edit: Edycja grupy klientów
+        index: Grupy klientów
+        new: Nowa grupa klientów
+externalservices:
+    label:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            info: Szczegóły
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        cartage: Koszt transportu
+        consigned: Wysłano
+        cost: Koszt
+        description: Opis
+        discount: Rabat
+        id: Id
+        number: Numer
+        returned: Odebrano
+        serviceCharge: Cena za obsługę
+        subcontractor: Podwykonawca
+        subcontractorChoice: wybierz podwykonawcę
+        summary: Łączny koszt
+    title:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            details: Szczegóły
+            edit: Edytuj
+            filter: Filtruj
+            info: Szczegóły
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        cartage: Koszt transportu
+        consigned: Wysłano
+        cost: Koszt
+        description: Opis
+        discount: Rabat
+        id: Id
+        number: Numer
+        returned: Odebrano
+        serviceCharge: Cena za obsługę
+        subcontractor: Podwykonawca
+        subcontractorChoice: wybierz podwykonawcę
+        summary: Łączny koszt
+import:
+    label:
+        line: Linia
+    modal:
+        title: Import pozycji
+label:
+    active: Status
+    active_no: nieaktywny
+    active_yes: aktywny
+    add: Dodaj
+    approved: Zatwierdzone
+    auto: '- auto -'
+    base_error: Błąd bazy danych
+    btn:
+        add: Dodaj
+        cancel: Anuluj
+        change: Zmień
+        clear: Wyczyść
+        close: Zamknij
+        confirm: Zatwierdź
+        create: Utwórz
+        default: Domyślnie
+        delete: Usuń
+        edit: Edytuj
+        filter: Filtruj
+        import: ''
+        new: Dodaj
+        remove: Usuń
+        save: Zapisz
+        submit: Zapisz
+        update: Aktualizuj
+        upload_delete: Usuń
+    choice: '--- wybierz ---'
+    confirm: potwierdzam
+    confirm_remove: potwierdzam usunięcie
+    email: Adres e-mail
+    empty: '----'
+    exp_copy: Export do schowka
+    exp_pdf: Export PDF
+    exp_xls: Export Excel
+    express: Ekspres
+    lp: Lp.
+    name: Nazwa
+    new: Dodaj
+    no: Nie
+    record_id: Identyfikator
+    remove: Usuń
+    reports: Raporty
+    return: Powrót
+    save: Zapisz
+    server_error: Błąd serwera
+    sumAll: Łącznie
+    summary: Podsumowanie
+    update: Aktualizuj
+    warnings: Uwagi
+    yes: Tak
+materials:
+    label:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            info: Szczegóły
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        delete: Usuń
+        description: Opis
+        discount: 'Rabat [%]'
+        edit: Edycja
+        id: ID
+        index: Materiały serwisowe
+        materials: Materiały serwisowe
+        name: Nazwa
+        new: Dodaj
+        remove: Usuń
+        summary: Wartość
+        update: Aktualizuj
+        used: Data
+        value: Cena
+        warranty: 'Gwar. [msc]'
+    title:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            details: Szczegóły
+            edit: Edytuj
+            filter: Filtruj
+            info: Szczegóły
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        delete: Usuń
+        description: Opis użytego matriału
+        discount: 'Rabat [%]'
+        edit: Edycja
+        id: Identyfikator
+        index: Materiały serwisowe
+        materials: Materiały
+        name: Nazwa materiału
+        new: Dodaj
+        summary: Wartość
+        used: Data wykorzystania
+        value: Cena materiału
+        warranty: Gwarancja
+    warning:
+        not_found: brak w bazie
+message:
+    access_denied: Dostęp zabroniony. Brak uprawnień.
+    base_error: Błąd bazy danych
+    error: Błąd
+    must_ajax: Oczekiwano zapytania typu AJAX
+    remove_aborted: Anulowano akację usuwania z bazy
+    removed: Usunięto z bazy
+    server_error: Błąd serwera
+modal:
+    title:
+        comment: Komentarz
+        date: Data
+        exp: Eksport
+        import: Import pozycji zamówienia
+        my_modal: Okno
+        servicecatalog: Katalog usług
+        serviceoptions: Opcje usługi
+        serviceorders_exp: Eksport zamówienia
+        serviceorders_show: Podgląd zamówienia
+        text: Tekst
+pricelists:
+    label:
+        actions: Akcje
+        addServiceOption: Dodaj pozycję
+        basic: Podstawowe
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        clients: Klienci
+        clientsGroups: Grupuy klientów
+        delete: Usuń
+        description: Opis
+        edit: Edycja
+        end: Do
+        id: ID
+        importServiceOptions: Importuj pozycje
+        importServices: Importuj pozycje
+        index: Cenniki
+        new: Dodaj
+        pdf: PDF
+        remove: Usuń
+        serviceCatalog: Cennik usług
+        serviceOptions: Cennik opcji usług
+        show: Pokaż
+        start: Od
+        title: Nazwa
+        update: Aktualizuj
+    message:
+        notFound: Nie odnaleziono cennika
+    modal:
+        title: Wybór cennika
+    title:
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        clients: Klienci
+        clientsGroups: Grupuy klientów
+        delete: Usuń
+        edit: Edycja
+        index: Cenniki
+        new: Dodaj
+        pricelists: cenniki
+        show: Pokaż
+security:
+    title:
+        login: Logowanie do systemu
+        resetting: Resetowanie hasła
+servicecatalog:
+    label:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        create: Zapisz
+        delete: Usuń
+        description: Opis
+        edit: Edycja
+        id: ID
+        index: Katalog usług
+        new: Dodaj
+        remove: Usuń
+        show: Pokaż
+        t: Nazwa
+        title: Nazwa
+        update: Aktualizuj
+        v: Domyślna cena
+        value: Domyślna cena
+    message:
+        create: Utworzono usługę w słowniku
+        notFound: Nie odnaleziono usługi
+    modal:
+        title:
+            servicecatalog: Katalog usług
+    title:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        delete: Usuń
+        edit: Edycja
+        id: ID
+        index: Katalog usług
+        new: Dodaj
+        servicecatalog: Katalog usług
+        show: Pokaż
+        title: Katalog usług
+        v: Domyślna cena
+        value: Domyślna cena
+servicecatalogprices:
+    label:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        create: Zapisz
+        delete: Usuń
+        description: Opis
+        edit: Edycja
+        id: ID
+        new: Dodaj
+        remove: Usuń
+        service: Usługa
+        show: Pokaż
+        t: Nazwa
+        update: Aktualizuj
+        v: Cena
+        value: Cena
+    message:
+        create: Utworzono pozycję cennika usługę
+        notFound: Nie odnaleziono pozycji cennika usług
+    modal:
+        title: Wybór usługi
+    title:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        delete: Usuń
+        edit: Edycja
+        id: ID
+        new: Dodaj
+        servicecatalog: Usługa
+        show: Pokaż
+        v: Cena
+        value: Cena
+serviceoptions:
+    label:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        count: Ilość
+        create: Zapisz
+        delete: Usuń
+        description: Opis
+        edit: Edycja
+        id: ID
+        index: Opcje usług
+        lp: Lp.
+        n: Nazwa
+        name: Nazwa
+        new: Dodaj
+        remove: Usuń
+        show: Pokaż
+        type: Typ
+        update: Aktualizuj
+        v: Wartość
+        value: Wartość
+    message:
+        create: Utworzono opcję usług
+        notFound: Nie odnaleziono opcji usługi
+    modal:
+        title:
+            serviceoptions: Opcje usługi
+    title:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        choiced: Wybrane opcje
+        create: Nowa opcja usług serwisowych
+        delete: Usuń
+        description: Opis
+        edit: Edycja
+        id: ID
+        index: Opcje usług
+        lp: Lp.
+        name: Nazwa
+        new: Dodaj
+        serviceoptions: Opcje usług
+        show: Pokaż
+        type: Typ obliczeń
+        v: Domyślna wartość
+        value: Domyślna wartosć
+serviceoptionsprices:
+    label:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        create: Zapisz
+        delete: Usuń
+        description: Opis
+        edit: Edycja
+        id: ID
+        new: Dodaj
+        remove: Usuń
+        serviceOption: Opcja usługi
+        show: Pokaż
+        type: Typ
+        update: Aktualizuj
+        v: Wartość
+        value: Wartość
+    message:
+        create: Utworzono pozycję cennika opcji usług
+        notFound: Nie odnaleziono pozycji cennika opcji usług
+    modal:
+        title: Wybór opcji usługi
+    title:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        delete: Usuń
+        description: Opis
+        edit: Edycja
+        id: ID
+        new: Dodaj
+        serviceoptions: Opcje usług
+        show: Pokaż
+        v: Wartość
+        value: Wartosć
+serviceorders:
+    label:
+        accessory: Akcesoria
+        actions: Akcje
+        b: Rachunek
+        basic: Podstawowe dane
+        bill: Rachunek
+        btn:
+            add: ''
+            addExternalService: Dodaj usługę zewnętrzną
+            addMaterial: Dodaj materiał
+            addService: Dodaj usługę
+            addServices: Dodaj usługi
+            agreement: Umowa
+            book: ''
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Zapisz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edycja
+            exp_agreement: Potwierdzenie
+            exp_report: Raport
+            filter: Filtruj
+            new: Dodaj
+            open: Otwórz
+            pdf: Generuj pdf
+            remove: Usuń
+            save: Zapisz
+            serviceCatalog: Katalog
+            show: Pokaż
+            submit: Zapisz
+            update: Aktualizuj
+        c: Zakończone
+        choiceClient: Wybierz klienta
+        cl_cc: Kod klienta
+        cl_n: Klient
+        client: Klient
+        closed: Zamknięte
+        cr: Utworzone
+        created: Utworzone
+        description: Opis
+        edit: Edycja
+        express: Ekspres
+        externalservices: Usługi zewnętrzne
+        filter:
+            clients:
+                name: Klient
+                regular: Typ klienta
+            created: Utworzone
+            express: Express
+            status: Status
+            type: Typ
+        id: ID
+        index: Zlecenia serwisowe
+        materials: Materiały serwisowe
+        name: Nazwa
+        nr: Numer
+        number: Numer
+        paid: Zaplacono
+        receipt: Wydane
+        s: Status
+        server_error: ServiceOrders błąd serwera
+        serviceorders: Zlecenia serwisowe
+        services: Wykonane usługi
+        status: Status
+        summary: Podsumowanie
+        t: Typ
+        title: Tytuł
+        tt: Tytuł
+        type: Typ
+        v: Wartość
+        value: Wartość
+    message:
+        create: Utworzono nowe zlecenie serwisowe %1 dla klienta %2
+        remove: Usunięto zlecenie serwisowe %1
+        update: Zaktualizowano zlecenie serwisowe %1
+    title:
+        accessory: Akcesoria
+        actions: Akcje
+        bill: Rachunek
+        btn:
+            add: Dodaj
+            addExternalService: Dodaj usługę zewnętrzną
+            addMaterial: Dodaj materiał
+            addService: Dodaj usługę
+            addServices: Dodaj usługi
+            book: Katalog
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Zapisz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edycja
+            exp_agreement: Potwierdzenie
+            exp_report: Raport
+            filter: Filtruj
+            new: Dodaj
+            open: Otwórz
+            pdf: Generuj pdf
+            remove: Usuń
+            save: Zapisz
+            serviceCatalog: Katalog
+            show: Pokaż
+            submit: Zapisz
+            update: Aktualizuj
+        cl_cc: Kod klienta
+        cl_n: Klient
+        client: Klient
+        client_index: Zlecenia serwisowe
+        close: Zamknij zlecenie
+        closed: Zamknięte
+        complited: Zakończone
+        create: Tworzenie zlecenia serwisowego
+        created: Utworzone
+        description: Opis
+        edit: Edycja
+        exp_agreement: Umowa
+        express: Ekspres
+        externalservices: Usługi zewnętrzne
+        filter:
+            clients:
+                name: Klient
+                regular: Typ klienta
+            created: Utworzone
+            express: Express
+            status: Status
+            type: Typ
+        id: Identyfikator
+        index: Zlecenia serwisowe
+        materials: Materiały serwisowe
+        new: Dodaj
+        number: Numer
+        open: Otwórz zlecenie
+        paid: Zaplacone
+        pdf: Generuj pdf
+        receipt: Wydane
+        serviceOrder: Zgłoszenie serwisowe
+        serviceorders: Zgłoszenia serwisowe
+        settled: Rozliczone
+        show: Pokaż
+        status: Status
+        title: Tytuł
+        type: Typ
+        update: Aktualizacja zlecenia serwisowego
+        value: Wartość
+services:
+    label:
+        actions: Akcje
+        btn:
+            add: dodaj usługę
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Zapisz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edycja
+            filter: Filtruj
+            info: Szczegóły
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            show: Pokaż
+            submit: Zapisz
+            update: Zapisz
+        choiceClient: wybierz klienta
+        choiceServiceOrder: wybierz zlecenie
+        client: Klient
+        description: Opis
+        details: Szczegóły
+        discount: 'Rabat [%]'
+        duration: 'Czas [min]'
+        filter:
+            clients:
+                name: Klient
+                regular: Stali klienci
+            performed: Wykonano
+            serviceorders:
+                closed: Zamknięte
+                state: Stan zlecenia
+        id: ID
+        index: Usługi serwisowe
+        lp: LP.
+        new: Nowa usługa
+        options: Opcje
+        performed: Wykonana
+        serviceOrder: Zlecenie
+        serviceOrderType: Typ zgłoszenia
+        services: Usługi serwisowe
+        so_c: Zamk. zlec.
+        so_cl_cc: Kod klienta
+        so_cl_n: Klient
+        so_nr: Nr zlecenia
+        summary: Wartość
+        title: Usługa
+        value: Cena
+    message:
+        clientNotFound: Nie wybrano klienta
+        create: Dodano nową usługę do zlecenia nr %1 z dnia %2
+        serviceOrderCreated: Utworzono nowe zlecenie
+        toServiceOrder: do zlecenia
+    title:
+        actions: Akcje
+        btn:
+            add: dodaj usługę
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Zapisz
+            default: Domyślnie
+            delete: Usuń
+            details: Szczegóły
+            edit: Edycja
+            filter: Filtruj
+            info: Szczegóły
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            show: Pokaż
+            submit: Zapisz
+            update: Zapisz
+        client: Klient
+        create: Tworzenie usługi
+        delete: Usuń usługę
+        description: Opis
+        discount: Rabat
+        duration: Czas wykonywania
+        edit: Edycja usługi
+        filter:
+            clients:
+                name: Klient
+                regular: Stali klienci
+            performed: Wykonano
+            serviceorders:
+                closed: Zamknięte
+                state: Stan zlecenia
+        id: Identyfikator
+        index: Usługi serwisowe
+        new: Nowa usługa
+        options: Opcje
+        performed: Wykonana
+        serviceOrder: Zgloszenie serwisowe
+        serviceOrderType: Typ serwisu
+        services: Usługi serwisowe
+        so_c: Zamk. zlec.
+        so_cl_cc: Kod klienta
+        so_cl_n: Klient
+        so_nr: Nr zlecenia
+        summary: Podsumowanie
+        title: Usługa
+        value: Wartość
+settings:
+    label:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edycja
+            filter: Filtruj
+            new: Dodaj
+            pdf: Generuj pdf
+            remove: Usuń
+            save: Zapisz
+            show: Pokaż
+            submit: Zapisz
+            update: Aktualizuj
+        cl_n: Klient
+        client: Klient
+        create: Zapisz
+        description: Opis
+        filter:
+            client: Klient
+        id: ID
+        index: Ustawienia
+        name: Nazwa
+        settings: Ustawienia
+        value: Wartość
+    message:
+        create: Utworzono
+        update: Zaktualizowano
+    title:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Zapisz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edycja
+            filter: Filtruj
+            new: Dodaj
+            pdf: Generuj pdf
+            remove: Usuń
+            save: Zapisz
+            show: Pokaż
+            submit: Zapisz
+            update: Aktualizuj
+        cl_n: Klient
+        complited: Zakończone
+        description: Opis
+        edit: Edycja ustawienia
+        filter:
+            client: Klient
+        id: Identyfikator
+        index: Ustawienia
+        name: Nazwa
+        new: Nowe ustawienie
+        settings: Ustawienia
+        value: Wartość
+    warning:
+        not_found: brak w bazie
+shipments:
+    label:
+        actions: Akcje
+        add_pos: Do wysyłki
+        area: Powierzchnia
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        data: Dane wysyłki
+        generated: Wygenerowana
+        id: ID
+        new: Nowa wysyłka
+        number: Numer
+        orders: Zamówienia w wysyłce
+        quantity: Ilość
+        send: Wysłane
+        sent: Wysłano
+        shipments: Wysyłka
+    title:
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        delete: Usuwanie produkcji
+        edit: Edycja wysyłki
+        index: Lista wysyłek
+        new: Nowa wysyłka
+subcontractors:
+    label:
+        actions: Akcje
+        active: Aktywny
+        active_no: nie
+        active_yes: tak
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        city: Miejscowość
+        contact: Osoba kontaktowa
+        email: Adres e-mail
+        filter:
+            active: Status
+        id: ID
+        index: Podwykonawcy
+        name: Nazwa
+        new: Dodaj
+        street: Ulica
+        tel: Telefon
+        zipCode: Kod pocztowy
+    title:
+        actions: Akcje
+        active: Status
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        city: Miejscowość
+        contact: Osoba kontaktowa
+        edit: Edycja
+        email: Adres e-mail
+        filter:
+            active: Status
+        id: ID
+        index: Podwykonawcy
+        name: Nazwa
+        new: Dodaj
+        street: Ulica
+        tel: Telefon
+        zipCode: Kod pocztowy
+title:
+    btn:
+        add: Dodaj
+        cancel: Anuluj
+        change: Zmień
+        clear: Wyczyść
+        close: Zamknij
+        confirm: Zatwierdź
+        create: Utwórz
+        default: Domyślnie
+        delete: Usuń
+        edit: Edytuj
+        filter: Filtruj
+        import: ''
+        new: Dodaj
+        remove: Usuń
+        save: Zapisz
+        submit: Zapisz
+        update: Aktualizuj
+        upload_delete: Usuń
+    change_on: Włączony
+    error:
+        form: Błędy w formularzu
+        server: Błąd wewnętrzny serwera
+    remove_from_base: Usunięcie z bazy danych
+    title: System obsługi BAJT
+uploads:
+    label:
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+    title:
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        delete: Usuń
+users:
+    label:
+        actions: Akcje
+        active_no: nieaktywny
+        active_yes: aktywny
+        added: Utworzono użytkownika
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Aktualizuj
+        clients: Klienci
+        email: Adres e-mail
+        enabled: Status
+        enabled_no: nieaktywny
+        enabled_yes: aktywny
+        error: Błąd użytkownika
+        filter:
+            active: Aktywny
+        id: Id
+        index: Użytkownicy
+        lastLogin: Ostatnie logowanie
+        login: Użytkownik
+        name: Nazwa wyświetlana
+        new: Nowy
+        password: Hasło
+        password_confirmation: Powtórz hasło
+        password_mismatch: Niezgodne hasło
+        role_admin: pracownik
+        role_super_admin: administrator
+        role_user: klient
+        roles: Uprawnienia
+        type: Typ
+        userGroups: Grupy użytkowników
+        username: Nazwa użytkownika
+        usernameCanonical: Nazwa użytkownika kanononiczna
+    message:
+        added: Dodano użytkownika o danych logowania
+        email_exist: Podany adres e-mail znajduje się już w bazie
+        error_create: Błąd utworzenia użytkownika
+        login: 'Nazwa logowania: %1'
+        password: 'Hasło: %1'
+        updated: Zaktualizowano użytkownika
+    title:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Zapisz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edycja
+            filter: Filtruj
+            new: Nowy
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Zapisz
+        delete: Usuwanie użytkownika
+        edit: Modyfikacja użytkownika
+        enabled: Status
+        error:
+            update: Bląd aktulalizacji
+            create: Bląd tworzenia
+        filter:
+            active: Aktywny
+        id: ID
+        index: Lista użytkowników
+        lastLogin: Ostatnie logowanie
+        new: Nowy użytkownik
+        roles: Uprawnienia
+        userGroups: Grupy użytkowników
+        username: Nazwa użytkownika
+        usernameCanonical: Nazwa użytkownika kanononiczna
+usersgroups:
+    label:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Zapisz
+        code: Kod
+        create: Utwórz
+        description: Opis
+        id: ID
+        index: Grupy użytkowników
+        name: Nazwa
+        update: Aktualizuj
+    title:
+        actions: Akcje
+        btn:
+            add: Dodaj
+            cancel: Anuluj
+            change: Zmień
+            clear: Wyczyść
+            close: Zamknij
+            confirm: Zatwierdź
+            create: Utwórz
+            default: Domyślnie
+            delete: Usuń
+            edit: Edytuj
+            filter: Filtruj
+            new: Dodaj
+            remove: Usuń
+            save: Zapisz
+            submit: Zapisz
+            update: Zapisz
+        code: Kod
+        delete: Usuwanie grupy klientów
+        description: Opis
+        edit: Edycja grupy użytkowników
+        id: ID
+        index: Grupy użytkowników
+        name: Nazwa
+        new: Nowa grupa użytkowników

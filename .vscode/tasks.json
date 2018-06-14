@@ -1,0 +1,28 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Sort messages.yml",
+            "type": "shell",
+            "command": "yml-sorter -i src\\AppBundle\\Resources\\translations\\messages.pl.yml"
+        },
+        {
+            "label": "Symfony: generate entities",
+            "type": "shell",
+            "command": "php bin\\console doctrine:generate:entities AppBundle"
+        },
+        {
+            "label": "Symfony: schema update",
+            "type": "shell",
+            "command": "php bin\\console doctrine:schema:update --force"
+        }, 
+        {
+            "label": "Symfony: clean cache",
+            "type": "shell",
+            "command": "php bin\\console cache:clear"
+        }
+
+    ]
+}

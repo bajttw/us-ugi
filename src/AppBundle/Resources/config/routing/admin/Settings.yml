@@ -1,0 +1,85 @@
+app_admin_settings:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\SettingsController::indexAction }
+
+app_admin_settings_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\SettingsController::ajaxListAction }
+
+app_admin_settings_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\SettingsController::showAction }
+
+app_admin_settings_data:
+    path:     /{id}/data
+    defaults: { _controller: AppBundle\Controller\SettingsController::ajaxDataAction }
+
+app_admin_settings_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\SettingsController::newAction }
+
+app_admin_settings_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\SettingsController::createAction }
+    methods:  POST
+
+app_admin_settings_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\SettingsController::editAction }
+
+app_admin_settings_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\SettingsController::updateAction }
+    methods:  [POST, PUT]
+
+app_admin_settings_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\SettingsController::deleteAction }
+
+app_admin_settings_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\SettingsController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_settings_client:
+    path:     /{cid}/client
+    defaults: { _controller: AppBundle\Controller\SettingsController::clientIndexAction }
+
+app_admin_settings_client_ajax:
+    path:     /{cid}/client/ajax
+    defaults: { _controller: AppBundle\Controller\SettingsController::clientAjaxListAction }
+
+app_admin_settings_client_show:
+    path:     /{cid}/client/{id}/show
+    defaults: { _controller: AppBundle\Controller\SettingsController::showAction }
+
+app_admin_settings_client_data:
+    path:     /{cid}/client/{id}/data
+    defaults: { _controller: AppBundle\Controller\SettingsController::ajaxDataAction }
+
+app_admin_settings_client_new:
+    path:     /{cid}/client/new
+    defaults: { _controller: AppBundle\Controller\SettingsController::newAction }
+
+app_admin_settings_client_create:
+    path:     /{cid}/client/create
+    defaults: { _controller: AppBundle\Controller\SettingsController::createAction }
+    methods:  POST
+
+app_admin_settings_client_edit:
+    path:     /{cid}/client/{id}/edit
+    defaults: { _controller: AppBundle\Controller\SettingsController::editAction }
+
+app_admin_settings_client_update:
+    path:     /{cid}/client/{id}/update
+    defaults: { _controller: AppBundle\Controller\SettingsController::updateAction }
+    methods:  [POST, PUT]
+
+sapp_admin_ettings_client_delete:
+    path:     /{cid}/client/{id}/delete
+    defaults: { _controller: AppBundle\Controller\SettingsController::deleteAction }
+
+app_admin_settings_client_remove:
+    path:     /{cid}/client/{id}/remove
+    defaults: { _controller: AppBundle\Controller\SettingsController::removeAction }
+    methods:  [POST, DELETE]

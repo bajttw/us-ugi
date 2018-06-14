@@ -1,0 +1,1259 @@
+{%- block attributes -%}
+    {% if attr is defined %}
+        {%- for attrname, attrvalue in attr -%}
+            {{- " " -}}
+            {%- if attrname in ['placeholder', 'title'] -%}
+                {{- attrname }}="{{ attrvalue|default('...')|trans }}"
+            {%- elseif attrvalue is same as(true) -%}
+                {{- attrname }}="{{ attrname }}"
+            {%- elseif attrvalue is not same as(false) -%}
+                {{- attrname }}="{{ attrvalue }}"
+            {%- endif -%}
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock attributes -%}
+
+{%- block data_options -%}
+    {% if data_opt is defined %}
+        {%- for dn, dv in data_opt -%}
+            {{- ' ' -}}data-{{ dn }}="{% if dv is iterable %}{{dv|json_encode()}}{% else %}{{- dv -}}{% endif %}"
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock data_options -%}
+
+{%- block input_formControl -%}
+    {% set attr=input.attr|default({})|set_array_value('type', 'text')|add_class('form-control') -%}
+    {% set data_opt= input.d|default({}) %}
+    <div class="form-group">
+        <input {{ block('attributes') }} {{ block('data_options') }} >
+    </div>
+{%- endblock input_formControl -%}
+
+
+{%- block access_denied -%}
+    <div class="col alert alert-danger" data-name="error" >
+        <h3> {{ 'message.access_denied'|trans }} </h3>    
+    </div>
+{%- endblock access_denied -%}
+
+{%- block btn_action -%}
+    {% set attr=btn.attr -%}
+    {% set data_opt= btn.d|default({}) %}
+    {% if attr.href is not defined %}
+        {% set attr=attr|merge({ href: '#'}) %}
+    {% endif %}
+    <a {{ block('attributes') }} {{ block('data_options') }} >
+    </a>
+{%- endblock btn_action -%}
+
+{%- block label -%}
+    {% set attr = label.attr|default({}) %}
+    <label {{ block('attributes') }} > {{ label.label|default('') }} </label>
+{%- endblock label -%}
+
+{# span #}
+    {%- block span_label -%}
+        <span {{ block('attributes') }} {{ block('data_options') }} >
+            {{ label|default('') }}
+        </span>
+    {%- endblock span_label -%}
+
+    {%- block span_disp -%}
+        {% set attr=disp.attr|default({})|add_class('label disp') %}
+        {% set data_opt=disp.d|default({}) %}
+        {% set label=disp.label|default({}) %}
+        {{ block('span_label') }}
+    {%- endblock span_disp -%}
+
+
+
+    {%- block material_icon -%}
+        {% set icon = icon|default(btn.icon|default(false)) %}
+        {% if icon %}
+            <i class="material-icons md-14">{{ icon }}</i>
+        {% endif %}
+    {%- endblock material_icon -%}
+
+{# span buttons #}
+    {%- block btn_span -%}
+        {% set attr = attr|default(btn.attr|default({}))|add_class('btn') -%}
+        {{ block('span_label') }}
+    {%- endblock btn_span -%}
+
+    {%- block span_button -%}
+        {% set attr = btn.attr|default({})|add_class('btn') -%}
+        {% if btn.size is defined %}
+            {% set attr=attr|add_class([ 'btn-'~btn.size ]) %}
+        {% endif %}
+        {% if btn.icon is defined and btn.icon %}
+            {% set attr=attr|add_class([ 'fa',  'fa-'~btn.icon ]) %}
+        {% endif %}
+        {% set data_opt = btn.d|default({}) -%}
+        {% set label = btn.label|default('') ? btn.label|trans : '' -%}
+        {{ block('span_label') }}
+    {%- endblock span_button -%}
+
+
+    {% block button_content %}
+		{{ block('material_icon') }}
+		<span class="text">{{ btn.label|default('') }}</span>
+    {% endblock button_content %}
+
+    {% block button %}
+        {% set attr = {
+                type: 'button'
+            }
+            |array_replace(btn.attr|default({}))
+            |add_class('btn') 
+        %}
+        {% set data_opt = btn.d|default({}) %} 
+        {% if btn.action|default(false) %}
+            {% if  btn.label|default('') is empty %}
+                {% set btn = btn|set_label(btn.action, btn_en|default(en) ) %}
+            {% endif %}
+            {% set attr = attr|set_title('btn.'~btn.action, btn_en|default(en|default(''))) %}
+            {% set data_opt = data_opt|set_array_value( 'action', btn.action ) %}
+        {% endif %}
+        {% if btn.size|default(false) %}
+            {% set attr=attr|add_class('btn-'~btn.size) %}
+        {% endif %}
+        {% if  btn.modal is defined %}
+            {% set data_opt=data_opt|merge( { 'toggle' : 'modal', 'target' : "#"~( btn.modal is empty or btn.modal=='1' ? 'my' : btn.modal)~"_modal" } ) %} 
+        {% endif %}
+        {% if  attr.href is defined %}
+            <a {{ block('attributes') }} {{ block('data_options') }} >
+                {{ block('button_content') }}
+            </a>        
+        {% else %}
+            <button {{ block('attributes') }} {{ block('data_options') }} >
+                {{ block('button_content') }}
+            </button>        
+        {% endif %}
+    {% endblock button %}
+
+    {%- block btn_save -%}
+        {% set btn = btn|default({})|gen_btn('save', 'save', ['btn-save', 'btn-success'], en ) %}
+        {{ block('button') }}
+    {%- endblock btn_save -%}
+    
+    {%- block btn_submit -%}
+        {% set btn = btn|default({})|gen_btn('submit', 'save', ['btn-save', 'btn-success'], en, { 
+            label: ("btn." ~ btn.attr.value|default('submit'))|gen_label(en),
+            attr: { type: 'submit'} 
+        } ) %}
+        {{ block('button') }}
+    {%- endblock btn_submit -%}
+
+    {%- block btn_add -%}
+        {% set btn = btn|default({})|gen_btn('add', 'add_circle_outline', ['btn-save', 'btn-add'], en ) %}
+        {{ block('button') }}
+    {%- endblock btn_add -%}
+
+    {%- block btn_book -%}
+        {% set btn = btn|default({})|gen_btn('book', 'library_books', 'btn-info', en, { label: false } ) %}
+        {{ block('button') }}
+    {%- endblock btn_book -%}
+
+    {%- block btn_import -%}
+        {% set btn = btn|default({})|gen_btn('import', 'import_export', 'btn-outline-dark', en ) %}
+        {{ block('button') }}
+    {%- endblock btn_import -%}
+
+    {%- block btn_ok -%}
+        {% set btn = btn|default({})|gen_btn('ok', 'check', ['btn-success', 'btn-ok'], en ) %}
+        {{ block('button') }}
+    {%- endblock btn_ok -%}
+
+    {%- block btn_change -%}
+        {% set en = btn.en|default(en|default('')) %}
+        {% set title = {
+            on: 'btn.change_on'|gen_title(en),
+            off: 'btn.change_off'|gen_title(en)
+        } %}
+        {% set btn = btn|default({})|gen_btn('change', 'edit', 'btn-info', en, {
+            d:{
+                on: {
+                    icon: 'edit',
+                    title: title.on|trans
+                },
+                off:{
+                    icon: 'lock',
+                    title: title.off|trans
+                }
+            },
+            attr: {
+                title: title.on
+            },
+            action: 'change'
+        } ) %}
+        {{ block('button') }}
+    {%- endblock btn_change -%}
+
+    {%- block btn_cancel -%}
+        {% set btn= btn|default({})|gen_btn('cancel', 'not_interested', ['btn-warning', 'btn-cancel'], en ) %}
+        {{ block('button') }}
+    {%- endblock btn_cancel -%}
+
+    {%- block btn_close -%}
+        {% set btn = btn|default({})|gen_btn('close', 'highlight_off', ['btn-default', 'btn-close'], en ) %}
+        {{ block('button') }}
+    {%- endblock btn_close -%}
+
+    {%- block btn_clear -%}
+        {% set btn = btn|default({})|gen_btn('clear', 'repeat', ['btn-primary', 'btn-clear'], en ) %}
+        {{ block('button') }}
+    {%- endblock btn_clear -%}
+
+    {%- block btn_delete -%}
+        {% set btn = btn|default({})|gen_btn('delete', 'remove_circle', ['btn-danger', 'btn-rm'], en ) %}
+
+        {{ block('button') }}
+    {%- endblock btn_delete -%}
+
+    {%- block btn_info -%}
+        {% set btn = btn|default({})|gen_btn('info', 'info', 'btn-info', en, {
+            d: {
+                showinfo: "1"
+            },
+            label: false
+        } ) %}
+        {{ block('button') }}
+    {%- endblock btn_info -%}
+
+    {%- block btn_details -%}
+        {% set btn = btn|default({})|gen_btn('details', 'details', 'btn-info', en, {
+            d: {
+                showinfo: "1"
+            },
+            label: false
+        } ) %}
+        {{ block('button') }}
+    {%- endblock btn_details -%}
+
+    {%- block btn_more -%}
+        {% set btn = btn|default({})|gen_btn('details', 'more_vert', 'btn-secondary', en, {
+            d: {
+                showinfo: "1"
+            },
+            label: false
+        } ) %}
+        {{ block('button') }}
+    {%- endblock btn_more -%}
+
+    {%- block btn_more_childs -%}
+        {% set btn = btn|default({})|array_replace({d: {
+            showinfo: "childs"
+        }}) %}
+        {{ block('btn_more') }}
+    {%- endblock btn_more_childs -%}
+
+    {%- block btn_more_card -%}
+        {% set btn = btn|default({})|array_replace({d: {
+            showinfo: "card"
+        }}) %}
+        {{ block('btn_more') }}
+    {%- endblock btn_more_card -%}
+
+    {%- block btn_more_all -%}
+        {% set btn = btn|default({})|array_replace({d: {
+            showinfo: "all"
+        }}) %}
+        {{ block('btn_more') }}
+    {%- endblock btn_more_all -%}
+
+    {%- block btn_filter -%}
+        {% set btn = btn|default({})|gen_btn('filter', 'filter_list', ['btn-default', 'btn-filter'], en ) %}
+        {{ block('button') }}
+    {%- endblock btn_filter -%}
+
+    {%- block btn_upload -%}
+        {% set btn = btn|default({})|gen_btn('upload', 'attach_file', ['btn-default', 'btn-attach'], en, {
+            size:  "sm",
+            label: false
+        } ) %}
+        {{ block('button') }}
+    {%- endblock btn_upload -%}
+
+    {%- block buttons -%}
+        {% if buttons is iterable %}
+            {% for btn in buttons %}
+                {{ block( btn.block is defined ? btn.block : 'button') }}
+            {% endfor %}
+        {% endif %}
+    {%- endblock buttons -%}
+
+    {%- block exp_btns -%}
+        {% set btn_en = btn_en|default(en|default('')) %}
+        {% for name, btn in exp_buttons %}
+            {% set btn = btn|default({})|gen_btn('exp_' ~ name, '', 'btn-outline-secondary', btn_en|default('')) %}
+            {{ block('button') }}
+        {% endfor %}
+    {%- endblock exp_btns -%}
+
+    {% block import_btn %}
+        <div class="col import-wrap">
+            {% set btn = btn|default({})|gen_btn( 'import', "forward", ['btn-import', 'btn-primary', 'p-t-3', 'p-b-3'], '', {
+                    label: false
+                } )
+            %}
+            {{ block('button') }}
+        </div>
+    {% endblock import_btn %}
+
+    {% block btn_signal %}
+        {% set lab = ('sig.' ~ btn.name)|gen_label( btn.en|default(en)) %}
+        {% set btn = btn|default({})|gen_btn( btn.name, false, ['btn-signal'], en, {
+            d: {
+                signal: 1,
+                name: btn.name,
+                disp: btn.label|default(lab),
+                values:{ name: 'value'}|json_encode(),
+                value: btn.value
+            },
+            label: lab,
+            size: 'xs'
+        }) %}
+        {{ block('button') }}
+    {% endblock btn_signal %}
+
+    {%- block btn_signals -%}
+        {% for btn in signals %}
+            {{ block('btn_signal') }}
+        {% endfor %}
+    {%- endblock btn_signals -%}
+    
+{# buttons #}
+    {%- block btn_button -%}
+        <button {{ block('attributes') }} {{ block('data_options') }} >
+            {{ block("material_icon") }}
+            {{ label }}
+        </button>             
+    {%- endblock btn_button -%}
+
+    {%- block btn_link -%}
+        <a {{ block('attributes') }} {{ block('data_options') }} >
+            {{ block("material_icon") }}
+            {{ label }}
+        </a>             
+    {%- endblock btn_link -%}
+
+    {%- block btn -%}
+        {% set attr=btn.attr|default({})|add_class('btn')|set_array_value('type', 'button') -%}
+        {% set data_opt=btn.d|default({}) -%}
+        {% set label=(btn.label|default(""))|trans %}
+        {% if  attr.href is defined %}
+            {{ block("btn_link") }}
+        {% else %}
+            {{ block("btn_button") }}
+        {% endif %}
+    {%- endblock btn -%}
+
+{# divs#}
+    {% block begin_div %}
+        {% set attr = div.attr|default({}) %} 
+        {% set data_opt = div.d|default({}) %} 
+        <div {{ block('attributes') }} {{ block('data_options') }} >
+    {% endblock begin_div %}
+
+    {% block close_div %}
+        </div>
+    {% endblock close_div %}
+
+    {%- block div -%}
+        {{ block("begin_div") }}
+            {{ div.content|default('')|raw }}
+        {{ block("close_div") }}
+    {%- endblock div -%}
+
+    {%- block div_show -%}
+        {% set en = div.en|default(en|default('')) %}
+        {% set attr = div.attr|default({})
+            |add_class("input-group") 
+            |set_title(div.name, en)
+        %}
+        <div {{ block('attributes') }} >
+            <span class="input-group-prepend">
+                {% set label = {
+                        attr: {
+                            class: "input-group-text"
+                        }
+                    }
+                %}
+                {% if div.label is defined %}
+                    {% set label = label|array_replace( div.label is iterable ? div.label : { label: div.label|trans } ) %}
+                {% endif %}
+                {% set label = label|set_label( div.name|default(''), en) %}
+                {{ block('label') }}
+            </span>
+            <span class="form-control" data-name="{{ div.name|default('') }}">
+                {{ div.content|default('')|raw }}
+            </span>
+        </div>
+    {%- endblock div_show -%}
+    
+    
+    {%- block div_messages -%}
+        {% set div = div|default({})|add_class(['flex-box', 'messages'], 'attr')|set_array_value('attr-style', 'display:none;') %}
+        {{ block('div') }}
+    {%- endblock div_messages -%}
+
+    {%- block div_errors -%}
+        {% set div = div|default({})|add_class(['flex-box', 'errors'], 'attr')|set_array_value('attr-style', 'display:none;') %}
+        {{ block('div') }}
+    {%- endblock div_errors -%}
+
+
+    
+{# filter #}
+
+    {% block filter_field %}
+        {% set attr = ffilter.attr|default({})|add_class(['form-control', 'filter']) %}
+        {% set data_opt = ffilter.d|default({}) %}
+        {% if ffilter.data is defined and ffilter.data is not empty %}
+            {% set data_opt = data_opt|set_array_value('dic', ffilter.data|json_encode() ) %}
+        {% endif %}
+        {% if ffilter.name is defined and ffilter.name is not empty %}
+            {% set data_opt = data_opt|set_array_value('name', ffilter.name ) %}
+        {% endif %}
+        {% if ffilter.type|default('select') == 'select' %}
+            {% set attr = attr|default([])|set_array_value('size', '1') %}
+            <select {{ block('attributes') }} {{ block('data_options') }} >
+                {#            <option selected="selected" value="">dowolna</option>#}
+                {% for option in ffilter.data %}
+                    <option value="{{ option.v }}" title="{{ option.d|default('') }}">{{ option.n }}</option>
+                {% endfor %}
+            </select>
+        {% elseif ffilter.type == 'input' %}
+            <input {{ block('attributes') }} {{ block('data_options') }} type="text"  value="{{ ffilter.value|default('') }}">
+        {% elseif ffilter.type == 'hidden'  %}
+            <input {{ block('attributes') }} {{ block('data_options') }} type="hidden" value="{{ ffilter.value|default('') }}">
+        {% endif %}
+    {% endblock filter_field %}
+
+    {% block filter_control %}
+        <div>
+            {% set attr = { 
+                class: 'form-group',
+                title: ffilter.attr.title|default(('filter.' ~ ffilter.name)|gen_title(en))
+            } %}
+            <div {{ block('attributes') }}>
+                {% set label = {
+                        for : ffilter.attr.id
+                    }
+                    |add_class('control-label', 'attr')
+                %}
+                {% if ffilter.label is defined %}
+                    {% set label = label|array_replace( ffilter.label is iterable ? ffilter.label : { label: ffilter.label|trans } ) %}
+                {% endif %}
+                {% set label = label|set_label( 'filter.' ~ ffilter.name, en) %}
+                {{ block('label') }}
+                {{ block('filter_field') }}
+            </div>
+        </div>
+    {% endblock filter_control %}
+
+    {% block filterbar %}
+        {% set div = {
+            attr: bar.attr|default({})|add_class( ['bar', 'filterbar'] ),
+            d: bar.d|default({})
+        } %}
+        {% set btn_en = bar.en|default(en|default('')) %}
+        {{ block("begin_div") }}
+            <div class="filters">
+                {% for ffilter in bar.filters %}
+                    {% if ffilter.type|default('1') != 'hidden' %}
+                        {{ block('filter_control') }}
+                    {% else %}    
+                        {{ block('filter_field') }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="btn-group">
+                {% set btn = { en: bar.en|default(en|default('')) } %}
+                {{ block('btn_filter') }}
+            </div>
+        {{ block("close_div") }}
+    {% endblock filterbar %}
+
+{# bars #}
+    {% block bar_element %}
+        {% if element.type == 'btn' %}
+            {% set btn = {
+                }
+                |array_replace(element)
+                |set_label('btn.' ~ element.action, element.en|default(btn_en|default('')))            
+            %}
+            {{ block("button") }}
+        {% else %}
+            
+        {% endif %}
+    {% endblock bar_element %}
+
+    {% block bar %}
+        {% set div = {
+            attr: bar.attr|default({})|add_class('bar'), 
+            d: bar.d|default({})
+        } %}
+        {% set btn_en = bar.en|default(en|default('')) %}
+        {{ block("begin_div") }}
+            {% for element in bar.elements %}
+                {{ block("bar_element") }}
+            {% endfor %}    
+        {{ block("close_div") }}
+    {% endblock bar %}
+
+    {% block toolbar %}
+        {% if bar is defined and bar is not empty%}
+            {% if bar.template is defined and bar.template is not empty  %}
+                {% include bar.template %}
+            {% else %}
+                {{ block("bar") }}
+            {% endif %}
+        {% endif %}
+    {% endblock toolbar %}
+
+    {%- block toolbars -%}
+        {% if toolbars is defined and toolbars is iterable %}
+            <div class="bars" >
+                {% for bar in toolbars %}
+                    {% set en = bar.en|default(en|default('')) %}
+                    {% if bar.filters is defined %}                      
+                        {{ block("filterbar") }}
+                    {% else %}
+                        {{ block("toolbar") }}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {%- endblock toolbars -%}
+
+    {% block status_bar %}
+        <div class="status-bar">
+        </div>
+    {% endblock %}
+
+    {% block progress_bar %}
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            </div>
+        </div>
+    {% endblock %}
+
+{# upload #}
+
+    {% block upload_status %}
+        <div class="flex-on flex-wrap upload-status col-12" >
+            <div class="col-md-6 col-12" data-name="message">
+                {# <strong >{{ 'uploads.label.uploading'|trans }}</strong><span data-name="name" ></span>  #}
+            </div>
+            <div class="col">
+                {{ block('progress_bar')}}
+            </div>
+            <div class="col alert alert-danger" data-name="error" style="display:none;">
+            </div>
+        </div>
+    {% endblock %}
+
+
+    {% block upload_process %}
+        <div class="flex-on flex-wrap upload-process row-details" style="display:none;">
+            <div class="col-12 ">
+                <div class="preview" style="display: none">
+                    <canvas>canvas
+                </div>
+                <div class="flex-on flex-wrap col p-0">
+                    <div class="col-8" data-name="fname">
+                        nazwa
+                    </div>
+                    <div class="col-2" data-name="fsize">
+                        rozmiar
+                    </div>
+                    <div class="col-2">
+                        {% set btn={
+                            size: 'sm',
+                            attr: { class: 'btn-process fa' }
+                        } %}
+                        {{ block('button') }}
+                    </div>
+                </div>
+            </div>
+            {{ block("upload_status") }}
+        </div>
+    {% endblock upload_process %}
+    
+    {% block upload_edit %}
+        <div class="row-details upload">
+            {{- block('upload_detail') -}}
+            <div class="d-flex" >
+                <div class="col-12" style="display:none;">
+                    <span data-name='desc' ></span>
+                </div>
+            </div>
+            <div class="d-flex" >
+                <div class="col-12  cell alert alert-danger" style="display:none;">
+                    <span data-name='error' ></span>
+                </div>
+            </div>
+            <div class="d-flex" >
+                {{ block('progress_bar')}}
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block upload_preview %}
+        <div data-name="preview" {{ preview|default(false) ? '' : 'style="display: none;"' }} >
+            <div class="upload-preview center-block" >
+                {% if url %}
+                    <a href="{{ url }}" target="_blank"> 
+                        {{ block('upload_img') }}
+                    </a>  
+                {% else %}
+                    {{ block('upload_img') }}
+                {% endif %}
+            </div>
+        </div>
+
+    {% endblock upload_preview %}
+
+    {% block upload_img %}
+        {% set attr = {
+            style: "width: {{ preview.width|default(false) ? preview.width~'px' : 'auto' }}; height: {{preview.height|default(false) ? preview.height~'px' : 'auto' }};",
+            src: url|default( asset('bundles/images/no_image.jpg') ),
+            alt: upl.name|default('')
+        } %}
+        <img {{ block('attributes') }} />
+    {% endblock upload_img %}
+
+    
+    {% block upload_info %}
+        <div class="col-md-9 col-12 info-box-content">
+            {% set en = en|default('uploads') %}
+            {% for name in ['original', 'size', 'desc'] %}
+                {% set div = {
+                    attr : {
+                        class: "col-12"
+                    },
+                    name: 'file.'~name,
+                    content: url and name=='original' ? '<a href="' ~ url ~ '" target="_blank">' ~ upl.original ~ '</a>' : upl[name]|default(' - ')
+                } %}    
+                {{ block('div_show') }}
+            {% endfor %}
+        </div>
+    {% endblock upload_info %}
+
+    {% block upload_info_row %}
+        <div class="col-md-9 col-12 info-box-content">
+            {% set cells = [
+                {
+                    name: 'original',
+                    addClass: 'col',
+                    d: { name: 'original' },
+                    content: url and name=='original' ? '<a href="' ~ url ~ '" target="_blank">' ~ upl.original ~ '</a>' : upl[name]|default(' - ')
+                },
+                {
+                    name: 'size',
+                    ownClass: true,
+                    d: { name: 'size' },
+                    content: upl.size|default('-')                    
+                },
+                {
+                    name: 'desc',
+                    ownClass: true,
+                    signals: [ {
+                        en: 'uploads',
+                        disp: 'U',
+                        name: 'desc',
+                        value: upl.desc|default('')
+                    }]
+                }
+            ] %}
+            {{ block('cells') }}
+        </div>
+    {% endblock upload_info_row %}
+    
+    {% block upload_desc %}
+        <div class="flex-on flex-wrap col-12 p-0" >
+            <div class="col-12 info pb-1" style="display:none;">
+                <div class="input-group">
+                    <textarea class="form-control" readonly="readonly" data-name='desc' rows="2" cols="50">upl.desc|default('')</textarea>                   
+                    <div class="input-group-append">
+                        {% set btn={
+                            size: 'sm'
+                        } %}
+                        {{ block('btn_change') }}
+                </div>
+            </div>
+        </div>
+    {% endblock upload_desc %}    
+
+    {% block upload_show %}
+        {% set url = upl.url|default(false) ? upl.fullUrl ~ upl.name : '' %}
+        {% set attr = { class: "flex-on flex-wrap upload-show" }|add_class( uplRow|default(false) ? 'row-details' : 'form-control' ) %}
+        <div {{ block('attributes') }} >
+            <div class="flex-on flex-wrap col-12 p-0">
+                <div class="flex-on flex-wrap col p-0">
+                    {{ block('upload_preview') }}
+                    {% if uplRow|default(false) %}
+                        {{ block('upload_info_row') }}
+                    {% else %}
+                        {{ block('upload_info') }}
+                    {% endif %}
+                    <div class="col flex-on align-items-center justify-content-center actions">
+                        {% set btn={
+                            size: uplRow|default(false) ? 'xs' : 'sm',
+                            action: 'upload_delete',
+                            label: ''
+
+                        } %}
+                        {{ block('btn_delete') }}
+                    </div>
+                </div>
+            </div>
+            {{ block('upload_desc') }}
+        </div>
+    {% endblock %}
+
+
+    {%- block upload_detail -%}
+        {% set url = upl.url|default(false) ? upl.fullUrl ~ upl.name : '' %}
+        <div class="flex-on flex-wrap col-12 p-0">
+            <div class="" data-name="preview" {{ preview|default(false) ? '' : 'style="display: none;"' }} >
+                <div class="upload-preview center-block" >
+                    {% set imgStyle = 'width:' ~ (preview.width|default(false) ? preview.width ~ 'px' : 'auto') ~ '; height:' ~ (preview.height|default(false) ? preview.height ~ 'px' : 'auto' ) ~ ';' %}
+                    {% set attr={
+                            style: imgStyle,
+                            alt: '',
+                            src: url|default(asset('bundles/images/no_image.jpg'))
+                        }
+                    %}
+                    {% if  url %}
+                        <a href="{{ url }}" target="_blank"> <img {{ block('attributes') }} > </a>  
+                    {% else %}
+                        <img {{ block('attributes') }} >   
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex-on flex-wrap col p-0">
+                <div class="col-md-9 col-12 info-box-content">
+                    {% set en = 'uploads' %}
+                    {% for name in ['original', 'size', 'desc'] %}
+                        {% set attr = {} %}
+                        <span {{ block('attributes') }} data-name="{{ name }}" >
+                            {% if name == 'originals' %}
+                                isUpload ? '<a href="' ~ upl.fullUrl ~ upl.name ~'" target="_blank">' ~ upl.original ~ '</a>' : upl[name]|default(' - ')
+                            {% else %}
+                                
+                            {% endif %}
+                            content: isUpload and name=='original' ? '<a href="' ~ upl.fullUrl ~ upl.name ~'" target="_blank">' ~ upl.original ~ '</a>' : upl[name]|default(' - ')
+                        </span>   
+                    {% endfor %}
+                </div>
+                <div class="col-3 buttons">
+                    {{ block('btn_delete') }}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+
+{# cards #}
+    {% block begin_card %}
+        {% set div= {
+            attr: card.attr|default({})|add_class('card'),
+            d: card.d|default({})
+        }%}
+        {{ block("begin_div") }}
+        {{ block('card_header') }}
+        {{ block("begin_card_block") }}
+    {% endblock begin_card %}
+
+    {% block close_card %}
+        </div></div>
+    {% endblock close_card %}
+
+    {% block card_header %}
+        {% import 'macros.html.twig' as mbajt %}
+        <div class="card-header">
+            {{ card.header.title|default('')|trans }}
+            <div class="float-right">
+                {{ card.header.right_content|default('')|raw }}
+                {% if card.header.inf is defined %}
+                    {{ mbajt.span_btn_info(card.header.inf) }}
+                {% endif %}
+            </div>
+        </div>
+    {% endblock card_header %}
+
+    {% block begin_card_block %}
+    {% set div= {
+            attr: card.block.attr|default({})|add_class('card-block'),
+            d: card.d|default({})
+        } %}
+        {{ block("begin_div") }}
+    {% endblock begin_card_block %}
+
+
+    {% block card %}
+        {{ block("begin_card") }}
+            {{ card.content|default('')|raw }}
+        {{ block("close_card") }}
+    {% endblock card %}
+
+{# containers #}
+    {% block begin_show_container %}
+        {% set div={
+            attr: show.attr|default({})|add_class(['show-container', 'flex-box', 'flex-auto']),
+            d: show.d|default({})|set_array_value("ecn", ecn) 
+        }%}
+        {{ block("begin_div") }}
+    {%- endblock begin_show_container -%}
+
+    {% block show_container %}
+        {{ block("begin_show_container") }}
+            {{ show.content|default('')|raw }}
+        {{ block("close_div") }}
+    {%- endblock show_container -%}
+
+
+{# cells #}
+
+
+    {%- block cell -%}
+        {% set ownClass= ( (cell.ownClass is defined and cell.ownClass) or (cell.ownClass is not defined and cellOpt.ownClass|default(false)) ) and cell.name|default('') ? 'c-'~cell.name : '' %}
+        {% set defClass= not cell.addClass|default(cellOpt.addClass|default(false)) and cell.attr.class|default('') ? '' : cellOpt.defClass|default('') %}
+        {% set cell = cell|add_class( [cell.addClass|default(''), ownClass, defClass, cellOpt.class|default('') ], 'attr') %}
+        {% set div= {
+            attr: cell.attr|default({}),
+            d: cell.d|default({}),
+        } %}
+        {{ block("begin_div") }}
+            {{ cell.content|default('')|raw }}
+        {{ block("close_div") }}
+    {%- endblock cell -%}
+
+    {%- block cell_data -%}
+        {% if cell.name is defined %}
+            {% set cell=cell|set_array_value('d.name', cell.name ) %}                
+        {% endif %}
+        {% if cell.options.disp|default(false) %}
+            {% set cell = cell|set_array_value( 'd.disp', cell.options.disp ) %}
+        {% endif %}
+        {% if cell.options.empty|default(false) %}
+            {% set cell = cell|set_array_value( 'd.empty', cell.options.empty ) %}
+        {% endif %}
+        {% if cell.content is not defined %}
+            {% if cell.dic|default(false) %}
+                {% set cell = cell|set_array_value( 'd.disp', "n" ) %}
+                {% if cell.options.dicName|default(false) %}
+                    {% set cell = cell|set_array_value( 'd.dic-name', cell.options.dicName ) %}
+                {% endif %}
+                {% set label = values|default({})|dic_val( dictionaries|default(null), cell.name, cell.options|default({}) )  %}
+            {% elseif cell.signals|default(false) %}
+                {% set signals=cell.signals|default({}) %}
+                {% set label= block('btn_signals')  %}
+            {% else %}
+                {% set label = values|default({})|get_array_value(cell.name, cell.options|default({}) )  %}
+            {% endif %}
+            {% if cell.diff|default(false) %}
+                {% set cell=cell|set_array_value( 'content', block('show_diff') )
+                    |add_class('diff', 'attr')
+                %}
+            {% else %}
+                {% set cell=cell|set_array_value( 'content', label ) %}
+            {% endif %}
+        {% endif %}
+        {{ block("cell") }}
+    {%- endblock cell_data -%}
+
+    {%- block cell_signals -%}
+        {% set signals=cell.signals|default({}) %}
+        {% set cell=cell|set_array_value( 'content', block('btn_signals') ) %}
+        {{ block('cell') }}
+    {%- endblock cell_signals -%}
+
+
+    {%- block cell_data_dic -%}
+        {% set cell=cell|set_array_value('dic', true ) %}                
+        {{ block('cell_data') }}
+    {%- endblock cell_data_dic -%}
+
+    {%- block cell_form -%}
+        {% if cell.content is not defined and form[cell.name|default('')] is defined %}
+            {% set formFunction= cell.form|default(cellOpt.form|default('row')) %}
+            {% set options= cell.options is defined and cell.options is null ? {} : cellOpt.options|default({})|array_replace(cell.options|default({}) ) %}
+            {% if formFunction=='row' %}
+                {% set cell=cell|set_array_value('content', form_row( form[cell.name], options ) ) %}
+            {% elseif formFunction== 'div' %}
+                {% set cell=cell|set_array_value('content', form_div( form[cell.name], options ) ) %}
+            {% elseif formFunction== 'btn' %}
+                {% set cell=cell|set_array_value('content', form_btn( form[cell.name], options ) ) %}
+            {% elseif formFunction== 'fbtn' %}
+                {% set cell=cell|set_array_value('content', form_fbtn( form[cell.name], options ) ) %}
+            {% elseif formFunction== 'field' %}
+                {% set cell=cell|set_array_value('content', form_field( form[cell.name], options ) ) %}
+            {% else %}
+                {% set cell=cell|set_array_value('content', form_row( form[cell.name], options ) ) %}
+            {% endif %}
+        {% endif %}
+        {{ block("cell") }}
+    {%- endblock cell_form -%}
+
+
+    {% block cells %}
+        {% for cell in cells %}
+            {% if cell is string %}
+                {% set cell={ name: cell } %}
+            {% endif %}
+            {% if ( cell.form is defined and cell.form ) or ( cell.form is not defined and cellOpt.form|default(false) ) %}
+                {{ block("cell_form") }}
+            {% elseif ( cell.cellData is defined and cell.cellData ) or ( cell.cellData is not defined and cellOpt.cellData|default(false) ) %}
+                {{ block("cell_data") }}
+            {% elseif cell.signals|default(false) %}
+                {{ block("cell_signals") }}
+            {% else %}
+                {{ block("cell") }}
+            {% endif %}
+        {% endfor %}
+    {% endblock cells %}
+
+{# div_table #}
+    {% block div_table_row %}
+        {% set defClass = tabRow.attr.class|default('') ? '' : rowOpt.defClass|default('') %}
+        {% set en = tabRow.en|default(en|default('')) %}
+        {% set div={
+            attr: tabRow.attr|default({})|add_class( [ defClass, rowOpt.class|default('') ]),
+            d: tabRow.d|default({}) 
+        }%}
+        {{ block("begin_div") }}
+            {{ tabRow.content|default('')|raw }}
+            {% set cellOpt= cellOpt|default({})|array_replace(tabRow.cellOpt|default({})) %}
+            {% set cells= tabRow.cells|default([]) %}
+            {% set values= tabRow.values|default( {} ) %}
+            {{ block("cells") }}
+            {#        {{ block("cells_data") }}#}
+        {{ block("close_div") }}
+    {% endblock div_table_row %}
+
+    {% block div_table_row_details %}
+        {% set tabRow=tabRow|add_class('row-details', 'attr' ) %}
+        {{ block("div_table_row") }}
+    {% endblock div_table_row_details %}
+
+    {% block div_table_header %}
+        <div class="table-header"> 
+            <div class="row-head">
+                {% set en = tabHeader.en|default(en|default('')) %}
+                {% set cellOpt= cellOpt|default({})|array_replace(tabHeader.cellOpt|default({})) %}
+                {% for cell in tabHeader.cells %}
+                    {% if cell is string %}
+                        {% set cell={ name: cell } %}
+                    {% endif %}
+                    {% set cell_en=cell.en|default(en) %}
+                    {% set prefix= cell_en is not empty ? cell_en~'.' : ''  %}
+                    {% if cell.name|default('') %}
+                        {% set cell= cell|set_array_value('attr.title', prefix~'title.'~cell.name)  %}
+                        {% set cell= cell|set_array_value('content', (prefix~'label.'~cell.name)|trans )  %}
+                    {% endif %}
+                    {{ block("cell") }}
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock div_table_header %}
+
+    {% block div_table_footer %}
+        {% set div={ 
+            attr: tabFooter.attr|default({})|add_class('table-footer'),
+            d: tabFooter.d|default({}),
+            content: tabFooter.content|default('')
+        }%}
+        {{ block("div") }}
+    {% endblock div_table_footer %}
+
+    {% block div_table_rows %}
+        {% for tabRow in rows %}
+            {{ block("div_table_row") }}
+        {% endfor %}
+    {% endblock div_table_rows %}
+
+
+    {%- block begin_div_table -%}
+        {% set div={
+            attr: divTab.attr|default({})|add_class('table'), 
+            d: divTab.d|default({}) 
+        }%} 
+        {{ block("begin_div") }}
+    {%- endblock begin_div_table -%}
+
+    {%- block begin_div_table_body -%}
+        {% set div={
+            attr: tabBody.attr|default({})|add_class('table-body'), 
+            d: tabBody.d|default({}) 
+        }%} 
+        {{ block("begin_div") }}
+    {%- endblock begin_div_table_body -%}
+
+    {%- block div_table -%}
+        {% set en = divTab.en|default(en|default('')) %}
+        {{ block("begin_div_table") }}
+            {% set rowOpt= divTab.rowOpt|default({}) %}
+            {% set cellOpt= divTab.cellOpt|default({}) %}
+            {% if divTab.header is defined %}
+                {% set tabHeader= divTab.header %}
+                {{ block("div_table_header") }}
+            {% endif %}
+            
+            {% set tabBody=divTab.body|default({}) %}
+            {{ block("begin_div_table_body") }}
+                {{ divTab.content|default('')|raw }}
+                {% if divTab.data is defined %}
+                    {% set tabRow= divTab.data|add_class('row-data', 'attr' )|set_array_value('cellOpt', { cellData: true }) %}
+                    {{ block("div_table_row") }}
+                {% endif %}
+                {% if divTab.info is defined %}
+                    {% set tabRow= divTab.info|add_class('row-info', 'attr')|set_array_value( 'style', 'display: none;' ) %}
+                    {{ block("div_table_row") }}
+                {% endif %}
+                {% set rows=divTab.rows|default([]) %}
+                {{ block("div_table_rows") }}
+            {{ block("close_div") }}
+            
+            {% if divTab.footer is defined %}
+                {% set tabFooter=divTab.footer %}
+                {{ block("div_table_footer") }}
+            {% endif %}
+
+        {{ block("close_div") }}
+    {%- endblock div_table -%}
+
+
+
+
+
+
+
+
+
+{# datatable #}
+    {%- block datatable_column -%}
+            {% set attr= column.attr|default({}) %}
+            {% set column_name = column.label|default(column.data|default(''))|field_name(fields)  %}
+            {% set data_opt = column.d|default({}) %}
+            {% if column_name %}    
+                {% set attr= attr|set_array_value( 'title', table.name~'.title.'~column_name) %}
+            {% endif %}
+        <th {{ block('attributes') }} {{ block('data_options') }} >
+            {% if column_name %}    
+                {{ (table.name~'.label.'~column_name)|trans }}
+            {% endif %}
+        </th>
+    {%- endblock datatable_column -%}
+    {%- block datatable -%}
+        {% set table_id= table.attr.id|default(table.name~"_table") %}
+        {% set attr=table.attr|set_array_value('id', table_id)|add_class(['datatable', 'dataTable', 'table-hover', 'table-striped',  'table-bordered' ]) %}
+        {% set data_opt= table.d|default({})
+            |set_array_value('name', table.name)
+            |set_array_value('en', table.name)
+            |set_array_value('ecn', table.ecn)  %}
+        {% set fields=entities_settings[table.ecn].fields|default({}) %}
+                <table style="width: 100%;" width="100" {{ block('attributes') }} {{ block('data_options') }} 
+                    data-detail-tmpl="{{  table.details.tmpl|default('') != '' ? block(table.details.tmpl|default(''))|e : '' }}"
+                    >
+                    <thead>
+                        {% set columns=table.d.columns %}
+                        {#            {% if table.d.table.options.select|default(false) %}#}
+                        {#                {% set columns=[{ data: 'sel', defaultContent : "<span>Edit</span>" }]|merge( columns) %}#}
+                        {#            {% endif %}#}
+                        <tr>
+                            {% for column in columns %}
+                                {{ block('datatable_column') }}
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                </table>
+    {%- endblock datatable -%}
+
+{%- block show_diff -%}
+    {% set attr = attr|default({})|add_class(options.diffClass|default('fa fa-star')) %}
+    {{ block('span_label') }}
+{%- endblock show_diff -%}
+
+{%- block tabs -%}
+    {% set attr = tabs.attr|default({})|add_class(['tabs-wrapper']) %}
+    <div {{ block('attributes') }} >
+        <div>
+            <ul class="nav nav-tabs" role="tablist">
+                {% for tab_panel in tabs.panels %}
+                    <li class="nav-item">
+                        {% set en = tab_panel.en|default(tab_panel.name) %}
+                        {% set data_opt = {
+                            toggle : "tab"
+                        } %}
+                        {% set attr={
+                            id: tab_panel.name ~ '_tab',
+                            href : "#" ~ tab_panel.name ~ "_tab_panel",
+                            class : 'nav-link' ~ (tab_panel.active|default(false) ? ' active' : ''),
+                            role : 'tab', 
+                            title : tab_panel.title is defined ? tab_panel.title : tab_panel.name|gen_title( en),
+                            'aria-expanded' : tab_panel.active|default(false) ? 'true' : 'false'
+                        } %}
+                            {# 'aria-controls' : tab_panel.name ~ "_tab_panel",
+                            'aria-expanded' : tab_panel.active|default(false) ? 'true' : 'false' #}
+
+                        <a {{ block('attributes') }} {{ block('data_options') }} >{{ tab_panel.label|default( tab_panel.name|gen_label(en, false) )|trans }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="tab-content">
+            {% for tab_panel in tabs.panels %}
+                {% set attr={
+                    id : tab_panel.name ~ "_tab_panel",
+                    class : 'tab-pane' ~ (tab_panel.active|default(false) ? ' active' : ''), 
+                    role : "tabpanel",
+                    'aria-expanded' : tab_panel.active|default(false) ? 'true' : 'false'
+                }%}
+                    {# 'aria-labelledby': tab_panel.name ~ "_tab",
+                    'aria-expanded' : tab_panel.active|default(false) ? 'true' : 'false' #}
+
+                {# ~ (tab_panel.active|default(false) ? ' active' : '') #}
+                <div {{ block('attributes') }} >
+                    {% include tab_panel.template|default('Panel/layout.html.twig') with { panel : tab_panel } %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{%- endblock tabs -%}
+
+{%- block show_entity -%}
+    <div class="row-blocks">
+        <div class="col-12 table-view">
+            <table >
+                <tbody>
+                    {% if admin|default(false) %}
+                        {% for key, value in entity %}
+                            <tr>   
+                                <th>
+                                     {{ key|gen_label(en) }} 
+                                </th>
+                                <td>
+                                    {{ value }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>   
+                            <th>
+                                {{ 'label.record_id'|trans }} 
+                            </th>
+                            <td>
+                                {{ entity.id }}
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{%- endblock show_entity -%}
+
+
+
+
+
+{%- block content -%}
+    {% if content is iterable %}
+        {% for type, c in content %}
+            {% if  type == 'block' %}
+                {{ block(c) }}
+            {% elseif type == 'twig' %}
+                {% include  c %} 
+            {% else %}
+                {{ c }}
+            {% endif %}
+        {% endfor %}
+    {% elseif content is twig %}
+        {% include  content %}    
+    {% else %}
+        {{ content }}
+    {% endif %}
+{%- endblock content -%}
+
+
+
+
+{% block document_body %}
+    {% set title= title|default('title.title')|trans %}
+    {% set div={
+        attr: { id : 'page_title', class: 'bar-shadow' },
+        d: { title: title } 
+    }%}
+    {{ block("begin_div") }}
+        <h1>
+            {% block title_form  %}
+                {{ title }}
+            {% endblock %}  
+        </h1>
+    {{ block("close_div") }}
+    <div class="content-header">
+        {% for flashMessage in app.session.flashbag.get('notice') %}
+            <div class="flash_notice">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        {% for flashMessage in app.session.flashbag.get('error') %}
+            <div class="flash_error">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+    </div>
+    {% set data_opt={ 'entities' : entities_settings|default({}) } %}
+    <div id="content_body" class="content-body flex-auto flex-box" {% block overflow %} style="overflow: auto;"{% endblock %} {{ block('data_options') }}>
+        {% block main_toolbars %}
+            {{ block("toolbars") }}
+        {% endblock %}
+        {% block fos_user_content %}
+        {% endblock fos_user_content %}
+    </div>
+    {%block modal %}
+        {% if modals is defined and modals is not empty%}
+            {% for modal in modals %}
+                {% include 'Modal/layout.html.twig' with { modal : modal } %} 
+            {% endfor %}
+        {% endif %}
+        {% include 'Modal/layout.html.twig' with {'modal': {} } %} 
+    {% endblock %}
+{% endblock document_body %}
+
+
+
+
+
+
+{%- block show_field -%}
+    <div class="form-group">
+        {% set label = {}|set_label(cell.name, cell.en) %}
+        {{ block('label') }}
+        {% set cellOpt = { ownClass : true } %}
+        {% set cell = cell|add_class(['form-control', 'field-text'], 'attr') %}
+        {{ block("cell_data") }}
+    </div>
+{%- endblock show_field -%}
+
+
+{%- block field_details -%}
+    {% set en = details.en|default(en|default('')) %}
+    <table>
+        {% for field in details.fields %}
+            {% if field is string %}
+                {% set field = { name: field } %}
+            {% endif %}
+            {% set label = field.label|default( (en ? en~'.' : '')~ 'label.' ~ field.name|default('') ) %}
+            {% set attr = field.attr|default({}) %}
+            {% set data_opt = field.d|default({})|set_array_value('name', field.name) %}
+        <tr {{ block('attributes') }} >
+            <th> {{ label|trans() }} </th>
+            <td> <span {{ block('data_options') }}> </span> </td>
+        </tr>
+        {% endfor %}
+    </table>
+{%- endblock field_details -%}

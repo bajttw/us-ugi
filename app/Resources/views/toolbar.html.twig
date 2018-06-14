@@ -1,0 +1,23 @@
+{% extends 'bar.html.twig' %}
+{% use "blocks.html.twig" %}
+{% block bar_content %}
+    {% set div={
+        attr: bar.attr|default({})|add_class([ 'col-md-12', 'well', 'toolbar']) 
+    }%} 
+    {% import 'macros.html.twig' as mbajt %}
+    {{ block("begin_div") }}
+        {% for btn in bar.buttons %}
+            {% set 
+                attr = (btn.attr)|default({})|merge( { 
+                    class: ((btn.attr.class)|default('') ~ ' btn btn-primary')|trim, 
+                    title : (btn.attr.title)|default(bar.name ~ ".title." ~ btn.action) 
+            } ) -%}
+            <a href="{{ btn.url|default('#') }}" {{ macros.attributes(attr) }} 
+                {% if btn.modal is defined and btn.modal %}
+                    {{ mbajt.modal_btn(bar.name, btn.modal) }}
+                {% endif %}>
+                {{ btn.label|default(bar.name ~ ".label." ~ btn.action)|trans }}
+            </a>
+        {% endfor %}    
+    {{ block("close_div") }}
+{% endblock bar_content %}

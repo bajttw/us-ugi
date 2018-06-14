@@ -1,0 +1,8 @@
+<strong> Błędy w formularzu </strong>
+<ul class="error_list">
+    {% for error in errors %}
+        <li>
+            <strong>{{ error.label }}: </strong><i>{{ error.error }}</i>
+        </li>
+    {% endfor %}
+</ul>

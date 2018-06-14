@@ -1,0 +1,6 @@
+{% extends (layout|default('layout'))~'.html.twig' %}
+{% block fos_user_content %}
+    {% if table is defined %}
+        {{ block('datatable') }}
+    {% endif %}
+{% endblock %}

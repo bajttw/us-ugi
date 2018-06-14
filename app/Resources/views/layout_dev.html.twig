@@ -1,0 +1,109 @@
+{% use "blocks.html.twig" %}
+{% use "Form/blocks.html.twig" %}
+{% if full_layuot is not defined %}
+    {% set full_layuot = true %}
+{% endif %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}
+                {{ title|default('title.title')|trans}}
+            {% endblock %}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {% block stylesheets %}
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link rel="stylesheet" href="{{ asset('bundles/assets/css/bajt_assets.min.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/css/dataTables-bootstrap4.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/css/main.css') }}" type="text/css" media="all" >
+        {% endblock %}
+        {% block css_template %}
+        {% endblock css_template %}
+        <link rel="shortcut icon" href="{{ asset('bundles/images/favicon.ico') }}" />
+    </head>
+    <body class="flex-box" >
+        {% if full_layuot %}
+            <header >       
+                <nav class="py-0 navbar navbar-expand-md navbar-dark bg-dark" data-menu="ajax" >
+                    <a class="navbar-brand" href="{{ path('app_home') }}">
+                        <span>Bajt</span>
+                    </a>                   
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    {# <button id="test" type='button'>test</button> #}
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        {% block menu %}
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                {{ knp_menu_render('AppBundle:Builder:adminMenu', {'currentClass': 'active'}) }}
+                                {# {{ knp_menu_render('AppBundle:Builder:adminMenu', {'currentClass': 'active', 'template': 'menu.html.twig'}) }} #}
+                            {% elseif is_granted('ROLE_ADMIN') %}
+                                {{ knp_menu_render('AppBundle:Builder:employeeMenu', {'currentClass': 'active'}) }}
+                                {# {{ knp_menu_render('AppBundle:Builder:employeeMenu', {'currentClass': 'active', 'template': 'menu.html.twig'}) }} #}
+                            {% elseif is_granted('ROLE_USER') %}
+                                {% set client_menu = knp_menu_get('AppBundle:Builder:clientMenu', [], {'clientid': client_id|default('__cid__')} ) %}
+                                {# {{ knp_menu_render(client_menu, {'currentClass': 'active'}) }} #}
+                                {{ knp_menu_render(client_menu, {'currentClass': 'active', 'template': 'menu.html.twig'}) }}
+                            {% endif %}    
+                        {% endblock %}
+                    </div>
+                    <ul class="navbar-nav float-right">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="material-icons md-18 mr-1">perm_identity</i>
+                                    <span>{{ app.user.username }}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('fos_user_security_logout') }}" class="nav-link" target="_self">
+                                    <i class="material-icons md-18 mr-1">open_in_browser</i>
+                                    <span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li  class="nav-item">
+                                <a href="{{ path('fos_user_security_login') }}" class="nav-link"  target="_self">
+                                    <i class="material-icons md-18 mr-1">exit_to_app</i>
+                                    <span>{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>    
+                    {% for type, messages in app.session.flashBag.all %}
+                        {% for message in messages %}
+                            <div class="{{ type }}">
+                                {{ message|default('...')|trans({}, 'FOSUserBundle') }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </nav>
+            </header>
+        {% endif %}
+        <div id="main-wrapper" class="flex-auto flex-box">
+            {{ block("document_body") }}
+        </div>
+        {{ block("fileupload") }}
+        {% if full_layuot %}
+            <footer class="footer bar-shadow text-center">
+                <span>Strona wykonana przez </span>
+            </footer>
+        {% endif %}
+        {# {{ block('upload') }} #}
+        {% block js_framework %}
+            <script type="text/javascript" src="{{ asset('bundles/assets/js/bajt_assets.min.js') }}"></script>
+         
+        {% endblock %}
+        {% block javascripts %}
+            <script type="text/javascript" src="{{ asset('bundles/js/bajt_ts.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/bajt_main.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/bajt_app.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/bajt_exp.js')}}"></script>
+        {% endblock %}
+        {% block js_template %}
+            
+        {% endblock js_template %}
+    </body>
+</html>

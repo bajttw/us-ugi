@@ -1,0 +1,51 @@
+.bars{
+    @include flex-on;
+    @include flex-column;
+    .bar{
+        background-color: $bar-bg;
+        border-top: solid silver 1px;
+        border-bottom: solid silver 1px;
+        margin-top: 2px;
+        @include flex-on;
+        @include flex-wrap;
+        @extend .form-sm;
+        .form-group{
+            margin-bottom: .5rem;
+        }
+        > div {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .btn-group{
+            padding: 5px;
+            @include flex-on;
+            > *{
+                margin:auto;
+            }
+
+        }
+
+    }
+    
+}
+.toolbar{
+    background-color: $toolbar-bg;
+}
+
+.filterbar{
+    .filters{
+        @include flex-on;
+        overflow: unset;
+        > div{
+            margin-left: 15px; 
+        }
+        > div:first-child{
+            margin-left: 0; 
+        }
+    }
+}
+
+.bar-shadow {
+    @include box-shadow($bar-box-shadow);
+    /*z-index: $zindex-navbar;*/
+}

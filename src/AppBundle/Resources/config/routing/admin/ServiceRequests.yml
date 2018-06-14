@@ -1,0 +1,38 @@
+app_admin_servicerequests:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\ServiceRequestsController::indexAction }
+
+app_admin_servicerequests_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\ServiceRequestsController::ajaxListAction }
+
+app_admin_servicerequests_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\ServiceRequestsController::createAction }
+    methods:  POST
+
+app_admin_servicerequests_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\ServiceRequestsController::deleteAction }
+
+app_admin_servicerequests_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\ServiceRequestsController::editAction }
+
+app_admin_servicerequests_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\ServiceRequestsController::newAction }
+
+app_admin_servicerequests_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\ServiceRequestsController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_servicerequests_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\ServiceRequestsController::showAction }
+
+app_admin_servicerequests_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\ServiceRequestsController::updateAction }
+    methods:  [POST, PUT]

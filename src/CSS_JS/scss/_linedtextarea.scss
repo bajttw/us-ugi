@@ -1,0 +1,43 @@
+.lined-container {
+	padding: 3px;
+        width:100%;
+}
+
+.lined-lines{
+	margin-top: 0px;
+	margin-right: 10px;
+	width: 3em;
+	float: left;
+	overflow: hidden;
+	border-right: 1px solid #c0c0c0;
+}
+
+.lined-textarea {
+	padding: 0px;
+	margin: 0px;
+        overflow: hidden;
+}
+
+.lined-textarea textarea, .lined-container .codelines .lineno {
+	line-height: 20px !important;
+}
+
+.lined-textarea textarea {
+	padding-right:0.3em;
+	border: 0;
+}
+
+
+
+.lined-container .codelines .lineno {
+	color:#AAAAAA;
+	padding-right: 0.5em;
+	text-align: right;
+	white-space: nowrap;
+        height: 20px;
+	line-height: 20px !important;
+}
+
+.linedwrap .codelines .lineselect {
+	color: red;
+}

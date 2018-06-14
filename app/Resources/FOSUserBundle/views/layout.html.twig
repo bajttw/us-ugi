@@ -1,0 +1,12 @@
+{% extends 'layout.html.twig' %}
+{%  block begin_fos_card %}
+    <div class="d-flex justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4 mt-1">
+            {{ block("begin_card") }}
+{%  endblock begin_fos_card %}
+
+{%  block close_fos_card %}
+        </div>
+    </div>
+    {{ block("close_card") }}
+{%  endblock close_fos_card %}

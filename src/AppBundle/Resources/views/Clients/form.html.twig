@@ -1,0 +1,49 @@
+<div class="row-blocks">
+    <div class="col-10">
+        {{form_row(form.name)}}
+    </div>
+    <div class="col-2">
+        {{form_row(form.nip)}}
+    </div>
+</div>
+<div class="row-blocks">
+    <div class="col-2">
+        {{form_row(form.zipCode)}}
+    </div>
+    <div class="col-5">
+        {{form_row(form.city)}}
+    </div>
+    <div class="col-5">
+        {{form_row(form.street)}}
+    </div>
+</div>
+<div class="row-blocks">
+    <div class="col-4">
+        {{form_row(form.contact)}}
+    </div>
+    <div class="col-4">
+        {{form_row(form.email)}}
+    </div>
+    <div class="col-2">
+        {{form_row(form.tel)}}
+    </div>
+    <div class="col-2">
+        {{form_row(form.mobile)}}
+    </div>
+</div>
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="row-blocks">
+        <div class="col-2">
+            {{form_row(form.active)}}
+        </div>
+        <div class="col-2">
+            {{form_row(form.regular)}}
+        </div>
+        <div class="col-2">
+            {{form_row(form.code)}}
+        </div>
+        <div class="col-4">
+            {{form_row(form.clientGroups)}}
+        </div>
+    </div>
+{% endif %}

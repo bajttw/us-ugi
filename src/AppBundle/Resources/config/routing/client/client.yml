@@ -1,0 +1,16 @@
+settings:
+    resource: "@AppBundle/Resources/config/routing/client/Settings.yml"
+    prefix:   /settings
+
+users:
+    resource: "@AppBundle/Resources/config/routing/client/Users.yml"
+    prefix:   /users
+
+clients:
+    resource: "@AppBundle/Resources/config/routing/client/Clients.yml"
+    prefix:   /clients
+
+serviceorders:
+    resource: "@AppBundle/Resources/config/routing/client/ServiceOrders.yml"
+    prefix:   /serviceorders
+

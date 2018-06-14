@@ -1,0 +1,53 @@
+AppBundle\Entity\PriceLists:
+    type: entity
+    repositoryClass: AppBundle\Repository\PriceListsRepository
+    table: PriceLists
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        title:
+            type: string
+            length: 100
+        description:
+            type: text
+            nullable: true
+        start:
+            type: datetime
+        end:
+            type: datetime   
+            nullable: true
+    oneToMany:
+        serviceCatalogPrices:
+            targetEntity: ServiceCatalogPrices
+            mappedBy: priceList
+            cascade: [persist]
+        serviceOptionsPrices:
+            targetEntity: ServiceOptionsPrices
+            mappedBy: priceList
+            cascade: [persist]
+    manyToMany:
+        clients:
+            targetEntity: Clients
+            mappedBy: priceLists
+        clientsGroups:
+            targetEntity: ClientsGroups
+            mappedBy: priceLists
+        notes:
+            targetEntity: Notes
+            joinTable:
+                name: PriceLists_Notes
+                joinColumns:
+                    priceLists_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    notes_id:
+                        referencedColumnName: id 
+            cascade: [ persist, remove ]
+    lifecycleCallbacks: 
+        prePersist: [ prePersistPriceLists ]

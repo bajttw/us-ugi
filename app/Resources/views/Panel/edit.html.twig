@@ -1,0 +1,21 @@
+{% extends 'Panel/content.html.twig' %}
+{% use "Form/blocks.html.twig" %}
+{% block panel_form_start %}
+    {{ block('b_form_start') }}
+{% endblock %}
+{% block panel_form_errors %}
+    {{ block("b_form_errors") }}
+{% endblock %}
+{% block panel_form_body %}
+    {{ block("b_form_body") }}
+{% endblock %}
+{% block panel_form_submit %}
+    {{ block("b_form_submit") }}
+{% endblock %}
+{% block panel_form_messages %}
+    {{ block("b_form_messages") }}
+{% endblock %}
+{% block panel_form_end %}
+    {{ block("b_form_end") }}
+{% endblock %}
+

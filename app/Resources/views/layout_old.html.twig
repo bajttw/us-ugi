@@ -1,0 +1,230 @@
+{% use "blocks.html.twig" %}
+{% use "Form/blocks.html.twig" %}
+{% if full_layuot is not defined %}
+    {% set full_layuot = true %}
+{% endif %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}
+                {{ title|default('title.title')|trans}}
+            {% endblock %}
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/assets/bootstrap/css/bootstrap.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/assets/tether/css/tether.min.css') }}" type="text/css" media="all" >
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            {# <link rel="stylesheet" href="{{ asset('bundles/font-awesome/css/fontawesome.min.css') }}" type="text/css" media="all" > #}
+            {# <link rel="stylesheet" href="{{ asset('bundles/font-awesome/css/fa-svg-with-js.css') }}" type="text/css" media="all" > #}
+            <link rel="stylesheet" href="{{ asset('bundles/assets/jq/ui/jquery-ui.min.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/assets/jsoneditor/jsoneditor.min.css') }}" type="text/css">
+            {# <link rel="stylesheet" href="{{ asset('bundles/system/DataTables/DataTables-1.10.13/css/dataTables.min.css') }}" type="text/css" media="all" > #}
+            {# <link rel="stylesheet" href="{{ asset('bundles/system/DataTables/DataTables-1.10.13/css/dataTables.bootstrap4.min.css') }}" type="text/css" media="all" > #}
+            <link rel="stylesheet" href="{{ asset('bundles/assets/DataTables/Responsive-2.1.1/css/responsive.bootstrap4.min.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/assets/DataTables/Buttons-1.2.4/css/buttons.bootstrap4.min.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/assets/DataTables/Scroller-1.4.2/css/scroller.bootstrap.min.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/assets/css/daterangepicker.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/assets/css/linedtextarea.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/css/dataTables-bootstrap4.css') }}" type="text/css" media="all" >
+            <link rel="stylesheet" href="{{ asset('bundles/css/main.css') }}" type="text/css" media="all" >
+            {# <script defer src="{{ asset('bundles/font-awesome/js/fa-brands.js') }}"></script> #}
+            {# <script defer src="{{ asset('bundles/font-awesome/js/fa-v4-shims.js') }}"></script> #}
+            {# <script defer src="{{ asset('bundles/font-awesome/js/fa-solid.min.js') }}"></script>  #}
+            {# <script defer src="{{ asset('bundles/font-awesome/js/fa-regular.min.js') }}"></script>  #}
+            {# <script defer src="{{ asset('bundles/font-awesome/js/fa-solid.js') }}"></script> #}
+            {# <script src="{{ asset('bundles/font-awesome/js/fontawesome.min.js') }}"></script> #}
+        {% endblock %}
+        {% block css_template %}
+        {% endblock css_template %}
+        <link rel="shortcut icon" href="{{ asset('bundles/images/favicon.ico') }}" />
+    </head>
+    <body class="flex-box" >
+        {% if full_layuot %}
+            <header >       
+                <nav class="py-0 navbar navbar-expand-md navbar-dark bg-dark" data-menu="ajax" >
+                    <a class="navbar-brand" href="{{ path('app_home') }}">
+                        <span>Bajt</span>
+                    </a>                   
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    {# <button id="test" type='button'>test</button> #}
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        {% block menu %}
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                {{ knp_menu_render('AppBundle:Builder:adminMenu', {'currentClass': 'active'}) }}
+                                {# {{ knp_menu_render('AppBundle:Builder:adminMenu', {'currentClass': 'active', 'template': 'menu.html.twig'}) }} #}
+                            {% elseif is_granted('ROLE_ADMIN') %}
+                                {{ knp_menu_render('AppBundle:Builder:employeeMenu', {'currentClass': 'active'}) }}
+                                {# {{ knp_menu_render('AppBundle:Builder:employeeMenu', {'currentClass': 'active', 'template': 'menu.html.twig'}) }} #}
+                            {% elseif is_granted('ROLE_USER') %}
+                                {% set client_menu = knp_menu_get('AppBundle:Builder:clientMenu', [], {'clientid': client_id|default('__cid__')} ) %}
+                                {# {{ knp_menu_render(client_menu, {'currentClass': 'active'}) }} #}
+                                {{ knp_menu_render(client_menu, {'currentClass': 'active', 'template': 'menu.html.twig'}) }}
+                            {% endif %}    
+                        {% endblock %}
+                    </div>
+                    <ul class="navbar-nav float-right">
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="material-icons md-18 mr-1">perm_identity</i>
+                                    <span>{{ app.user.username }}</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ path('fos_user_security_logout') }}" class="nav-link" target="_self">
+                                    <i class="material-icons md-18 mr-1">open_in_browser</i>
+                                    <span>{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</span>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li  class="nav-item">
+                                <a href="{{ path('fos_user_security_login') }}" class="nav-link"  target="_self">
+                                    <i class="material-icons md-18 mr-1">exit_to_app</i>
+                                    <span>{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>    
+                    {% for type, messages in app.session.flashBag.all %}
+                        {% for message in messages %}
+                            <div class="{{ type }}">
+                                {{ message|default('...')|trans({}, 'FOSUserBundle') }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </nav>
+            </header>
+        {% endif %}
+        <div id="main-wrapper" class="flex-auto flex-box">
+            {{ block("document_body") }}
+        </div>
+        {{ block("fileupload") }}
+        {% if full_layuot %}
+            <footer class="footer bar-shadow text-center">
+                <span>Strona wykonana przez </span>
+            </footer>
+        {% endif %}
+        {# {{ block('upload') }} #}
+        {% block js_framework %}
+            <script type="text/javascript" src="{{ asset('bundles/assets/jq/jquery-3.2.1.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/jq/ui/jquery-ui.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/tether/js/tether.min.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/js/moment.min.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/js/popper.min.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/bootstrap/js/bootstrap.min.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/js/bootstrap-switch.js')}}"></script> 
+            <script type="text/javascript" src="{{ asset('bundles/assets/js/bootstrap-multiselect.js')}}"></script> 
+            <script type="text/javascript" src="{{ asset('bundles/assets/js/bootstrap-confirmation.js')}}"></script> 
+            {# <script type="text/javascript" src="{{ asset('bundles/js/maskedinput.js')}}"></script> #}
+            <script type="text/javascript" src="{{ asset('bundles/assets/js/linedtextarea.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/js/daterangepicker.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/JSZip-2.5.0/jszip.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/pdfmake-0.1.18/build/pdfmake.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/pdfmake-0.1.18/build/vfs_fonts.js') }}"></script>
+
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/DataTables-1.10.13/js/jquery.dataTables.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/DataTables-1.10.13/js/dataTables.bootstrap4.min.js') }}"></script>
+
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Buttons-1.2.4/js/dataTables.buttons.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Buttons-1.2.4/js/buttons.bootstrap4.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Buttons-1.2.4/js/buttons.colVis.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Buttons-1.2.4/js/buttons.flash.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Buttons-1.2.4/js/buttons.html5.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Buttons-1.2.4/js/buttons.print.min.js') }}"></script>
+
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/KeyTable-2.2.0/js/dataTables.keyTable.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Responsive-2.1.1/js/dataTables.responsive.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Responsive-2.1.1/js/responsive.bootstrap4.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Scroller-1.4.2/js/dataTables.scroller.min.js') }}"></script>
+            {#<script type="text/javascript" src="{{ asset('bundles/DataTables/Select-1.2.0/js/dataTables.select.min.js') }}"></script>#}
+            <script type="text/javascript" src="{{ asset('bundles/assets/DataTables/Select-1.2.0/js/dataTables.select.min.js') }}"></script>
+            {#<script type="text/javascript" src="{{ asset('bundles/system/app/DataTables/ColReorder-1.3.2/js/dataTables.colReorder.js') }}"></script>#}
+            {#<script type="text/javascript" src="{{ asset('bundles/system/app/DataTables/FixedColumns-3.2.2/js/dataTables.fixedColumns.js') }}"></script>#}
+            {#<script type="text/javascript" src="{{ asset('bundles/system/app/DataTables/FixedHeader-3.1.2/js/dataTables.fixedHeader.js') }}"></script>#}
+            {#<script type="text/javascript" src="{{ asset('bundles/system/app/DataTables/RowReorder-1.1.2/js/dataTables.rowReorder.js') }}"></script>#}
+            {#<script type="text/javascript" src="{{ asset('bundles/system/app/DataTables/AutoFill-2.1.2/js/dataTables.autoFill.js') }}"></script>#}
+            {#<script type="text/javascript" src="{{ asset('bundles/system/app/DataTables/AutoFill-2.1.2/js/autoFill.bootstrap.js') }}"></script>#}
+
+            {#<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>#}
+            <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+     
+            <!-- <script type="text/javascript" src="{{ asset('bundles/assets/jq/upload/js/vendor/jquery.ui.widget.js') }}"></script> -->
+     
+            <!-- The Templates plugin is included to render the upload/download listings -->
+            {#<script src="//blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>#}
+            <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+            {#<script src="//blueimp.github.io/JavaScript-Load-Image/js/load-image.all.min.js"></script>#}
+            <script type="text/javascript" src="{{ asset('bundles/assets/jq/upload/js/extra/load-image.all.min.js') }}"></script>
+            <!-- The Canvas to Blob plugin is included for image resizing functionality -->
+            {#<script src="//blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>#}
+            <script type="text/javascript" src="{{ asset('bundles/assets/jq/upload/js/extra/canvas-to-blob.min.js') }}"></script>
+            <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+            <script type="text/javascript" src="{{ asset('bundles/assets/jq/upload/js/jquery.iframe-transport.js') }}"></script>
+            <!-- The basic File Upload plugin -->
+            <script type="text/javascript" src="{{ asset('bundles/assets/jq/upload/js/jquery.fileupload.js') }}"></script>
+            <!-- The File Upload user interface plugin -->
+            {#<script src="{{ asset('bundles/system/app/jQFileUpload/js/jquery.fileupload-ui.js') }}"></script>#}
+            <!-- The File Upload processing plugin -->
+            <script type="text/javascript" src="{{ asset('bundles/assets/jq/upload/js/jquery.fileupload-process.js') }}"></script>
+            <!-- The File Upload image preview & resize plugin -->
+            <script type="text/javascript" src="{{ asset('bundles/assets/jq/upload/js/jquery.fileupload-image.js') }}"></script>
+            <!-- The File Upload validation plugin -->
+            <script type="text/javascript" src="{{ asset('bundles/assets/jq/upload/js/jquery.fileupload-validate.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/assets/jsoneditor/jsoneditor.min.js') }}"></script>
+
+        {% endblock %}
+        {% block javascripts %}
+            {# <script type="text/javascript" src="{{ asset('bundles/js/variables.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/utilities.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/bajt.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/html.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/msg.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/events.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/widget.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/combobox.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/copytextarea.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/nettoinput.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/uploads.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/datatables.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/dtimport.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/fields.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/forms.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/modals.js')}}"></script>
+ #}
+
+            {# <script type="text/javascript" src="{{ asset('bundles/js/messages.js')}}"></script> #}
+            {# <script type="text/javascript" src="{{ asset('bundles/js/valid.js')}}"></script> #}
+            <script type="text/javascript" src="{{ asset('bundles/js/bajt_ts.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/bajt_main.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/bajt_app.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/js/bajt_exp.js')}}"></script>
+            {# <script type="text/javascript" src="{{ asset('bundles/js/export.js')}}"></script> #}
+            {# <script type="text/javascript" src="{{ asset('bundles/app/js/appexport.js')}}"></script> #}
+            {# <script type="text/javascript" src="{{ asset('bundles/app/js/appvariables.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/app/js/entities.js')}}"></script>
+            
+            <script type="text/javascript" src="{{ asset('bundles/app/js/appdatatables.js')}}"></script>
+
+
+
+
+            
+
+
+            <script type="text/javascript" src="{{ asset('bundles/app/js/clients.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/app/js/services.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/app/js/serviceorders.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/app/js/pricelist.js')}}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/app/js/app.js')}}"></script> #}
+
+        {% endblock %}
+        {% block js_template %}
+            
+        {% endblock js_template %}
+    </body>
+</html>

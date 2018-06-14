@@ -1,0 +1,5 @@
+{% extends 'Panel/content.html.twig' %}
+{% use "blocks.html.twig" %} 
+{% block fos_user_content %}
+    {{ block('access_denied') }}
+{% endblock %}

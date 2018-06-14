@@ -1,0 +1,13 @@
+app_uploads_delete:
+    path:     /delete
+    defaults: { _controller: AppBundle\Uploads:deleteFile"}
+    methods:  [POST, DELETE]
+
+app_uploads_temp:
+    path: /temp
+    defaults: { _controller: AppBundle\Uploads:uploadTemp" }
+
+app_uploads_uploadfile:
+    path:     /send
+    defaults: { _controller: AppBundle\Uploads:uploadFile" }
+

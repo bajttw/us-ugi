@@ -1,0 +1,67 @@
+$cl-signals: 7rem;
+$cl-summary: 14rem;
+$cl-time: 10rem;
+$cl-feature: 8rem;
+$cl-dimension: 5rem;
+$cl-lackers: 10rem;
+$cl-nr: 3rem;
+$cl-name: auto;
+
+
+$tab-columns:  (
+    "actions" : 64px, 
+    "area" : $cl-summary, 
+    "areaLack" : $cl-summary, 
+    "auto": auto,
+    "cartage" : $cl-summary,
+    "client": 25rem,
+    "color" : $cl-signals, 
+    "color.n" : $cl-feature, 
+    "comm" : $cl-dimension,
+    "comments" : $cl-signals, 
+    "consigned" : $cl-time,
+    "cost" : $cl-summary,
+    "cutter" : $cl-feature, 
+    "count": $cl-dimension,
+    "discount": $cl-dimension,
+    "double" : $cl-signals, 
+    "doubleSide" : $cl-dimension, 
+    "duration": $cl-dimension,
+    "handle" : $cl-feature, 
+    "lackers" : 10rem, 
+    "length" : $cl-dimension,
+    "lp": $cl-nr,
+    "model" : $cl-signals, 
+    "name" : $cl-name,
+    "nr": $cl-nr,
+    "number": 8rem,
+    "options" : $cl-signals,
+    "order": $cl-name,
+    "osummary": $cl-nr + $cl-dimension + $cl-dimension,
+    "package" : $cl-signals, 
+    "performed": $cl-time,
+    "positionLackers" : $cl-signals, 
+    "poslackers" : $cl-signals, 
+    "returned" : $cl-time,
+    "select": 24px,
+    "serviceCharge" : $cl-summary,
+    "signals" : $cl-signals, 
+    "size" : $cl-signals, 
+    "subcontractor": 14rem,
+    "summary" : $cl-summary,
+    "sq": $cl-nr,
+    "title" : $cl-name,
+    "type" : $cl-nr,
+    "width" : $cl-dimension,
+    "value" : $cl-summary,
+    "warranty" : $cl-dimension,
+    "used" : $cl-time,
+    "quantity" : $cl-dimension
+);
+
+$disp-bg: (
+    express: ( $gray-300,  darkorange, orangered),
+    type: ( $gray-300, gray, gold, darkturquoise, darkorchid, teal,  gray,  gray,  gray,  teal),
+    status: ( $gray-300, aquamarine,forestgreen, deepskyblue, darkgrey)
+);
+

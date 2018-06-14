@@ -1,0 +1,11 @@
+{% extends 'Modal/content.html.twig' %}
+{%- block modal_body -%}
+    {% set toolbars = modal.toolbars | default(null) %}
+    {{ block("toolbars") }}
+    {% set table = modal.table %}
+    {{ block('datatable') }}
+{%- endblock -%}
+{%- block modal_form_submit -%}
+    {% set btn = modal.addBtn|default({ attr: { class: 'btn-success' } }) %}
+    {{ block('btn_add') }}
+{%- endblock modal_form_submit -%}

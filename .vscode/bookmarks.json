@@ -1,0 +1,48 @@
+{
+	"onDidClearBookmarkEmitter": {},
+	"onDidClearAllBookmarksEmitter": {},
+	"onDidAddBookmarkEmitter": {},
+	"onDidRemoveBookmarkEmitter": {},
+	"onDidUpdateBookmarkEmitter": {},
+	"bookmarks": [
+		{
+			"fsPath": "$ROOTPATH$\\src\\AppBundle\\Controller\\AppController.php",
+			"bookmarks": [
+				1218,
+				1827
+			]
+		},
+		{
+			"fsPath": "$ROOTPATH$\\src\\AppBundle\\CSS_JS\\js\\entities.js",
+			"bookmarks": [
+				299
+			]
+		},
+		{
+			"fsPath": "$ROOTPATH$\\src\\AppBundle\\CSS_JS\\js\\appexport.js",
+			"bookmarks": [
+				96,
+				320
+			]
+		},
+		{
+			"fsPath": "$ROOTPATH$\\src\\AppBundle\\Controller\\ServiceOrdersController.php",
+			"bookmarks": [
+				40
+			]
+		},
+		{
+			"fsPath": "$ROOTPATH$\\src\\AppBundle\\CSS_JS\\js\\serviceorders.js",
+			"bookmarks": [
+				1196
+			]
+		},
+		{
+			"fsPath": "$ROOTPATH$\\app\\Resources\\views\\blocks.html.twig",
+			"bookmarks": [
+				774,
+				1113
+			]
+		}
+	]
+}

@@ -1,0 +1,28 @@
+AppBundle\Entity\ServiceOptions:
+    type: entity
+    repositoryClass: AppBundle\Repository\ServiceOptionsRepository
+    table: ServiceOptions
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        name:
+            type: string
+            length: 100
+        description:
+            type: text
+            nullable: true
+        type:
+            type: smallint
+            options:
+                unsigned: true
+                default: 1
+        value:
+            type: float
+            options:
+                default: 0

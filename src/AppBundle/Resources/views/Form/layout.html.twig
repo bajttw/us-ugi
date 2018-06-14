@@ -1,0 +1,87 @@
+{% use "@App/ServiceOrders/blocks.html.twig" %}
+{% use "@App/ServiceOrders/formBlocks.html.twig" %}
+{% use "@App/PriceLists/formBlocks.html.twig" %}
+
+{% extends "Form/layout.html.twig" %}
+
+{% block appbundle_uploads_row -%}
+    {% set dopt=form.vars.attr['data-options']|default('{}')|json_decode %}
+    {% set preview = dopt['widget']['options']['preview'] | default('false') %}
+    {% set uplRow = true %}
+    {% set en = en|default('uploads') %}
+    <div {{ block('form_group_attributes') }}>
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form,{
+            attr: form.vars.attr|add_class('form-control')|array_replace({
+                "data-options":  (dopt|array_replace({
+                    widget: {
+                        options: {
+                            templates: {
+                                process: block("upload_process" ),
+                                show: block("upload_show" ),
+                                status: block("upload_status"),
+                                btnAdd: block("btn_upload")
+                            }
+                        }
+                    }
+                }))|json_encode
+            })
+
+        }) }}
+    </div>
+{%- endblock appbundle_uploads_row -%}
+
+{%- block appbundle_uploads_entry_row -%}
+    {{ form_widget(form)}}
+{%- endblock appbundle_uploads_entry_row -%}
+
+{# {% block appbundle_uploads_row -%}
+    {% set upload_options=attr['data-options']|default({})|json_decode() %}    
+
+    <div class="form-group upload-container collection {% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- block('form_label') -}}
+        {% if not read_only %}
+            {{ block('upload_btn') }}
+        {% endif %}
+        {% set attr = attr|add_class('form-control') %}
+        {{ form_widget(form) }}
+        {{ block("status_bar") }}
+    </div>
+{%- endblock appbundle_uploads_row -%} #}
+
+{% block appbundle_upload_row -%}
+    {% set dopt=form.vars.attr['data-options']|default('{}')|json_decode %}
+    {% set preview = dopt['widget']['options']['preview'] | default('false') %}
+    {% set upl = value is not empty? value | json_decode: null %}
+    {% set en = en|default('uploads') %}
+    <div {{ block('form_group_attributes') }}>
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form, 
+        { 
+            attr : form.vars.attr|array_replace({
+                "data-options":  (dopt|array_replace({
+                    widget: {
+                        options: {
+                            templates: {
+                                process: block("upload_process" ),
+                                show: block("upload_show" ),
+                                status: block("upload_status"),
+                                btnAdd: block("btn_upload")
+                            }
+                        }
+                    }
+                }))|json_encode
+            })
+        }) }}
+    </div>
+
+{%- endblock appbundle_upload_row -%}
+
+{# {% set upload_options=attr['data-options']|default('[]')|json_decode() %}     #}
+{# {% if attr['data-widget'] is defined and attr['data-widget']=='upload' %} #}
+{# {{ block("upload_widget") }} #}
+{# {% else %} #}
+{# {{ block("upload_row") }} #}
+{# {% endif %} #}

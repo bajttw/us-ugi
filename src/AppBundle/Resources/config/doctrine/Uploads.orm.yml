@@ -1,0 +1,44 @@
+AppBundle\Entity\Uploads:
+    type: entity
+    table: Uploads
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        name:
+            type: string
+            length: 45
+        original:
+            type: string
+            length: 45
+        type:
+            type: string
+            nullable: true
+            length: 20
+        uploadType:
+            type: smallint
+            column: upload_type
+            options:
+                unsigned: true
+                default: 0
+        path:
+            type: string
+            length: 250
+        url:
+            type: string
+            length: 250
+        size:
+            type: integer
+            options:
+                unsigned: true
+    lifecycleCallbacks: 
+           # prePersist: [preUpload]
+       # preUpdate: [preUpload]
+       # postPersist: [upload]
+       # postUpdate: [upload]
+        postRemove: [removeUpload]

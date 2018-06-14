@@ -1,0 +1,51 @@
+AppBundle\Entity\Notes:
+    type: entity
+    repositoryClass: AppBundle\Repository\NotesRepository
+    table: Notes
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        created:
+            type: datetime
+        term:
+            type: datetime
+            nullable: true
+        title:
+            type: string
+            length: 45
+        content:
+            type: text
+            nullable: true
+        type:
+            type: smallint
+            options:
+                unsigned: true
+                default: 1
+        status:
+            type: smallint
+            options:
+                unsigned: true
+                default: 1
+        options:
+            type: text            
+            nullable: true
+            
+    manyToMany:
+        uploads:
+            targetEntity: Uploads
+            joinTable:
+                name: Notes_Uploads
+                joinColumns:
+                    notes_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    uploads_id:
+                        referencedColumnName: id 
+            cascade: [ "persist" ]
+    lifecycleCallbacks: {  }

@@ -1,0 +1,19 @@
+client_clients_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Clients:edit" }
+
+client_clients_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Clients:update" }
+    methods:  [POST, PUT]
+
+client_clients_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Clients:show" }
+
+client_clients_data:
+    path:     /{id}/data
+    defaults: { _controller: "AppBundle:Clients:ajaxData" }    
+
+
+

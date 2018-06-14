@@ -1,0 +1,44 @@
+{% use "blocks.html.twig" %}
+{% use "Form/blocks.html.twig" %}
+{% use "@App/ServiceOrders/blocks.html.twig" %}
+{% use "@App/Services/blocks.html.twig" %}
+{% set admin = form.vars.attr['data-admin']|default(false) %}
+<div class="row-blocks">
+    <div class="col-md-4 col-12">
+        {% if form.client.vars.attr.readonly|default(false) %}
+            {{form_field(form.client)}}
+        {% else %}
+            {{form_row(form.client)}}
+        {% endif %}
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        {{form_field(form.serviceOrderId)}}
+    </div>
+    <div class="col-md-4 col-sm-6 col-12">
+        {{form_field(form.serviceOrderType)}}
+    </div>
+    <div class="col-12">
+        {{form_field(form.title)}}
+    </div>
+    <div class="col-sm-4 col-12">
+        {{form_field(form.performed)}}
+    </div>
+    <div class="col-sm-2 col-12">
+        {{form_field(form.duration)}}
+    </div>
+    <div class="col-sm-6 col-12">
+        {{form_field(form.value)}}
+    </div>
+    <div class="col-md-6 col-12">
+        {{form_field(form.description)}}
+    </div>
+    <div class="col-md-6 col-12">
+        {{form_field(form.details)}}
+    </div>
+    <div class="col-12">
+        {{  form_fbtn( form.options, { icon: 'add', disp: true, disp_value : false , disp_details : true, attr: { 'data-options':  {  disp : { tmpl: block('show_serviceOption') }}|json_encode } }) }}
+    </div>
+</div>
+<div style="display:none;">
+    {{form_widget(form)}}
+</div>

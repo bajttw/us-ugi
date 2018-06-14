@@ -1,0 +1,84 @@
+{% use "blocks.html.twig" %}
+{% use "/Form/blocks.html.twig" %}
+{% use "@App/ServiceOrders/blocks.html.twig" %}
+{% use "@App/ServiceOrders/formBlocks.html.twig" %}
+{% use "@App/Services/blocks.html.twig" %}
+{% set admin = form.vars.attr['data-admin']|default(false) %}
+
+<div class="row-blocks">
+    <div class="col-12">
+        {% set card={ 
+            attr: {
+                class: 'card-sm'
+            },
+            header: { 
+                title: 'serviceorders.label.basic'
+            },
+            content: block('serviceorders_basic')
+        } %}
+        {{ block("card") }}
+    </div>
+</div>
+<div class="row-blocks">
+    <div class="col-12">
+        {% set card={ 
+            attr: {
+                class: 'card-sm'
+            },
+            header: { 
+                title: 'serviceorders.label.services',
+                right_content: block('services_buttons')
+            },
+            block:{
+                attr: {
+                    class: 'scroll'
+                }
+            },
+            content: form_row(form.services) 
+        } %}
+        {{ block("card") }}
+    </div>
+</div>
+<div class="row-blocks">
+    <div class="col-12">
+        {% set card={ 
+            attr: {
+                class: 'card-sm'
+            },
+            header: { 
+                title: 'materials'|gen_title(en),
+                right_content: block('materials_buttons')
+            },
+            block:{
+                attr: {
+                    class: 'scroll'
+                }
+            },
+            content: form_row(form.materials) 
+        } %}
+        {{ block("card") }}
+    </div>
+</div>
+<div class="row-blocks">
+    <div class="col-12">
+        {% set card={ 
+            attr: {
+                class: 'card-sm'
+            },
+            header: { 
+                title: 'externalservices'|gen_title(en),
+                right_content: block('externalservices_buttons')
+            },
+            block:{
+                attr: {
+                    class: 'scroll'
+                }
+            },
+            content: form_row(form.externalServices) 
+        } %}
+        {{ block("card") }}
+    </div>
+</div>
+<div style="display:none;">
+    {{form_widget(form)}}
+</div>

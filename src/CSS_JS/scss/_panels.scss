@@ -1,0 +1,112 @@
+.panels{
+    @extend .row-blocks;
+    @include flex-item-auto();
+    align-items: stretch !important;
+/*    @include flex-row;
+    @include flex-item-auto();*/
+    /*@include full-height;*/
+    /*flex-wrap: wrap;*/
+    /*align-items: stretch;*/
+    /*flex-direction: row;*/
+    
+    .panel{
+        padding-left: 0;
+        padding-right: 0;
+        position:relative;
+        
+        @include flex-box;
+        min-height: auto;
+        .panel-content, form{
+            div:first{
+                margin-top: 10px;
+            }
+            @include flex-item-auto;
+            @include flex-box;
+            .content-body{
+                @include flex-item-auto;
+                @include flex-box;
+            }
+        }
+        form{
+            .content-body{
+                @include flex-item-auto(auto !important);
+            }
+        }
+        .content-header{
+            box-shadow: $box-shadow;
+            z-index: 2;
+        }
+        .content-footer{
+            box-shadow: $box-shadow;
+            z-index: 2;
+        }
+        .card{
+            @include full-height;
+            margin: 0;
+        }
+    }
+
+
+    .panel + .panel{
+        border-left: whitesmoke 2px solid;
+        padding-left: 5px;
+        /*box-shadow: $box-shadow inset;*/
+    }
+
+}
+
+/*
+.panel{
+    @include flex-column;
+    &-header{
+        
+    }
+    &-content{
+        @include flex-item-auto; 
+        @include flex-column;
+        > div{
+            @include flex-column;
+            @include full-height;
+        }       
+    }
+    .content-body{
+        @include flex-item-auto; 
+        @include flex-column;
+        > div{
+            @include flex-column;
+            @include full-height;
+        }       
+    }
+    &.content-overflow .panel-content > div{
+        @include full-height( auto );
+    }
+    &-footer{
+    }
+    .card{
+        @include flex-column;
+        @include full-height;
+        .card-block{
+           @include flex-item-auto; 
+            @include flex-column;
+        }
+    }
+}*/
+.tabs-wrapper{
+    @include flex-box;
+    @include flex-item-auto; 
+    .tab-content{
+        @include flex-box;
+        @include flex-item-auto; 
+        border-left: silver 1px solid;
+        border-right: silver 1px solid;
+        .tab-pane.active{
+            @include flex-box;
+            @include flex-item-auto; 
+            /*@include full-height;*/
+            > div{
+                @include flex-item-auto; 
+                @include full-height;
+            }
+        }
+    }
+}

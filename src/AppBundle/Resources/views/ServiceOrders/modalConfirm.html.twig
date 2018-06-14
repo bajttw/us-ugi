@@ -1,0 +1,17 @@
+{% extends 'Modal/content.html.twig' %}
+{% block form_body %}
+    <table class="exp-table" data-toggle="table" >
+        <thead>
+        <tr>
+            {% for column in modal.columns %}
+                <th data-field="{{ column.field }}" data-sortable="true" class="{{ column.class|default(" ") }}">{{ column.name }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+    </table>
+{% endblock %}
+{% block modal_footer %}
+    <button type="button" class="btn-save btn-confirm btn btn-success" >Zatwierdź</button>
+{% endblock %}
+ 
+

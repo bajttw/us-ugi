@@ -1,0 +1,110 @@
+{% use "blocks.html.twig" %}
+{% block b_form_start %}
+    {% if form is defined %}
+        {% set attr= attr|default({})|set_array_value( 'data-ecn', ecn ) %}
+        {% if entity_data is defined %}
+            {% set attr=attr|set_array_value('data-entity-data', entity_data|json_encode) %}
+        {% endif %}
+        {{form_start(form, { "attr": attr})}} 
+    {% endif %}
+{% endblock %}
+
+{% block b_form_end %}
+    {% if form is defined %}
+        {{form_end(form)}} 
+    {% endif %}
+{% endblock %}
+
+{% block b_form_errors %}
+    {% set div = {
+        attr: {
+            class: 'form-errors'
+        },
+        content: form is defined ? form_errors(form) : '' 
+    } %}
+    {{ block('div_errors') }}
+{% endblock %}
+
+{% block b_form_messages %}
+    {% set div = {
+        attr: {
+            class: 'form-messages'
+        }
+    } %}
+    {{ block('div_messages') }}
+{% endblock %}
+
+{% block b_form_body %}
+    {% if form is defined %}
+        {% set attr = { id : form.vars.id, class : 'form-body' } %}
+        {% set data_opt = { 
+            "form-prefix" : form.vars.id|bundle_prefix
+        }%}
+        <div {{ block('attributes') }} {{ block('data_options') }} >
+            {% if template_body is defined and template_body is not empty  %}
+                {% include template_body %}    
+            {% else %}
+                {{form_row(form)}} 
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block b_form_js %}
+    {% if form is defined %}
+    {% endif %}
+{% endblock %}
+
+{% block b_form_submit %}
+    {% if form is defined %}
+        {% set btn = form_options.submit|default({}) %}
+        {{ block('btn_submit') }}
+        {# {% set attr= form_options.submit.attr|add_class(['btn']) %} #}
+        {# {% set attr= attr|merge({ type: "submit", value: attr.value|default('btn.save'|gen_label('') )|trans, title: attr.title|default('btn.save'|gen_title() )}) %} #}
+        {# <input {{ block('attributes') }} />         #}
+    {% endif %}
+{% endblock %}
+
+{% block fileupload %}
+<div style="display:none; ">
+    <input id="fileupload" data-url="{{ path( upload_route|default('app_uploads_temp') )}}" type="file" name="attach_[]" multiple
+        data-show-tmpl="{{ block('upload_edit')|e }}"
+        data-status-tmpl="{{ block('upload_status')|e }}"
+        accept=".doc,.docx,.jpeg,.jpg,.ods,.odt,.pdf,.png,.rar,.rtf,.txt,.xls,.xlsx,.zip">
+</div>
+{% endblock fileupload %}
+
+{%- block form_btns -%}
+    {% for name in btns.fields %}
+        {{ form_btn(form[name]) }}
+    {% endfor %}
+    {{ btns.additional|default('')|raw }}
+{%- endblock form_btns -%}
+
+{#{%- block form_cells -%}
+    {% for cell in cells %}
+        {% if cell is string %}
+            {% set cell={ name: cell } %}
+        {% endif %}
+        {{ block("form_cell") }}
+    {% endfor %}
+{%- endblock form_cells -%}
+#}
+
+
+{#
+{% block form_table_row %}
+    {% set div={
+        attr: tabRow.attr|default({}),
+        d: tabRow.d|default({}) 
+    }%}
+    {{ block("begin_div") }}
+        {% set en = tabRow.en|default('') %}
+        {% set cellOpt= cellOpt|default(tabRow.cellOpt|default({ ownClass : true } )) %}
+        {% set cells= tabRow.cells|default([]) %}
+        {{ block("cells") }}
+    {{ block("close_div") }}
+{% endblock form_table_row %}
+
+#}

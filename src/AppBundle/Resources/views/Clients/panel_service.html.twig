@@ -1,0 +1,71 @@
+{%- block client_info -%}
+    {% set fields = [
+        'code',
+        'name',
+        'nip',
+        'contact',
+        'tel',
+        'mobile',
+        'email',
+        'street',
+        'zipCode',
+        'city'
+    ] %}
+    {% for f in fields %}
+        {% set div = {
+            name: f
+        } %}    
+        {{ block('div_show') }}
+    {% endfor %}
+{%- endblock client_info -%}
+
+{%- block client_preview -%}
+    <div class="col-12">
+        {% set fields = ['name', 'tel', 'mobile'] %}
+        {% for f in fields %}
+            <span class="info-header">{{ ('clients.label.'~f)|trans }}</span>
+            <span class="info-content" data-name="{{ f }}"></span>
+        {% endfor %}
+    </div>
+{%- endblock client_preview -%}
+
+{%- block client_empty -%}
+    <div class="col-12">
+        <strong>
+            <i>{{ 'clients.label.not_selected'|trans }}</i>
+        </strong>
+    </div>
+{%- endblock client_empty -%}
+
+{% extends 'Panel/layout.html.twig' %}
+{% block panel_header %}
+    <div class="col-12 mb-1">
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+            {% set div = {
+                attr: {
+                    id: 'client-info',
+                    class: 'card'
+                },
+                d: {
+                    templates: {
+                        preview: block('client_preview'),
+                        info: block('client_info'),
+                        empty: block('client_empty')
+                    }
+                }
+            } %}
+            {{ block('begin_div') }}
+            <div class="card-header" role="tab" id="show_client_info">
+                <div class="row info-box-header" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"></div>
+            </div>
+            <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="show_client_info">
+                <div class="card-block info-box-content"></div>
+            </div>
+            {{ block('close_div') }}
+        </div>
+    </div>
+{% endblock %}
+{% block panel_content %}
+    {% set tabs = panel.tabs %}
+    {{ block('tabs') }}
+{% endblock panel_content %}

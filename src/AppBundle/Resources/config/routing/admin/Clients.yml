@@ -1,0 +1,64 @@
+app_admin_clients:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\ClientsController::indexAction }
+
+app_admin_clients_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\ClientsController::ajaxListAction }    
+
+app_admin_clients_ajax_details:
+    path:     /ajax/details
+    defaults: { _controller: AppBundle\Controller\ClientsController::ajaxListDetailsAction }    
+
+app_admin_clients_dic:
+    path:     /dic
+    defaults: { _controller: AppBundle\Controller\ClientsController::ajaxDicAction }
+
+app_admin_clients_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\ClientsController::newAction }
+
+app_admin_clients_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\ClientsController::createAction }
+    methods:  POST
+
+app_admin_clients_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\ClientsController::editAction }
+
+app_admin_clients_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\ClientsController::updateAction }
+    methods:  [POST, PUT]
+
+app_admin_clients_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\ClientsController::deleteAction }
+
+app_admin_clients_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\ClientsController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_clients_data:
+    path:     /{id}/data
+    defaults: { _controller: AppBundle\Controller\ClientsController::ajaxDataAction }    
+
+app_admin_clients_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\ClientsController::showAction }
+
+app_admin_clients_service:
+    path:     /service
+    defaults: { _controller: AppBundle\Controller\ClientsController::serviceAction }
+
+app_admin_clients_client_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\ClientsController::newAction }
+
+app_admin_clients_client_edit:
+    path:     /client/{id}/edit
+    defaults: { _controller: AppBundle\Controller\ClientsController::editAction }
+
+

@@ -1,0 +1,15 @@
+{% use "blocks.html.twig" %} 
+{% set attr= modal.attr|default({'title' : 'modal.title.my_modal', "id":"my_modal"})|merge( {'role':'dialog'} )|add_class('modal')|add_class(modal.addClass|default('')) %}
+{% set data_opt = modal.d|default({}) %} 
+<div {{ block('attributes') }} {{ block('data_options') }} >
+    {% set attr = modal.dialog_attr|default({})|add_class('modal-dialog') %}
+    <div {{ block('attributes') }} >
+        <div class="modal-content">
+            {% block modal_content %}
+                {% if modal.content is defined and modal.content is not empty %}
+                    {% include  modal.content %}    
+                {% endif %}
+            {% endblock %}
+        </div>
+    </div>
+</div>

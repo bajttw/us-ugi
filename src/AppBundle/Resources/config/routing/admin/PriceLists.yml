@@ -1,0 +1,42 @@
+app_admin_pricelists:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\PriceListsController::indexAction }
+
+app_admin_pricelists_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\PriceListsController::ajaxListAction }
+
+app_admin_pricelists_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\PriceListsController::createAction }
+    methods:  POST
+
+app_admin_pricelists_data:
+    path:     /{id}/data
+    defaults: { _controller: AppBundle\Controller\PriceListsController::ajaxDataAction }
+
+app_admin_pricelists_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\PriceListsController::deleteAction }
+
+app_admin_pricelists_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\PriceListsController::editAction }
+
+app_admin_pricelists_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\PriceListsController::newAction }
+
+app_admin_pricelists_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\PriceListsController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_pricelists_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\PriceListsController::showAction }
+
+app_admin_pricelists_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\PriceListsController::updateAction }
+    methods:  [POST, PUT]

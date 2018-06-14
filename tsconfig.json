@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "none",
+        "removeComments": true,
+        "sourceMap": true,
+        "outDir": "web/bundles/js"
+        // "inlineSourceMap": true
+        // "inlineSources": true
+
+    },
+    "compileOnSave": true,
+    "include": [
+        "src/CSS_JS/ts/*",
+        "src/AppBundle/CSS_JS/ts/*"
+    ]
+}

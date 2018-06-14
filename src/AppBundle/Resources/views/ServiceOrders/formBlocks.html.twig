@@ -1,0 +1,295 @@
+{% use "blocks.html.twig" %}
+{% use "@App/ServiceOrders/blocks.html.twig" %}
+{% use "@App/Services/blocks.html.twig" %}
+{% use "Form/blocks.html.twig" %}
+
+<!-- 'toggle': 'modal', 
+'target': '#servicecatalog_modal' -->
+
+{% block services_buttons %}
+    {%set en = 'serviceorders' %}
+    {%	set btn={
+        d: {
+            'positions-catalog' : 'Services',
+        },
+        label: 'btn.serviceCatalog'|gen_label(en),
+    } %}
+    {{ block('btn_book') }}
+    {% set btn = {
+        attr: {
+            class: 'btn-primary'
+        },
+        d: {
+            'positions-add' : 'Services' 
+        },
+        label: 'btn.addService'|gen_label(en)
+    } %}
+    {{ block('btn_add') }}
+{% endblock services_buttons %}
+
+{% block externalservices_buttons %}
+    {%	set btn = {
+        attr: {
+            class: 'btn-primary',
+            title: 'btn.addExternalService'|gen_title(en)
+        },
+        d: {
+            'positions-add' : 'ExternalServices' 
+        },
+        label: 'btn.addExternalService'|gen_label(en)
+    } %}
+    {{ block('btn_add') }}
+{% endblock externalservices_buttons %}
+
+{% block materials_buttons %}
+    {%	set btn={
+        attr: {
+            class: 'btn-primary',
+        },
+        d: {
+            'positions-add' : 'Materials' 
+        },
+        label: 'btn.addMaterial'|gen_label(en),
+    } %}
+    {{ block('btn_add') }}
+{% endblock materials_buttons %}
+
+{%- block _appbundle_serviceOrders_services_row -%}
+    {% set en='services' %}
+    {% set divTab={ 
+        attr: { 
+            class: 'table-form'
+        }
+    } %}
+    {{ block("begin_div_table") }}
+        {% set cellOpt={
+            ownClass: true,
+        } %}
+        {% set tabHeader={
+            cells: [ 'performed', 'title', 'duration', 'value', 'discount', 'summary', 'actions' ]
+        }%}
+        {{ block("div_table_header") }}
+        {% set attr = attr|add_class('table-body') %}
+        {% if prototype is defined %}
+            {%- set attr = attr|merge({'data-prototype': form_row(prototype, { hidden: 1}) }) -%}
+        {% endif %}
+        {% set btn = { size: 'sm', en: en, label: false } %}
+        {% set attr = attr|set_array_value('data-templates', {
+            details: block('btn_more'),
+            remove: block('btn_delete'),
+            option: block('show_serviceOption')
+        }|json_encode ) %}
+       {{- block('form_widget') -}}
+    {{ block("close_div") }}
+{%- endblock _appbundle_serviceOrders_services_row -%}
+
+{%- block _appbundle_serviceOrders_services_entry_row -%}
+    {% if hidden is defined %}
+        {% set attr = attr|merge({style: (attr.style|default('') ~ ' display:none;')|trim}) -%}
+    {% endif %}
+    {% set attr = attr|add_class( ['row-pos'] ) %}
+    <div  {{ block('widget_container_attributes') }}>
+        {% set cellOpt={
+            ownClass: true,
+            form: 'row',
+            en: 'services'
+        } %}
+        {% set rows=[
+            {
+                attr: { class: 'row-data' },
+                cells: [ 'performed', 'title', 'duration', 'value', 'discount', 'summary', 'actions' ]
+            },
+            {
+                attr: { class: 'row-info', style: 'display: none;' },
+                cellOpt: { class: 'col', ownClass: false },
+                cells : [ 'description', 'details', { name: 'options', form: 'fbtn',  options: { icon: 'add', disp: true, disp_value : false , disp_details : true } }]
+            }
+        ] %}
+        {{ block("div_table_rows") }}
+    </div>         
+{%- endblock _appbundle_serviceOrders_services_entry_row -%}
+
+{% block _appbundle_serviceOrders_services_entry_options_row2 -%}
+
+{%- endblock _appbundle_serviceOrders_services_entry_options_row2 -%}
+
+{% block _appbundle_serviceOrders_services_entry_options_row1 -%}
+    {% set dopt=form.vars.attr['data-options']|default('{}')|json_decode %}
+    {% set preview=dopt['widget']['options']['preview']|default('false') %}
+    <div {{ block('form_group_attributes') }}>
+        {{ form_label(form) }}
+        {% set btn={  size: 'sm', icon: 'add', attr: { class: 'btn-add'} } %}
+        {{ block('button') }}
+        {{ form_errors(form) }}
+        {{ form_widget(form,{
+            attr: form.vars.attr|add_class('form-control')
+        }) }}
+    </div>
+{%- endblock _appbundle_serviceOrders_services_entry_options_row1 -%}
+
+{%- block _appbundle_serviceOrders_externalServices_row -%}
+    {% set en='externalservices'  %}
+    {% set divTab={ 
+        attr: { 
+            class: 'table-bordered'
+        }
+    } %}
+    {{ block("begin_div_table") }}
+        {% set cellOpt={
+            ownClass: true,
+            
+        } %}
+        {% set tabHeader={
+            cells: [ { name: 'subcontractor'}, 'consigned', 'number', 'returned', 'cost', 'cartage', 'serviceCharge', 'discount', 'summary', 'actions' ]
+        }%}
+        {{ block("div_table_header") }}
+        {% set attr = attr|add_class('table-body') %}
+        {% if prototype is defined %}
+            {%- set attr = attr|merge({'data-prototype': form_row(prototype, { hidden: 1}) }) -%}
+        {% endif %}
+        {% set btn = { size: 'sm', en: en, label: false } %}
+        {% set attr = attr|set_array_value('data-templates', {
+            details: block('btn_more'),
+            remove: block('btn_delete')
+        }|json_encode ) %}
+        {{- block('form_widget') -}}
+    {{ block("close_div") }}
+{%- endblock _appbundle_serviceOrders_externalServices_row -%}
+
+{%- block _appbundle_serviceOrders_externalServices_entry_row -%}
+    {% if hidden is defined %}
+        {% set attr = attr|merge({style: (attr.style|default('') ~ ' display:none;')|trim}) -%}
+    {% endif %}
+    {% set attr = attr|add_class( ['row-pos'] ) %}
+    <div  {{ block('widget_container_attributes') }}>
+        {% set cellOpt={
+            ownClass: true,
+            form: 'row',
+            en: 'externalservices'
+        } %}
+        {% set rows=[
+            {
+                attr: { class: 'row-data' },
+                cells: [ 'subcontractor', 'consigned', 'number', 'returned', 'cost', 'cartage', 'serviceCharge', 'discount', 'summary', 'actions' ]
+            },
+            {
+                attr: { class: 'row-info', style: 'display: none;' },
+                cellOpt: { class: 'col' },
+                cells : [ 'description']
+            }
+        ] %}
+        {{ block("div_table_rows") }}
+    </div>         
+{%- endblock _appbundle_serviceOrders_externalServices_entry_row -%}
+
+{%- block _appbundle_serviceOrders_materials_row -%}
+    {% set en='materials'  %}
+    {% set divTab={ 
+        attr: { 
+            class: 'table-bordered'
+        }
+    } %}
+    {{ block("begin_div_table") }}
+        {% set cellOpt={
+            ownClass: true,
+            
+        } %}
+        {% set tabHeader={
+            cells: [ 'used', 'name', 'warranty', 'value', 'discount', 'summary', 'actions' ]
+        }%}
+        {{ block("div_table_header") }}
+        {% set attr = attr|add_class('table-body') %}
+        {% if prototype is defined %}
+            {%- set attr = attr|merge({'data-prototype': form_row(prototype, { hidden: 1}) }) -%}
+        {% endif %}
+        {% set btn = { size: 'sm', en: en, label: false } %}
+        {% set attr = attr|set_array_value('data-templates', {
+            details: block('btn_more'),
+            remove: block('btn_delete')
+        }|json_encode ) %}
+        {{- block('form_widget') -}}
+    {{ block("close_div") }}
+{%- endblock _appbundle_serviceOrders_materials_row -%}
+
+{%- block _appbundle_serviceOrders_materials_entry_row -%}
+    {% if hidden is defined %}
+        {% set attr = attr|merge({style: (attr.style|default('') ~ ' display:none;')|trim}) -%}
+    {% endif %}
+    {% set attr = attr|add_class( ['row-pos'] ) %}
+    <div  {{ block('widget_container_attributes') }}>
+        {% set cellOpt={
+            ownClass: true,
+            form: 'row',
+            en: 'materials'
+        } %}
+        {% set rows=[
+            {
+                attr: { class: 'row-data' },
+                cells: [ 'used', 'name', 'warranty', 'value', 'discount', 'summary', 'actions' ]
+            },
+            {
+                attr: { class: 'row-info', style: 'display: none;' },
+                cellOpt: { class: 'col' },
+                cells : [ 'description']
+            }
+        ] %}
+        {{ block("div_table_rows") }}
+    </div>         
+{%- endblock _appbundle_serviceOrders_materials_entry_row -%}
+
+
+{% block serviceorders_client_details %}
+    {% set details = {
+        en: 'clients',
+        fields: [ 'name' , 'contact', 'tel', 'mobile', 'email']
+    } %}
+    {{ block('field_details') }}
+{% endblock serviceorders_client_details %}
+
+{% block serviceorders_basic %}
+    {% set rowOpt={ defClass: 'row-blocks' } %}
+    {% set cellOpt= { defClass: 'col', ownClass: false, form: 'field' } %}
+    {% set rows=[
+        { 
+            cells: [
+                { attr: { class: 'col-3'}, 
+                    name: 'client', 
+                    form: form.client.vars.attr.readonly|default(false) ? 'field' : 'row', 
+                    options: {
+                        attr: {
+                            'data-templates': {
+                                details: block('serviceorders_client_details')
+                            }|json_encode()
+                        }
+                    }
+                },
+                { name: 'number', options:{ disp: true} }, 
+                { name: 'created', options:{ disp: true} }, 
+                'type',
+                'express',
+            ]
+        },
+        {
+            cellOpt: { form: 'row' },
+            cells: [
+                { attr: { class: 'col-3'}, name: 'title' },
+                'description', 
+                'accessory'
+            ]
+        },
+        {         
+            cells: [ 
+                { name: 'value', ownClass: true, defClass: '' }, 
+                'status', 
+                { name: 'closed', options:{ disp: true} }, 
+                { name: 'receipt', options:{ disp: true} }, 
+                'bill' ,
+                { name: 'paid', options:{ disp: true} }
+                
+            ]
+        }
+    ]%}
+    {{ block("div_table_rows") }}
+{% endblock serviceorders_basic %}
+
+

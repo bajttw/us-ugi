@@ -1,0 +1,49 @@
+{% use "blocks.html.twig" %}
+
+{% block serviceCatalog_buttons %}
+{%	set buttons=[
+    {
+        attr: {
+            class: 'btn-info',
+            id: 'services_catalog'
+        },
+        label: 'pricelists.label.importServiceCatalog'|trans,
+        icon: 'book'
+    },
+    {
+        attr: {
+            class: 'btn-success'
+        },
+        d: {
+            'add-position' : 'ServiceCatalog' 
+        },
+        label: 'pricelists.label.addService'|trans,
+        icon: 'plus'
+    } 
+]%}
+{{ block('buttons') }}
+{% endblock serviceCatalog_buttons %}
+
+{% block serviceOptions_buttons %}
+{%	set buttons=[
+    {
+        attr: {
+            class: 'btn-info',
+            id: 'services_options'
+        },
+        label: 'pricelists.label.importServiceOptions'|trans,
+        icon: 'book'
+    },
+    {
+        attr: {
+            class: 'btn-success'
+        },
+        d: {
+            'add-position' : 'ServiceOptions' 
+        },
+        label: 'pricelists.label.addServiceOptions'|trans,
+        icon: 'plus'
+    } 
+]%}
+{{ block('buttons') }}
+{% endblock serviceOptions_buttons %}

@@ -1,0 +1,128 @@
+{% use "blocks.html.twig" %}
+{% use "Form/blocks.html.twig" %}
+
+
+
+{% block pricelists_basic %}
+    {% set rowOpt={ defClass: 'row-blocks' } %}
+    {% set cellOpt= { defClass: 'col', ownClass: false, form: 'field' } %}
+    {% set rows=[
+        { 
+            cells: [
+                'title',
+                'start',
+                'end',
+            ]
+        },
+        {
+            cellOpt: { form: 'row' },
+            cells: [
+                'clients',
+                'clientsGroups',
+                'description'
+            ]
+        }
+    ]%}
+    {{ block("div_table_rows") }}
+{% endblock pricelists_basic %}
+
+
+{%- block _appbundle_priceLists_serviceCatalogPrices_row -%}
+    {% set en='servicecatalogprices'  %}
+    {% set divTab={ 
+        attr: { 
+            class: 'table-bordered'
+        }
+    } %}
+    {{ block("begin_div_table") }}
+        {% set cellOpt={
+            ownClass: true,
+        } %}
+        {% set tabHeader={
+            cells: [ { name: 'service', ownClass: false, addClass: 'c-name' }, 'value', 'actions' ]
+        }%}
+        {{ block("div_table_header") }}
+        {% set attr = attr|add_class('table-body') %}
+        {% if prototype is defined %}
+            {%- set attr = attr|merge({'data-prototype': form_row(prototype, { hidden: 1}) }) -%}
+        {% endif %}
+        {% set btn = { size: 'sm' } %}
+        {% set attr = attr|set_array_value('data-templates', {
+            details: block('btn_info'),
+            remove: block('btn_delete')
+        }|json_encode ) %}
+       {{- block('form_widget') -}}
+    {{ block("close_div") }}
+{%- endblock _appbundle_priceLists_serviceCatalogPrices_row -%}
+
+{%- block _appbundle_priceLists_serviceCatalogPrices_entry_row -%}
+{% if hidden is defined %}
+{% set attr = attr|merge({style: (attr.style|default('') ~ ' display:none;')|trim}) -%}
+{% endif %}
+{% set attr = attr|add_class( ['row-pos'] ) %}
+<div  {{ block('widget_container_attributes') }}>
+{% set cellOpt={
+    ownClass: true,
+    form: 'row',
+    en: 'servicecatalogprices'
+} %}
+{% set rows=[
+    {
+        attr: { class: 'row-data' },
+        cells: [ 'serviceCatalog', 'value', 'actions' ]
+    }
+] %}
+{{ block("div_table_rows") }}
+</div>         
+
+{%- endblock _appbundle_priceLists_serviceCatalogPrices_entry_row -%}
+
+{%- block _appbundle_priceLists_serviceOptionsPrices_row -%}
+    {% set en='serviceoptionsprices'  %}
+    {% set divTab={ 
+        attr: { 
+            class: 'table-bordered'
+        }
+    } %}
+    {{ block("begin_div_table") }}
+        {% set cellOpt={
+            ownClass: true,
+        } %}
+        {% set tabHeader={
+            cells: [ 'serviceOption', 'value', 'actions' ]
+        }%}
+        {{ block("div_table_header") }}
+        {% set attr = attr|add_class('table-body') %}
+        {% if prototype is defined %}
+            {%- set attr = attr|merge({'data-prototype': form_row(prototype, { hidden: 1}) }) -%}
+        {% endif %}
+        {% set btn = { size: 'sm' } %}
+        {% set attr = attr|set_array_value('data-templates', {
+            details: block('btn_info'),
+            remove: block('btn_delete')
+        }|json_encode ) %}
+       {{- block('form_widget') -}}
+    {{ block("close_div") }}
+{%- endblock _appbundle_priceLists_serviceOptionsPrices_row -%}
+
+{%- block _appbundle_priceLists_serviceOptionsPrices_entry_row -%}
+{% if hidden is defined %}
+{% set attr = attr|merge({style: (attr.style|default('') ~ ' display:none;')|trim}) -%}
+{% endif %}
+{% set attr = attr|add_class( ['row-pos'] ) %}
+<div  {{ block('widget_container_attributes') }}>
+{% set cellOpt={
+    ownClass: true,
+    form: 'row',
+    en: 'serviceOptions'
+} %}
+{% set rows=[
+    {
+        attr: { class: 'row-data' },
+        cells: [ 'serviceOption', 'value', 'actions' ]
+    }
+] %}
+{{ block("div_table_rows") }}
+</div>         
+
+{%- endblock _appbundle_priceLists_serviceOptionsPrices_entry_row -%}

@@ -1,0 +1,139 @@
+//bootstrap
+@import "bootstrap/functions";
+@import "bootstrap/mixins";
+@import "bootstrap/variables";
+@import "custom-bootstrap-variables";
+@import "app-variables";
+
+$border: 1px solid silver;
+$header-bg: #005673;
+
+$sm-padding-vertical: 2px !default;
+$sm-padding-horizontal: 5px !default;
+$sm-padding: 2px 5px !default;
+$sm-font-size: 0.9rem !default;
+
+$md-padding-vertical: 8px;
+$md-padding-horizontal: 15px;
+$md-padding: $md-padding-vertical $md-padding-horizontal;
+
+$cell-padding: 5px 7px;
+
+$brand-diff:  #0275d8 !default;
+$brand-signal-0: #e5e5e5 !default;
+$brand-signal-1: #bcbcbc !default;
+$brand-signal-2: #2c6c87 !default;
+$brand-signal-3: #5cb85c !default;
+
+
+$menu-color: white;
+$menu-bg: #005f7f;
+$menu-border: #003040;
+
+$menu-color: white, #005f7f, #003040;
+$menu-color-hover: white, #0079a2, #003040;
+$menu-color-select: white, #00455c, #003040;
+
+$bar-bg: #f7f7f7;
+
+
+
+$color: white, #005673, #0000ff;
+$color-hover: white, #0079a2, #0000ff;
+$color-select: white, #00455c, #0000ff;
+
+$table-header-color:white;
+$table-header-bg:#237a90;
+$table-border-color:#003040;
+
+$table-header-colors: $table-header-color, $table-header-bg, $table-border-color;
+$table-color-show-header: black, #eaeaea, silver;
+$table-color-show: black, #fefefe, silver;
+$table-color-show-stripe: black, #f9f9f9, silver;
+
+$table-detail-header-colors: black, lightgray, silver;
+
+$table-inner-bg: rgba(100, 100, 100, 0);
+$table-inner-stripe-bg: rgba(100, 100, 100, 0.05);
+
+$table-color: black, #fdfcf4, silver;
+$table-color-stripe: black,  #faf8df, silver;
+$table-color-hover: black, rgba(100, 100, 100, 0.05), silver !important;
+
+
+$dt-sort-bg: rgba(0,50,200,0.1);
+$dt-hover-bg: #eaeaea;
+$dt-striped-bg: #f2f2f2;
+$dt-striped-hover-bg: #eaeaea;
+
+$dt-select-bg: palegreen;
+$dt-select-hover-bg: lightgreen;
+
+
+$bar-box-shadow: $header-box-shadow;
+$dsa: 0 5px 16px 0 rgba(46, 40, 64, 0.7);
+
+$toolbar-bg: snow !default;
+
+$btn-color: #7f7f7f, #e5e5e5, #bfbfbf;
+$btn-color-hover:  white, #bfbfbf,  #7f7f7f;
+$btn-color-select: white, #404040,  #404040;
+$btn-color-disable: silver, white, #e5e5e5;
+
+$btn-diff-color: #fff !default;
+$btn-diff-bg: $brand-diff !default;
+$btn-diff-border: $btn-diff-bg !default;
+
+$btn-signal-0-color: #fff !default;
+$btn-signal-0-bg: $brand-signal-0 !default;
+$btn-signal-0-border: darken($btn-signal-0-bg, 10%) !default;
+
+$btn-signal-1-color: black !default;
+$btn-signal-1-bg: $brand-signal-1 !default;
+$btn-signal-1-border: darken($btn-signal-1-bg, 10%) !default;
+
+$btn-signal-2-color: #fff !default;
+$btn-signal-2-bg: $brand-signal-2 !default;
+$btn-signal-2-border: darken($btn-signal-2-bg, 10%) !default;
+
+$btn-signal-3-color: #fff !default;
+$btn-signal-3-bg: $brand-signal-3 !default;
+$btn-signal-3-border: darken($btn-signal-3-bg, 10%) !default;
+
+$input-info: (
+    info: (blue, white),
+    warning: (orange, papayawhip),
+    error: (lightcoral, mistyrose)   
+);
+
+// $input-error-border: lightcoral;
+// $input-warning-border: orange;
+// $input-info-border: blue;
+
+
+$cl-client: 25rem;
+$cl-order: 25rem;
+$cl-number: 20rem;
+$cl-lp: 3rem;
+$cl-dimension: 4rem;
+$cl-area: 5rem;
+$cl-signals: 4rem;
+$cl-comments: 5rem;
+$cl-actions: 4rem;
+$cl-feature: 8rem;
+$cl-lackers: 10rem;
+
+
+$btn-actions: "edit" "pdf" "delete" "show" "xls" "copy" "stan" "prn";
+
+$sel-names: "unselected" "selected" "added" "included";
+
+$select-img: "unchecked-square" "checked-square" "check_basic_blue" "check_basic_green";
+
+$select-colors: (black, rgba(240, 242,117,0.4), #ccc), (black, rgba(240, 242,117,0.4), #ccc), (black, rgba(152, 251,152,0.2), #86da98), (black, rgba(31,207,235,0.1), #17a2b8);
+
+$disp-info: (
+    info: (),
+    warning: (),
+    danger: ()   
+);

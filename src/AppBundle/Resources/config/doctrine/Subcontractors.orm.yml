@@ -1,0 +1,57 @@
+AppBundle\Entity\Subcontractors:
+    type: entity
+    repositoryClass: AppBundle\Repository\SubcontractorsRepository
+    table: Subcontractors
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        name:
+            type: string
+            length: 100
+        street:
+            type: string
+            nullable: true
+            length: 100
+        zipCode:
+            type: string
+            column: zip_code
+            nullable: true
+            length: 6
+        city:
+            type: string
+            nullable: true
+            length: 100
+        contact:
+            type: string
+            nullable: true
+            length: 100
+        tel:
+            type: string
+            nullable: true
+            length: 45
+        email:
+            type: string
+            nullable: true
+            length: 100
+        active:
+            type: boolean
+            nullable: false
+            options:
+                default: true
+        description:
+            type: string
+            nullable: true
+            length: 250
+
+    oneToMany:
+        externalServices:
+            targetEntity: ExternalServices
+            mappedBy: subcontractor
+
+    lifecycleCallbacks: {  }

@@ -1,0 +1,254 @@
+/*.dataTables_wrapper{
+    @include flex-column;
+    @include flex-item-auto;
+    padding: 0;
+    overflow: hidden;
+    .dataTables_scroll{
+        @include flex-column;
+        @include flex-item-auto(auto);
+        border-top: 1px solid silver;
+        border-bottom: 1px solid silver;
+        .dataTables_scrollBody{
+            flex: auto;
+            overflow: visible !important;
+        }
+        .dataTables_scrollHead{
+            overflow: visible !important;
+        }
+    }
+    .btn-group{
+        margin: 5px 10px;
+    }
+    .btn, .paginate_button a, .dataTables_info{
+        padding: 0.25rem 0.5rem !important;
+        font-size: .8rem;
+        
+    }
+
+    .dataTables_filter .form-control{
+        padding: $sm-padding;
+    }
+    
+    .btn, .paginate_button
+    {
+        @include colors($btn-color...);
+        &:hover{
+            @include colors($btn-color-hover...);
+        }
+        a{
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+    .dataTables_filter, .dataTables_paginate {
+        margin: 0 10px;
+    }
+}*/
+.dt-button-collection {
+    padding: 5px 5px 10px;
+
+}
+
+.dt-button{
+    padding: $sm-padding;
+    font-size: $sm-font-size;
+}
+.dt-button.dropdown-item{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    &::before{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background-image: url('../images/icons_16.png');
+        background-position-x: 64px;
+        background-position-y: 0;
+        margin-right: .5em;
+        content: "\00a0";
+    }
+    &.active{
+        background-color: inherit;
+        color: inherit;
+        &::before{
+            background-position-x: -80px;
+        }
+    }
+}
+    
+.dataTables_wrapper{
+    @include flex-box;
+    @include flex-item-auto;
+    font-size: .8rem;
+    padding: 0;
+    div.dataTables_processing {
+        position: relative;
+    }
+    .card{
+        height: auto !important;
+    }
+    .dataTables_utils > div{
+        margin: .2rem 1rem;
+    }
+    .dt-buttons .btn, .paginate_button a, .dataTables_info{
+        @extend .dt-button;
+    }
+    .form-control{
+        padding: $sm-padding;
+    }
+    .dataTables_scrollHead{
+        margin-bottom: 1px;
+        @include box-shadow($bar-box-shadow) ;
+        @include colors($color...);
+        table{
+            border: 0;
+        }
+    }
+    .dataTables_scroll{
+        min-height: 200px;
+        @include flex-box;
+        @include flex-item-auto;
+        border-top: 1px solid silver;
+        border-bottom: 1px solid silver;
+        .dataTables_scrollBody{
+            @include flex-item-auto;
+
+        }
+    }
+    .dataTables_filter label{
+        margin: 0;
+    }
+
+}
+
+.dataTable{
+    border-spacing: 0;
+    thead{
+        @include colors($color...);
+        th{
+            text-align: center;
+            border-bottom: 0;
+            border-top: 0;
+            min-width: 16px;
+            padding: 0.5em;
+            &:hover{
+                @include colors($color-hover...);
+            }
+            &.sorting_asc, &.sorting_desc{
+                background-color: $dt-sort-bg;
+                /*@include colors($color-select...);*/
+            }
+        }
+    }
+    tbody {
+        td {
+            &.dt-center{
+                text-align: center;
+            }
+            height: 1.5em;
+            padding: 5px 6px !important;
+        }
+        tr:last-child td{
+            border-bottom: 1px solid #ddd;
+        }
+    
+    
+        tr{
+            &:hover{
+                background-color: $dt-hover-bg;
+            }
+            &:nth-of-type(2n+1){
+                background-color: $dt-striped-bg;
+                &:hover{
+                    background-color: $dt-striped-hover-bg;
+                }
+            }
+            td{
+                // &.dt-detail{
+                //     background: url('../images/collapsed-square.png') center no-repeat;
+                //     width: 16px;
+                //     cursor: pointer;
+                // }
+                &.dt-actions{
+                    white-space: nowrap;
+                }
+                // &.dt-select{
+                //     width: 16px;
+                //     background: url('../images/unchecked-square.png') center no-repeat;
+                //     cursor: pointer;
+                // }
+                &.sorting_1{
+                    background-color: $dt-sort-bg;
+
+                }
+                span{
+                    &+span{
+                        margin-left:5px;
+                    }
+                    &.dt-icon{
+                        background: no-repeat 0 0;
+                        width: 24px;
+                        height: 24px;
+                        display: inline-block;
+                    }
+                //     &.label{
+                //         display: inline;
+                //         padding: .2em .6em .3em;
+                //         font-size: 0.8rem;
+                //         font-weight: bold;
+                //         line-height: 1;
+                //         // color: #fff;
+                //         text-align: center;
+                //         white-space: nowrap;
+                //         vertical-align: baseline;
+                //         border-radius: .25em;
+                //         &-info{
+                //             background-color: #5bc0de;
+                //         }
+                //         &-default{
+                //             background-color: #777;
+                //         }
+
+                //     }
+                }
+            }
+        }
+        &.shown{
+            // td.dt-detail{
+            //     background: url('../images/expanded-square.png') center no-repeat;
+            // }
+            &+tr > td{
+                padding-left:2em;
+            }
+        }
+
+            // &.selected, &.sel-1{
+            //     background-color: $dt-select-bg;
+            //     &:hover{
+            //         background-color: $dt-select-hover-bg;
+
+            //     }    
+            //     td{
+
+            //         &.dt-select{
+            //             background: url('../images/checked-square.png') center no-repeat;
+            //         }
+            //     }
+            // }
+            // &.added, &.sel-2{
+            //     td{
+            //         &.dt-select{
+            //             background: url('../images/check_basic_blue.png') center no-repeat;
+            //         }
+            //     }
+            // }
+            // &.included, &.sel-3{
+            //     td{
+            //         &.dt-select{
+            //             background: url('../images/check_basic_green.png') center no-repeat;
+            //         }
+            //     }
+            // }
+    }
+}
+

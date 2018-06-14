@@ -1,0 +1,44 @@
+app_admin_clientsgroups:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::indexAction }
+
+app_admin_clientsgroups_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::ajaxListAction }
+
+app_admin_clientsgroups_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::createAction }
+    methods:  POST
+
+app_admin_clientsgroups_data:
+    path:     /{id}/data
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::ajaxDataAction }
+
+app_admin_clientsgroups_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::deleteAction }
+
+app_admin_clientsgroups_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::editAction }
+
+app_admin_clientsgroups_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::newAction }
+
+app_admin_clientsgroups_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_clientsgroups_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::showAction }
+
+app_admin_clientsgroups_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\ClientsGroupsController::updateAction }
+    methods:  [POST, PUT]
+
+

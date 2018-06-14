@@ -1,0 +1,9 @@
+{% use "@App/ServiceOrders/blocks.html.twig" %}
+{{ dump() }}
+{% set dictionaries = entities_settings.Orders.dictionaries %}
+{% if pdf is not defined %}
+    {{ block('view_order')}}
+{% else %}
+    {{ block('print_order')}}
+{% endif %}
+        

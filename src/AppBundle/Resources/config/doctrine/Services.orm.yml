@@ -1,0 +1,60 @@
+AppBundle\Entity\Services:
+    type: entity
+    repositoryClass: AppBundle\Repository\ServicesRepository
+    table: Services
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        performed:
+            type: datetime
+        title:
+            type: string
+            length: 100
+        duration: 
+            type: smallint
+            nullable: true
+            options:
+                unsigned: true
+                default: 0
+        description:
+            type: text
+            nullable: true
+        details:
+            type: text
+            nullable: true
+        options:
+            type: text            
+            nullable: true
+        value:
+            type: float
+            nullable: true
+            options:
+                default: 0
+        discount: 
+            type: smallint
+            nullable: true
+            options:
+                unsigned: true
+                default: 0
+        summary:
+            type: float
+            options:
+                default: 0
+    manyToOne:
+        serviceOrder:
+            targetEntity: ServiceOrders
+            inversedBy: services
+            cascade: [persist, refresh]
+            joinColumn:
+                name: serviceOrders_id
+                referencedColumnName: id    
+    lifecycleCallbacks: 
+        prePersist: [ prePersistServices ]
+        preUpdate: [ preUpdateServices ]
+        

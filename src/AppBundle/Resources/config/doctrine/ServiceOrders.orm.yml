@@ -1,0 +1,105 @@
+AppBundle\Entity\ServiceOrders:
+    type: entity
+    repositoryClass: AppBundle\Repository\ServiceOrdersRepository
+    table: ServiceOrders
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        number: 
+            type: string
+            length: 10
+        created:
+            type: datetime
+        title:
+            type: string
+            length: 100
+        accessory:
+            type: text
+            nullable: true
+        description:
+            type: text
+            nullable: true
+        type:
+            type: smallint
+            options:
+                unsigned: true
+                default: 1
+        express:
+            type: smallint
+            options:
+                unsigned: true
+                default: 1
+        value:
+            type: float
+            nullable: true
+            options:
+                default: 0
+        status:
+            type: smallint
+            options:
+                unsigned: true
+                default: 1
+        closed:
+            type: datetime
+            nullable: true
+        receipt:
+            type: datetime
+            nullable: true
+        paid:
+            type: datetime
+            nullable: true
+        bill:
+            type: string
+            length: 20
+            nullable: true
+    oneToOne:
+        serviceRequest:
+            targetEntity: ServiceRequests
+            mappedBy: serviceOrder
+    oneToMany:
+        services:
+            targetEntity: Services
+            mappedBy: serviceOrder
+            cascade: [persist]
+        materials:
+            targetEntity: Materials
+            mappedBy: serviceOrder
+            cascade: [persist]
+        externalServices:
+            targetEntity: ExternalServices
+            mappedBy: serviceOrder
+            cascade: [persist]
+        payments:
+            targetEntity: Payments
+            mappedBy: serviceOrder
+            cascade: [persist]
+    manyToOne:
+        client:
+            targetEntity: Clients
+            inversedBy: serviceOrders
+            joinColumn:
+                name: clients_id
+                referencedColumnName: id    
+            
+    manyToMany:
+        notes:
+            targetEntity: Notes
+            joinTable:
+                name: ServiceOrders_Notes
+                joinColumns:
+                    serviceOrders_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    notes_id:
+                        referencedColumnName: id 
+            cascade: [ persist ]
+    lifecycleCallbacks: 
+        prePersist: [ prePersistServiceOrders ]
+        postPersist: [ postPersistServiceOrders ]
+        preUpdate: [ preUpdateServiceOrders ]

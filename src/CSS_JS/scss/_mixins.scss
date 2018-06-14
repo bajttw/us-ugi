@@ -1,0 +1,125 @@
+
+
+@mixin colors($text, $background, $border) {
+  color: $text;
+  background-color: $background;
+  border-color: $border;
+}
+@mixin colors-important($text, $background, $border) {
+  color: $text !important;
+  background-color: $background !important;
+  border-color: $border !important;
+}
+
+
+@mixin field-border{
+    border: 1px solid rgba(0, 0, 0, 0.15) {
+        radius: 0.25rem;
+    }
+}
+
+@mixin full-height($overflow: hidden ){
+    height: 100%;
+    max-height: 100%;
+    overflow: $overflow;
+}
+
+@mixin fluid(){
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+@mixin flex-on{
+    display: flex;
+    /*padding: 0 !important;*/
+    /*flex-wrap: wrap;*/
+
+}
+@mixin flex-wrap{
+    flex-wrap: wrap;
+
+}
+
+@mixin flex-row{
+    @include flex-on;
+    flex-direction: row;
+}
+
+@mixin flex-column{
+    @include flex-on;
+    flex-direction: column;
+    /*align-items: stretch;*/
+}
+
+@mixin flex-item-auto($overflow: auto){
+    flex: 1 1 auto !important;
+    overflow-y: $overflow;
+}
+
+@mixin flex-box{
+    @include flex-column;
+    > div{
+        flex: 0 0 auto;
+    }
+    > .flex-auto{
+        @include flex-item-auto;
+    }
+}
+
+
+@mixin button-variant($color, $background, $border) {
+  $active-background: darken($background, 10%);
+  $active-border: darken($border, 12%);
+
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+  @include box-shadow($btn-box-shadow);
+
+  @include hover {
+    color: $color;
+    background-color: $active-background;
+        border-color: $active-border;
+  }
+
+  &:focus,
+  &.focus {
+    color: $color;
+    background-color: $active-background;
+        border-color: $active-border;
+  }
+
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    background-color: $active-background;
+        border-color: $active-border;
+    // Remove the gradient for the pressed/active state
+    background-image: none;
+    @include box-shadow($btn-active-box-shadow);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      color: $color;
+      background-color: darken($background, 17%);
+          border-color: darken($border, 25%);
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    &:focus,
+    &.focus {
+      background-color: $background;
+          border-color: $border;
+    }
+    @include hover {
+      background-color: $background;
+          border-color: $border;
+    }
+  }
+}
+

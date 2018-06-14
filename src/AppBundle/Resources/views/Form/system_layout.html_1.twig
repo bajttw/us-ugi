@@ -1,0 +1,63 @@
+{% extends "Form/layout.html.twig" %}
+{#{% use "blocks.html.twig" %}#}
+{#{% use "SystemBundle:Orders:blocks.html.twig" %}#}
+
+
+
+
+
+
+
+
+
+
+{%- block systembundle_productions_positions_row -%}
+    {% set attr = attr|add_class('table-body') %}
+    {% if prototype is defined %}
+        {%- set attr = attr|merge({'data-prototype': form_row(prototype, { hidden: 1}) }) -%} {#, 'data-lacker-prototype': block('show_lacker')#}
+    {% endif %}
+    {{- block('form_widget') -}}
+{%- endblock systembundle_productions_positions_row -%}
+
+{%- block systembundle_productions_positions_entry_row -%}
+    {% if hidden is defined %}
+        {% set attr = attr|merge({style: (attr.style|default('') ~ ' display:none;')|trim}) -%}
+    {% endif %}
+    {% set attr = attr|add_class('row-pos') %}
+    <div {{ block('widget_container_attributes') }}>
+        {{form_widget(form)}}
+        <div class="row-data" >
+            <div class="col-1" data-name="production" ></div>
+            <div class="col-1" data-name="oid"></div>
+            <div class="c-height" data-name="length"></div>
+            <div class="c-width" data-name="width"></div>
+            <div class="c-quantity" data-name="quantity"></div>
+            <div class="c-area" data-name="area"></div>
+            <div class="c-model" data-name="model" data-dictionary="models"></div>
+            <div class="c-cutter" data-name="cutter" data-dictionary="cutters"></div>
+            <div class="c-size" data-name="size" data-dictionary="sizes"></div>
+            <div class="c-handle" data-name="handle" data-dictionary="handles"></div>
+            <div class="c-lackers" data-name="positionLackers" data-dictionary="lackers" data-collection="lackers" data-prototype="{{ block('show_lacker')|e }}"></div>
+            <div class="c-double" data-name="doubleSide" data-dictionary="doubleSide"></div>
+            <div class="col-1" >{{ macros.btn_delete() }}</div>
+        </div>
+        <div class="row-info" style="display:none;">
+        </div>
+    </div>
+{%- endblock systembundle_productions_positions_entry_row -%}
+
+
+{#{%- block systembundle_orders_positions_entry_positionLackers_widget -%}#}
+{#{%- block position_lackers_widget -%}#}
+{#    {% if prototype is defined %}#}
+{#        {%- set attr = attr|merge({'data-prototype': form_row(prototype, { hidden: 1})} ) -%}#}
+{#    {% endif %}#}
+{#    {{- block('form_widget') -}}#}
+{#{%- endblock position_lackers_widget -%}#}
+{#{%- endblock systembundle_orders_positions_entry_positionLackers_widget -%}#}
+
+{#{%- block systembundle_orders_positions_entry_positionLackers_entry_row -%}#}
+{#{%- endblock systembundle_orders_positions_entry_positionLackers_entry_row -%}#}
+
+
+

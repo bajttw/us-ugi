@@ -1,0 +1,221 @@
+{% use "blocks.html.twig" %}
+
+{%- macro span_btn(label, attr, data_opt) -%}
+    {{ block('btn_span') }}
+{%- endmacro -%}
+
+{%- macro span_btn_info(all, attr) -%}
+    {% set attr=attr|default({})|merge({ 'data-showinfo': all|default('1') })|add_class(['btn-info', 'fa', 'fa-info-circle']) -%}
+    {{ block('btn_span') }}
+{%- endmacro -%}
+
+{%- macro span_btn_delete(attr, data_opt) -%}
+    {% set attr=attr|default({})|add_class(['btn-danger', 'fa', 'fa-remove']) -%}
+    {{ block('btn_span') }}
+{%- endmacro -%}
+
+{%- macro table_column(column, tab_name) -%}
+    <th 
+        {%- for dn, dv in column.d -%}
+            {{- ' ' -}}data-{{ dn }}="{{ dv }}"
+        {%- endfor -%}
+        {% set attr= {} %}
+        {% if column.d.field is defined %}    
+            {% set attr= attr|merge({ title: (tab_name~'.title.'~column.d.field)}) %}
+        {% endif %}
+        {% set attr= attr|merge( column.attr|default({}) ) %}
+        {{ block('attributes') }}
+        >
+        {% if column.d.field is defined %}    
+            {{ (tab_name~'.label.'~column.d.field)|trans }}
+        {% endif %}
+    </th>
+{%- endmacro -%}
+
+{%- macro modal_btn(data_table, modal_id) -%}
+    data-toggle="modal" 
+    {% if data_table is not empty %} data-table="#{{ data_table }}_table" {% endif %}
+    data-target="#{{ modal_id is not defined or modal_id is empty or modal_id=='1' ? 'my' : modal_id }}_modal"
+{%- endmacro -%}
+
+{%- macro attributes(attr) -%}
+    {%- for attrname, attrvalue in attr -%}
+        {{- " " -}}
+        {%- if attrname in ['placeholder', 'title'] -%}
+            {{- attrname }}="{{ attrvalue|default('...')|trans }}"
+        {%- elseif attrvalue is same as(true) -%}
+            {{- attrname }}="{{ attrname }}"
+        {%- elseif attrvalue is not same as(false) -%}
+            {{- attrname }}="{{ attrvalue }}"
+        {%- endif -%}
+    {%- endfor -%}
+{%- endmacro -%}
+
+
+{% macro panel_height(label) %}
+    <div class="col-12 col-height col-top">
+        <div class="panel panel-default panel-height">   
+            <div class="panel-heading">
+                {{ label }}
+            </div>
+            <div class="panel-body" >
+
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{#{% macro show_field(label, value, attr, data_opt ) %}
+    {{ block('show_field') }}
+{% endmacro %}
+#}
+{% macro show_option(values, name, options ) %}
+    {% if values is defined %}
+        {{ block('diff_option') }}
+    {% endif %}
+{% endmacro %}
+
+
+
+{% macro orderpositionAttach(uploaded) %}
+        {% set name = uploaded.name|default('__name__') %}
+        {% set url = uploaded.url|default('__url__') %}
+    <div class="col-8 attach" >
+        <div class="attach-preview" style="background-image:url({{url}}thumbnail/{{name}});" >
+            <a href="{{url}}{{name}}" target="_blank"></a>
+        </div>
+        <div class="attach-description">
+            <p>
+                <span>{{uploaded.original|default('__original__') }}</span>
+            </p>
+        </div>
+    </div>
+{% endmacro %}
+
+
+
+
+{#{% macro show_field(field) %}
+    <div class="form-group" >
+        {% if field.vars is defined %}
+            {% if field.vars.label is defined and field.vars.label!='' %}<label >{{ field.vars.label|default('') }}</label>{% endif %}
+            <div 
+                {% if field.vars.id is defined %}
+                    id="{{ field.vars.id|replace({ 'drako_parapetybundle' : 'div'}) }}"
+                {% endif %} 
+                class="form-control" title="{{ field.vars.attr.title|default('') }}">
+                <span>
+                    {% if (field.vars.block_prefixes.1 == 'datetime') %}
+                        {% if field.vars.value.date.year is not empty %}
+                            {{ field.vars.value.date.year }}-{{ field.vars.value.date.month }}-{{ field.vars.value.date.day }} {{ field.vars.value.time.hour}}:{{ field.vars.value.time.minute}}
+                            {% else %}
+                            {{ field.vars.attr.placeholder }}
+                        {% endif %}
+                    
+                    {% else %}
+                        {% set val= field.vars.value|default( field.vars.attr.placeholder|default('')) %}
+                        {% if (field.vars.block_prefixes.1 == 'choice') %}
+                            {% for option in field.vars.choices %}
+                                {% if option.value == val %}
+                                    {% set val= option.label %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                        {{ val }}
+                    {% endif %}
+                </span>
+            </div>
+        {% else %}
+            {% if field.label is defined and field.label!='' %}<label >{{ field.label|default('') }}</label>{% endif %}
+            <div {% if field.id is defined and field.id is not empty %}id="{{ field.id }}"{% endif %} class="form-control" title="{{ field.title|default('') }}">
+                <span>
+                    {% if field.value.timestamp is defined %}
+                        {{ field.value|date('Y-m-d H:i') }}
+                    {% else %}
+                        {{ field.value|default( field.placeholder|default('') ) }}
+                    {% endif %}
+                </span>
+            </div>
+        {% endif %}
+    </div>    
+{% endmacro %}
+{% macro show_value(value, type, alert) %}
+    {% set type  = type|default('') %}
+    {% if value is not empty %}
+        {% if type == "date" %}
+            {% set value= value|date('Y-m-d') %}
+        {% elseif type=="datetime" %} 
+            {% set value= value|date('Y-m-d H:i:s') %}
+        {% elseif type=="float" %} 
+            {% set value=value|number_format(2, ',') %}
+        {% elseif type=="valute" %} 
+            {% set value=(value|number_format(2, ',') ~ 'zł')%}
+        {% else %}
+            {% set value=(value ~ type) %}
+        {% endif %}
+    {% endif %}
+        <span {% if alert is defined and alert!='' %} class="fa fa-exclamation-sign" {% endif %}>{{ value }}</span>
+{% endmacro %}
+
+{% macro row_value(value, label, type, alert) %}
+    <div class="row">
+        <div class="th col-8">{{ label }}</div>
+        <div class="col-16">
+            {{ _self.show_value(value, type|default(''), alert|default('')) }}
+        </div>
+    </div> 
+{% endmacro %}
+
+{% macro upload_field(field)%}
+    <div class="form_row">
+        {{ form_label(field) }}
+        <div class="col-md-18 upload-files">
+            <div class="preview">
+                {% if field.vars.value.name is defined %}
+                    <a target="_blank" href="{{field.vars.value.url}}{{field.vars.value.name}}">
+                        <div class="image" style="background-image:url({{field.vars.value.url}}thumbnail/{{field.vars.value.name}})"></div>
+                    </a>
+                {% else %}
+                    <div class="image"></div>
+                {% endif %}
+                <div class="progress" style="display: none">
+                    <div class="progress-bar progress-bar-success"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 actions">
+            <span class="btn btn-success btn-upload" data-upload-field="{{ field.vars.id }}">
+            <i class="fa fa-plus"></i>
+            <span>Wczytaj obraz</span>
+             </span>
+        </div>  
+        {{form_widget(field)}}
+    </div>  
+{% endmacro %}
+{% macro upload_field_json(field)%}
+    <div class="form_row">
+        {{ form_label(field) }}
+        <div class="col-md-18 upload-files">
+            <div class="preview">
+                {% if field.vars.value.name is defined %}
+                    <a target="_blank" href="{{field.vars.value.url}}{{field.vars.value.name}}">
+                        <div class="image" style="background-image:url({{field.vars.value.url}}thumbnail/{{field.vars.value.name}})"></div>
+                    </a>
+                {% else %}
+                    <div class="image"></div>
+                {% endif %}
+                <div class="progress" style="display: none">
+                    <div class="progress-bar progress-bar-success"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 actions">
+            <span class="btn btn-success btn-upload" data-upload-field="{{ field.vars.id }}">
+            <i class="fa fa-plus"></i>
+            <span>Wczytaj obraz</span>
+             </span>
+        </div>  
+        {{form_widget(field)}}
+    </div>  
+    
+{% endmacro %}#}

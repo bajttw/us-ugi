@@ -1,0 +1,356 @@
+@import "variables";
+@import "mixins";
+// bootstrap
+@import "bootstrap/mixins";
+@import "custom-jq-ui";
+@import "multiselect";
+@import "combobox";
+@import "switch";
+@import "linedtextarea";
+@import "daterangepicker";
+@import "buttons";
+@import "disp";
+@import "forms";
+@import "bars";
+@import "modals";
+@import "panels";
+@import "tables";
+@import "datatables";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.flex-on {
+  @include flex-on;
+}
+
+.flex-box {
+  @include flex-box;
+}
+
+.flex-item-auto,
+.flex-fill {
+  @include flex-item-auto;
+}
+
+#page_title {
+  padding: $spacer*0.25 $spacer*0.5;
+  h1 {
+    font-size: 1.25rem;
+  }
+}
+.row-blocks {
+  @include flex-row;
+  flex: none;
+  // flex-direction: row;
+  flex-wrap: wrap;
+  /*    > div+div{
+        padding-left: 0;
+    }*/
+  & + & {
+    margin-top: 1rem;
+  }
+}
+
+.import-wrap {
+  display: flex !important;
+  align-items: center !important;
+  flex-grow: 0;
+}
+
+#main-wrapper {
+  min-height: 800px;
+  /*padding: 42px 0 35px;*/
+  /*@include full-height;*/
+  > .content-body {
+    padding: 5px;
+  }
+
+  /*    .content-main{
+        @include flex-item-auto;
+        @include flex-box;
+        > .content-body{
+            @include flex-item-auto;
+            padding: 5px 15px;
+        }
+    }*/
+}
+header,
+footer {
+  @include box-shadow($header-box-shadow);
+}
+/*header, footer{
+    @include box-shadow($header-box-shadow);
+    position: fixed;
+    width: 100%;
+    z-index: 999!important;
+}
+
+header{
+    top: 0;
+    @include box-shadow($header-box-shadow);
+    height: 42px;
+    background-color: $header-bg;
+}
+
+footer{
+    bottom: 0;
+    background-color: whitesmoke;
+    height: 30px;
+    display:flex;
+    justify-content: center;
+    span{
+        
+    }
+}*/
+
+/*.full-height, .wrapper, .tabs-wrapper{*/
+
+.content-header {
+  background-color: #fdfefe;
+  h1 {
+    line-height: 2.5rem;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+  }
+}
+
+.content-main {
+  content: "";
+  .content-body {
+  }
+}
+.content {
+  background-color: #fdfefe;
+}
+.toolbars {
+  margin-bottom: 10px;
+  border-bottom: 1px silver solid;
+  .toolbar {
+    background-color: whitesmoke;
+    border-bottom: silver 1px solid;
+    padding: 5px 15px;
+    text-overflow: ellipsis;
+  }
+}
+
+.fa {
+  line-height: 1.25;
+}
+
+.order {
+  min-width: 1200px;
+}
+
+.info-box-header {
+  cursor: pointer;
+}
+.info-box-content {
+  display: flex;
+  align-content: center;
+  // justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 5px !important;
+  div {
+    padding: 5px;
+    width: auto;
+
+  }
+  // div + div {
+  //   padding-left: 0;
+  // }
+  span {
+    font-size: 0.8rem;
+    &.form-control {
+      display: block;
+      white-space: nowrap;
+      max-width: 15em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+.info-header {
+  font-weight: bold;
+  margin-left: 1rem;
+  &:first-child {
+    margin-left: 0;
+  }
+  &::after {
+    content: ":";
+    margin-right: 0.5rem;
+  }
+}
+.info-content {
+}
+
+.upload-preview {
+  text-align: center;
+  img {
+    max-width: 250px;
+  }
+}
+
+.modal-body > .container-fluid {
+  padding: 0;
+}
+
+.card-sm {
+  .card-header {
+    padding: {
+      top: 0.3rem;
+      bottom: 0.3rem;
+    }
+  }
+  .card-block {
+    padding: 2px 2px 5px;
+    margin-bottom: 0;
+  }
+}
+.overflow {
+  overflow: auto !important;
+}
+.overflow-x {
+  overflow-x: auto !important;
+}
+.overflow-y {
+  overflow-y: auto !important;
+}
+
+.show-wrapper {
+}
+
+.scroll {
+  overflow: auto;
+  &>div{
+    max-width: unset;
+  }
+  &-off {
+    overflow: hidden !important;
+  }
+}
+
+.loader {
+  // position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: $modal-content-bg;
+  background-clip: padding-box;
+  border: $modal-content-border-width solid $modal-content-border-color;
+  @include border-radius($border-radius-lg);
+  @include box-shadow($modal-content-box-shadow-xs);
+  // Remove focus outline from opened modal
+  outline: 0;
+  width: 25rem;
+  padding: 2rem;
+  // margin: 4rem auto;
+  margin: auto;
+  // top: 50%;
+  // left: 50%;
+  .animate {
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    border: 16px solid silver;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+  .msg {
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.overlay {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+  cursor: pointer;
+}
+
+.diff {
+  color: orange;
+}
+
+
+
+.border-t {
+  border-top: $border !important;
+}
+.border-b {
+  border-bottom: $border !important;
+}
+.border-l {
+  border-left: $border !important;
+}
+.border-r {
+  border-right: $border !important;
+}
+.border {
+  border: $border !important;
+}
+.border-t {
+  border-top: 1px solid;
+}
+.border-b {
+  border-bottom: 1px solid;
+}
+
+ul.ui-menu {
+  z-index: $zindex-modal+1;
+}
+
+/* Rules for sizing the icon. */
+.material-icons{
+  vertical-align: middle;
+  &.md-14 { font-size: 14px; }
+  &.md-18 { font-size: 18px; }
+  &.md-24 { font-size: 24px; }
+  &.md-36 { font-size: 36px; }
+  &.md-48 { font-size: 48px; }
+/* Rules for using icons as black on a light background. */
+  &.md-dark { 
+    color: rgba(0, 0, 0, 0.54); 
+    &.md-inactive { color: rgba(0, 0, 0, 0.26); }
+  }
+
+/* Rules for using icons as white on a dark background. */
+  &.md-light {
+     color: rgba(255, 255, 255, 1); 
+
+     &.md-inactive { color: rgba(255, 255, 255, 0.3); }  
+  }
+}
+

@@ -1,0 +1,145 @@
+.btn-sm{
+    padding: 2px;
+}
+
+.show-diff{
+    color:orange;
+}
+
+.btn-diff{
+    @include button-variant($btn-diff-color, $btn-diff-bg, $btn-diff-border);
+}
+
+.btn-img{
+    width: 24px;
+    height: 24px;
+    content: " ";
+    display: inline-block;
+    margin: 0 2px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+    &.disable{
+        cursor: default;
+    }
+
+}
+
+@for $i from 1 through length($btn-actions) {
+    .btn-#{nth($btn-actions, $i)}{
+        background-image:  url('../images/bt_#{nth($btn-actions, $i)}.png');
+        &.disable{
+            background-image:  url('../images/bt_#{nth($btn-actions, $i)}_mono.png');
+            
+        }
+    }                
+}
+
+
+.btn+.btn{
+    margin-left: 2px;
+}
+
+// .btn-edit, .btn-pdf, .btn-delete, .btn-show, .btn-xls, .btn-copy, .btn-stan, .btn-prn{
+//     background: no-repeat center;
+//     width: 24px;
+//     height: 24px;
+//     content: " ";
+//     display: inline-block;
+//     margin: 2px;
+//     cursor: pointer;
+// }
+
+// .btn-show{
+//     background-image: url(../images/bt_show.png);
+// }
+// .btn-edit{
+//     background-image: url(../images/bt_edit1.png);
+// }
+// .btn-pdf{
+//     background-image: url(../images/bt_pdf.png);
+// }
+// .btn-xls{
+//     background-image: url(../images/bt_xls.png);
+// }
+// .btn-delete{
+//     background-image: url(../images/bt_delete.png);
+// }
+// .btn-copy{
+//     background-image: url(../images/bt_copy.png);
+// }
+// .btn-export{
+//     background-image: url(../images/bt_export.png);
+// }
+// .btn-stan{
+//     background-image: url(../images/bt_stan.png);
+// }
+// .btn-prn{
+//     background-image: url(../images/bt_prn.png);
+// }
+
+.btn-default,
+.btn-signal,
+.signal-0{
+    @include button-variant($gray-300, $gray-300);
+    // @include button-variant($btn-signal-0-color, $btn-signal-0-bg, $btn-signal-0-border);
+}
+
+.signal-1, [data-signal="1"][data-value]:not([data-value=""]){
+    @include button-variant($gray-600, $gray-600);
+    // @include button-variant($btn-signal-1-color, $btn-signal-1-bg, $btn-signal-1-border);
+}
+.btn.diff, .signal-2, {
+    @include button-variant($blue, $blue);
+    
+    // @include button-variant($btn-signal-2-color, $btn-signal-2-bg, $btn-signal-2-border);
+}
+
+.btn-xs{
+    padding: 1px 5px !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+}
+
+.btn{
+    .card-header &{
+        padding: 1px 5px !important;
+        font-size: small;
+    }
+    // .row-details &{
+    //     padding: 1px 5px !important;
+    //     font-size: inherit !important;
+    //     line-height: inherit !important;
+    // }
+    .toolbar &, .modal-footer > &, .content-footer > &{
+        margin: 5px 10px;
+        &:first-child{
+            margin-left: 15px;
+        }
+        &:last-child{
+            margin-right: 15px;
+        }
+    }
+    .toolbar > &+&, .modal-footer > &+&, .content-footer > &+&{
+        margin-left: 0px;
+    }
+    // .form-group &{
+    //     // padding: $input-padding-y $input-padding-x;
+    //     line-height: $input-btn-line-height - 0.05rem;
+    // }
+}
+.buttons{
+    @include flex-on;
+    @include flex-wrap;
+    align-self: center!important;
+    justify-content: center!important;
+    padding: 5px;
+    .btn{
+        padding: $md-padding !important;
+    }
+}
+
+.modal .buttons{
+    justify-content: flex-end;   
+}

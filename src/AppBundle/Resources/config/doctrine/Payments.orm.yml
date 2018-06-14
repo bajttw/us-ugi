@@ -1,0 +1,50 @@
+AppBundle\Entity\Payments:
+    type: entity
+    repositoryClass: AppBundle\Repository\PaymentsRepository
+    table: Payments
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        performed:
+            type: datetime
+        type:
+            type: smallint
+            options:
+                unsigned: true
+                default: 0
+        description:
+            type: text
+            nullable: true
+        value:
+            type: float
+            options:
+                default: 0
+
+    manyToOne:
+        serviceOrder:
+            targetEntity: ServiceOrders
+            inversedBy: payments
+            joinColumn:
+                name: serviceOrders_id
+                referencedColumnName: id    
+    manyToMany:
+        notes:
+            targetEntity: Notes
+            joinTable:
+                name: Payments_Notes
+                joinColumns:
+                    payments_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    notes_id:
+                        referencedColumnName: id
+            cascade: [ persist, remove ]
+    lifecycleCallbacks: 
+        prePersist: [ prePersistPayments ]
+        preUpdate: [ preUpdatePayments ]

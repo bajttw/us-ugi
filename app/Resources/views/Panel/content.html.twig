@@ -1,0 +1,37 @@
+{% use "blocks.html.twig" %}
+{% block panel_form_start %}
+{% endblock panel_form_start %}
+<div class="content-header">
+    {% block content_header %}
+    {% endblock%}
+    <div class="d-flex content-info" >
+        <div class="alert alert-info fade in" {% if panel.info is not defined or panel.info is empty %} style="display: none"{% endif %}>
+{#                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>    #}
+            {{ panel.info|default('') }}
+        </div>
+    </div>
+</div>
+<div class="content-body">
+    {% block panel_content_body %}
+    {% endblock %}
+    {% block panel_form_body %}
+    {% endblock %}
+    {% block panel_form_messages %}
+    {% endblock %}
+    {% block panel_form_errors %}
+    {% endblock %}
+</div>
+<div class="content-footer">
+    <div class="buttons col-12">
+        {% block panel_form_submit %}
+        {% endblock %}
+    </div>
+    {% block panel_content_footer %}
+    {% endblock %}
+</div>
+{% block panel_form_end %}
+{% endblock %}
+{% block panel_js %}
+{% endblock %}
+
+

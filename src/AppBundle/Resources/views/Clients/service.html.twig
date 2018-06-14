@@ -1,0 +1,10 @@
+{% extends(layout | default('layout')) ~ '.html.twig' %}
+{% block fos_user_content %}
+    {% set div = service | add_class('panels', 'attr') %}
+    {{ block('begin_div') }}
+    {% set panel = panel_left | add_class(['col-4'], 'attr') %}
+    {% include panel.template | default('Panel/layout.html.twig') %}
+    {% set panel = panel_right | add_class(['col-8'], 'attr') %}
+    {% include panel.template | default('Panel/layout.html.twig') %}
+    {{ block('close_div') }}
+{% endblock fos_user_content %}

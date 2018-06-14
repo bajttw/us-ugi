@@ -1,0 +1,25 @@
+{% extends 'Panel/content.html.twig' %}
+{% use "@App/ServiceOrders/blocks.html.twig" %} 
+{% set table = panel.table %}
+{% block content_header %}
+    <div class="d-flex">
+        {% if panel.summary is defined and panel.summary %}
+            <div class="col-8">
+                {% set summary={
+                    id : "selected_summary"
+                }%}
+                {% if panel.summary is iterable %}
+                    {% set summary=summary|merge(panel.summary) %}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock%}
+{% block panel_content_body %}
+    {{ block('datatable') }}
+{% endblock %}
+
+
+
+    
+ 

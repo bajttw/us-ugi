@@ -1,0 +1,30 @@
+AppBundle\Entity\UsersGroups:
+    type: entity
+    repositoryClass: AppBundle\Repository\UsersGroupsRepository
+    table: UsersGroups
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        name:
+            type: string
+            length: 50
+        code:
+            type: string
+            length: 10
+            options:
+                default: 'N'
+        description:
+            type: text
+            nullable: true   
+    manyToMany:
+        users:
+            targetEntity: Users
+            mappedBy: userGroups
+
+    lifecycleCallbacks: {  }

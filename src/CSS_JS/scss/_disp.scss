@@ -1,0 +1,48 @@
+
+.disp {
+    &+.disp{
+        margin-left:5px;
+    }
+    &.label{
+        display: inline;
+        padding: .1rem .5rem;
+        // font-size: 0.8rem;
+        font-weight: bold;
+        // line-height: 1;
+        // color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: .25em;
+        &-info{
+            background-color: #5bc0de;
+        }
+        &-default{
+            background-color: #777;
+        }
+    }
+    cursor: context-menu;
+    @each $name, $signals in $disp-info {
+        $color: map-get($theme-colors, $name);
+        &-#{$name} {
+            color: $color;
+            @include hover-focus {
+                color: darken($color, 10%);
+            }
+        }
+    }
+    &.label{
+        @include button-variant($gray-300, $gray-300);
+        
+        @each $name, $signals in $disp-bg {
+            &.disp-#{$name} {
+                @for $i from 1 through length($signals) {
+                    &[data-value="#{$i}"]{
+                        @include button-variant(nth($signals, $i), nth($signals, $i));
+                    }                
+                }
+            }
+        }
+    }
+}
+

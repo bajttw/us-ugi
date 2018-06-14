@@ -1,0 +1,134 @@
+@import "mixins";
+
+// .btn{
+//   @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+// }
+
+.btn-default{
+  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+}
+
+@mixin inverse-menu-item-hover{
+    @include hover-focus {
+        background-color: $navbar-inverse-hover-bg; 
+    }
+    &.active{
+        background-color: $navbar-inverse-active-bg; 
+        @include hover-focus {
+            background-color: $navbar-inverse-hover-bg; 
+        }
+    }
+}
+
+.navbar-dark {
+    .navbar-nav {
+        .nav-item,
+        .dropdown-item {
+            @include hover-focus {
+                color: $navbar-dark-hover-color;
+                background-color: $navbar-dark-hover-bg
+            }
+            &.active {
+                background-color: $navbar-dark-active-bg;
+                @include hover-focus {
+                    color: $navbar-dark-hover-color;
+                    background-color: $navbar-dark-active-bg
+                }
+            }
+        }
+    }
+}
+
+// .navbar{
+//     &-inverse {
+//         .navbar-nav {
+//             .nav-item{
+//                 @include inverse-menu-item-hover;
+//             }
+//         }
+//         .dropdown-item{
+//             @include inverse-menu-item-hover;
+//         }
+//     }
+// }
+
+// .input-group-addon,
+// .input-group-btn,
+// .input-group .form-control {
+//   flex-direction: row !important;
+// }
+// .input-group-btn{
+//     > .btn{
+//         border: $input-btn-border-width solid $input-border-color;
+//         line-height: 0.5em !important;
+//         > *{
+//             line-height: 0.5em !important;
+            
+//         }
+//     }
+    
+// }
+.container-fluid{
+    width: 100%;
+}
+/*
+.navbar-dark {
+    padding: 0 1rem;
+    .navbar-brand {
+        .nav-link{
+            color:inherit;
+        }
+    }
+    .navbar-nav {
+        .nav-item{
+            padding: 5px 1rem;
+            border-right-style: solid;
+            border-right-width: 1px;
+            margin: 0 !important;
+            &.first{
+                border-left-width: 1px;
+                border-left-style: solid;
+            }
+            &.active{
+                background-color: $navbar-dark-active-bg;
+            }
+        }
+        .dropdown-menu{
+            background-color: $navbar-dark-bg;
+            border: none;
+            &.menu_level_1{
+                margin-top: 0;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+        }
+        .nav-item, .dropdown-item{
+            &:hover{
+                background: $navbar-dark-active-bg;
+            }
+        }
+    }
+}
+*/
+.btn{
+    vertical-align: unset;
+}
+select.form-control:not([size]):not([multiple]){
+    height: auto !important;
+}
+
+.input-group {
+    .form-control{
+        width: auto !important;
+        flex: auto !important;
+    }
+  }
+  
+  .popover-title{
+      padding: 5px 10px;
+  }
+
+.modal-header, .modal-footer{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}

@@ -1,0 +1,41 @@
+AppBundle\Entity\ClientsGroups:
+    type: entity
+    repositoryClass: AppBundle\Repository\ClientsGroupsRepository
+    table: ClientsGroups
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        name:
+            type: string
+            length: 100
+        code:
+            type: string
+            length: 10
+            options:
+                default: 'N'
+        description:
+            type: text
+            nullable: true
+    manyToMany:
+        clients:
+            targetEntity: Clients
+            mappedBy: clientGroups
+        priceLists:
+            targetEntity: PriceLists
+            inversedBy: clientsGroups  
+            joinTable:
+                name: ClientsGroups_PriceLists
+                joinColumns:
+                    clientsGroups_id:
+                        referencedColumnName: id                
+                inverseJoinColumns:
+                    pricelists_id:
+                        referencedColumnName: id
+
+    lifecycleCallbacks: {  }

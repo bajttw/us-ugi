@@ -1,0 +1,40 @@
+{
+    "yaml.format.enable": true,
+    "php.suggest.basic": false,
+    "[yaml]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": true,
+            "strings": true
+        }
+    },
+    "prettier.singleQuote": true,
+    "prettier.tabWidth": 4,
+    "files.exclude": {
+        ".git": true,
+        ".svn": true,
+        ".hg": true,
+        ".sass-cache": true,
+        "**/CVS": true,
+        "vendor": true,
+        "node_modules": true,
+        "var/cache": true
+    },
+    "files.watcherExclude": {
+        ".git/objects/**": true,
+        ".git/subtree-cache/**": true,
+        ".sass-cache/*/**": true,
+        "node_modules/*/**": true,
+        "vendor/*/**": true,
+        "var/cache/*/**": true
+    },
+    "search.exclude": {
+        "node_modules": true,
+        "vendor": true,
+        "var/cache": true
+    },
+    "php-cs-fixer.executablePath": "c:/xampp/php/php-cs-fixer.phar",
+    "prettier.printWidth": 120
+}

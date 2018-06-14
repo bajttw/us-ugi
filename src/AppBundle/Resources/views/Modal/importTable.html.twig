@@ -1,0 +1,94 @@
+{% extends 'Modal/content.html.twig' %}
+
+{%- block modal_actionsRow -%}
+    {% set btn = {
+        size: 'sm',
+        label: false
+    } %}
+    {{ block('btn_info') }}
+    {{ block('btn_delete') }}
+{%- endblock modal_actionsRow -%}
+
+{%- block modal_addedRow -%}
+    <div class="field row-pos" style="display:none" data-values="{{ rowValues|default({ key: 'id', name: 'id'}|json_encode) }}">
+        <div class="row-data">
+            {%- block modal_addedRow_data -%}{%- endblock modal_addedRow_data -%}
+        </div>
+        <div class="row-info" style="display:none;">
+            {%- block modal_addedRow_info -%}{%- endblock modal_addedRow_info -%}
+        </div>
+    </div>
+{%- endblock modal_addedRow -%}
+
+{%- block modal_body -%}
+    {% set fieldtype = modal.fieldtype | default('') %}
+    {% set fieldname= 'field-'~modal.attr.id %}
+    {% set en = modal.entityName | default(modal.name) %}
+    <div class="panels flex-nowrap">
+        <div class="col-5 flex-box">
+            {% set card={
+            attr: {
+                class: 'flex-auto'
+            },
+            header: {
+                title: en ~ '.title.index'
+            },
+            block: {
+                attr: {
+                    class: 'flex-auto flex-box'
+                }
+            }
+        } %}
+            {{ block("begin_card") }}
+            {% set toolbars = modal.toolbars | default(null) %}
+            {{ block("toolbars") }}
+            {% set table = modal.table %}
+            {{ block('datatable') }}
+            {{ block("close_card") }}
+        </div>
+        {{ block("import_btn") }}
+        <div class="col flex-box">
+            {% set card={
+            attr: {
+                class: 'flex-auto'
+            },
+            header: {
+                title: en ~ '.title.choiced'
+            },
+            block: {
+                attr: {
+                    class: 'flex-auto scroll'
+                }
+            }
+        } %}
+            {{ block("begin_card") }}
+            {% set divTab={ 
+                attr: { 
+                    class: 'table-bordered'
+                }
+            } %}
+            {{ block("begin_div_table") }}
+            {{ block("div_table_header") }}
+            {% set tabBody= { 
+                    attr: {
+                        id: 'modal_' ~ en ~ '_list',
+                        class: 'fields-container'
+                    },
+                    d: {
+                        fieldtype: fieldtype,
+                        sortable: 1,
+                        tmpl: block("modal_addedRow")
+                    }
+                } %}
+            {{ block("begin_div_table_body") }}
+            {{ block("close_div") }}
+            {{ block("close_div") }}
+
+            {{ block("close_card") }}
+        </div>
+    </div>
+{%- endblock -%}
+{%- block modal_form_submit -%}
+    {% set btn = modal.addBtn | default({}) %}
+    {{ block('btn_save') }}
+{%- endblock modal_form_submit -%}

@@ -1,0 +1,13 @@
+{% use "blocks.html.twig" %}
+{% block show_serviceOption %}
+    {% set cellOpt={ cellData: true } %}
+    {% set tabRow={
+        cells: [ 
+            { name: 'name', addClass: 'c-auto text-justify' }, 
+            { name: 'type', addClass: 'c-3', dic: true, options: { dicName: 'type' }, d:{ disp: 's' } }, 
+            { name: 'value', addClass: 'c-5'} 
+        ],
+        values: serviceOption|default({}) 
+    }%}
+    {{ block("div_table_row_details") }}
+{% endblock show_serviceOption %}

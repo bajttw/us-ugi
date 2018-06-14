@@ -1,0 +1,53 @@
+AppBundle\Entity\Materials:
+    type: entity
+    repositoryClass: AppBundle\Repository\MaterialsRepository
+    table: Materials
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            options:
+                unsigned: true
+    fields:
+        used:
+            type: datetime
+        name:
+            type: string
+            length: 100
+        description:
+            type: text
+            nullable: true
+        value:
+            type: float
+            nullable: true
+            options:
+                default: 0
+        summary:
+            type: float
+            options:
+                default: 0
+        discount: 
+            type: smallint
+            nullable: true
+            options:
+                unsigned: true
+                default: 0
+        warranty: 
+            type: smallint
+            nullable: true
+            options:
+                unsigned: true
+                default: 0
+            
+    manyToOne:
+        serviceOrder:
+            targetEntity: ServiceOrders
+            inversedBy: materials
+            cascade: [persist]
+            joinColumn:
+                name: serviceOrders_id
+                referencedColumnName: id    
+    lifecycleCallbacks: 
+        prePersist: [ prePersistMaterials ]

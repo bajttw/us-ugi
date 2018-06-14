@@ -1,0 +1,12 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}  
+    {% set card = {
+        header: {
+            title: 'security.title.login'
+        }
+    } %}
+    {{ block('begin_fos_card') }}
+        {% include "@FOSUser/Security/login_content.html.twig" %}
+    {{ block("close_fos_card") }}
+{% endblock fos_user_content %}

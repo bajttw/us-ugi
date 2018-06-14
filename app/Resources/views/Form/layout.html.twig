@@ -1,0 +1,280 @@
+
+{% use "blocks.html.twig" %}
+{% extends "bootstrap_3_layout.html.twig" %}
+
+{%- block form_group_attributes -%}
+    class="form-group {% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}"
+{%- endblock form_group_attributes -%}
+
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+    <ul class="message-field" style="display: none;">
+        {%- for error in errors -%}
+            <li>{{ error.message|default('...')|trans }}</li>
+        {%- endfor -%}
+    </ul>
+    {%- endif -%}
+{%- endblock form_errors -%}
+
+{%- block field_div -%}
+ {% spaceless %}
+    <div class="{{'form-control'~(disp_details|default(false) ? ' details' : '')}}" id="{{ id|obj_id }}"
+            {% if attr.title|default(false) %}
+                title="{{ attr.title|trans }}"
+            {% endif %}
+        >
+            {% if disp_value is not defined or disp_value %}
+                <span>
+                    {% if value is not empty %}
+                        {% if value is iterable %}
+                            {{ value|json_encode }}
+                            {{ 'blad' }}
+                        {% else %}
+                            {{ value }}
+                        {% endif %}
+                    {% else %}
+                        {% if attr.placeholder|default(false) %}
+                            {{ attr.placeholder|trans  }}
+                        {% endif %}
+                    {% endif %}
+                </span>
+            {% endif %}
+        </div>
+ {% endspaceless %}
+{%- endblock field_div -%}
+
+{%- block field_span -%}
+ {% spaceless %}
+        <span id="{{ id|obj_id }}"
+            {% if attr.title|default(false) %}
+                title="{{ attr.title|trans }}"
+            {% endif %}
+        >
+            {% if value is not empty %}
+                {{ value}}
+            {% else %}
+                {% if attr.placeholder|default(false) %}
+                    {{ attr.placeholder|trans  }}
+                {% endif %}
+            {% endif %}
+        </span>
+ {% endspaceless %}
+{%- endblock field_span -%}
+
+{%- block field_btn -%}
+    {% set opt = attr['data-options']|default({})|json_decode('control') %}
+    {% set btn = {
+        d: opt,
+        icon: opt.icon|default(false),
+        label: opt.text|default(false),
+        attr: {
+            id: id|obj_id(opt.prefix|default('btn')),
+            class: opt.class|default(''),
+            "data-navi": opt.navi|default(0)
+        }
+    } %}
+    {{ block('button') }}
+{%- endblock field_btn -%}
+
+            
+{%- block form_span -%}
+ {% spaceless %}
+        {{ form_widget(form) }}
+        {{- block('field_span') -}}
+ {% endspaceless %}
+{%- endblock form_span -%}
+
+{%- block form_field -%}
+{% spaceless %}
+    <div {{ block('form_group_attributes') }}>
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+        {% if disp|default(false) or form.vars.attr["data-options"]|default(null)|json_decode('disp') %}
+            {{- block('field_div') -}}
+        {% endif %}
+    </div>
+ {% endspaceless %}
+{%- endblock form_field -%}
+
+
+{%- block form_div -%}
+{% spaceless %}
+     <div {{ block('form_group_attributes') }}>
+        {{ form_widget(form) }}
+        {{- block('field_div') -}}
+     </div>
+ {% endspaceless %}
+{%- endblock form_div -%}
+
+ {%- block form_btn -%}
+ {% spaceless %}
+        {% if field is defined %}
+            {{ form_widget(form) }}
+        {% endif %}
+        {{- block('field_btn') -}}
+ {% endspaceless %}
+ {%- endblock form_btn -%}
+
+{%- block form_frow -%}
+
+{% spaceless %}
+    <div {{block('form_group_attributes')}}>
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+     </div>
+ {% endspaceless %}
+{%- endblock form_frow -%}
+ 
+{%- block form_fbtn -%}
+{% spaceless %}
+    <div {{ block('form_group_attributes') }}>
+        {{ form_label(form) }}
+        <div class="input-group">
+            {% if disp is defined %}
+                {{- block('field_div') -}}
+            {% endif %}
+            {{ form_widget(form) }}
+            <div class="input-group-append">
+                {{- block('field_btn') -}}
+            </div>
+        </div>
+        {{ form_errors(form) }}
+    </div>
+ {% endspaceless %}
+{%- endblock form_fbtn -%}
+ 
+{#{%- block form_fbtn -%}
+{% spaceless %}
+    <div class="form-group {% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{ form_label(form) }}
+        <div class="form-group-btn">
+            <div class="field-widget">
+                {% if disp is defined %}
+                    {{- block('field_div') -}}
+                {% endif %}
+                {{ form_widget(form) }}
+            </div>
+            <div class="field-btn">
+                {{- block('field_btn') -}}
+            </div>
+        </div>
+        {{ form_errors(form) }}
+    </div>
+ {% endspaceless %}
+{%- endblock form_fbtn -%}
+#}
+{%- block form_combo -%}
+ {% spaceless %}
+    <div {{ block('form_group_attributes') }}>
+        {{ form_label(form) }}
+        <div class="form-group-btn">
+            <div class="field-widget">
+                {% if disp is defined %}
+                    {{- block('field_div') -}}
+                {% endif %}
+                {{ form_widget(form) }}
+            </div>
+        </div>
+        {{ form_errors(form) }}
+    </div>
+ {% endspaceless %}
+{%- endblock form_combo -%}
+
+{% block checkbox_row -%}
+    <div {{ block('form_group_attributes') }}>
+        <label class="control-label required" >{{label|default('...')|trans()}}</label>
+        <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+        {{- form_errors(form) -}}
+    </div>
+{%- endblock checkbox_row %}
+
+
+
+{# 
+{% block upload_show_row  %}
+    {% set upl= value|json_decode %}
+    {% set preview=upload_options.preview|default(false) %}
+    <div class="row-details upload" >
+        {{- block('upload_detail') -}}
+        <div class="d-flex" >
+            <div class="col-12 cell" style="display:none;">
+                <span data-name='desc' ></span>
+            </div>
+        </div>
+        {{- form_widget(form) -}}
+    </div>
+{% endblock upload_show_row %}
+
+{% block upload_show  %}
+    {% set upl= value|json_decode %}
+    {% set preview=upload_options.preview|default(false) %}
+    <div class="row-details upload" >
+        {{- block('upload_detail') -}}
+        <div class="d-flex" >
+            <div class="col-12 cell" style="display:none;">
+                <span data-name='desc' ></span>
+            </div>
+        </div>
+        {{- form_widget(form) -}}
+    </div>
+{% endblock upload_show %}
+
+
+
+
+
+{% block upload_row -%}
+    {{ dump(form) }}
+    sffdsf
+    {% if  value is not empty %}
+        {{- block('upload_row_show') -}}
+    {% else %}
+        {{- form_widget(form) -}}
+    {% endif %}
+{%- endblock upload_row -%}
+
+{% block upload_widget -%}
+dsffds
+    <div class="form-group upload-container collection {% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
+        {{- block('form_label') -}}
+        {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) %}
+        {% if not read_only %}
+            {{ block('upload_btn') }}
+        {% endif %}
+        <div class='form-control' >
+            {{- block('upload_show') -}}
+        </div>
+        {{ block("status_bar") }}
+    </div>
+{%- endblock upload_widget -%} #}
+
+{% block fileupload %}
+<div style="display:none; ">
+    
+    {% set attr={
+        id : "fileupload",
+        type: "file",
+        name: "attach_[]",
+        multiple: "multiple",
+        accept: ".doc,.docx,.jpeg,.jpg,.ods,.odt,.pdf,.png,.rar,.rtf,.txt,.xls,.xlsx,.zip"
+    } %}
+    {% set data_opt={
+        url: path( upload_route|default('app_uploads_temp') ),
+        templates: {
+            show: block('upload_edit'),
+            status: block('upload_status')
+        }|json_encode        
+    } %}
+
+    <input {{ block("attributes")}} {{ block("data_options")}} >
+    {# id="fileupload" data-url="{{ path( upload_route|default('') )}}" type="file" name="attach_[]" multiple
+        data-show-tmpl="{{ block('upload_edit')|e }}"
+        data-status-tmpl="{{ block('upload_status')|e }}"
+        accept=".doc,.docx,.jpeg,.jpg,.ods,.odt,.pdf,.png,.rar,.rtf,.txt,.xls,.xlsx,.zip"> #}
+</div>
+{% endblock fileupload %}
+
+

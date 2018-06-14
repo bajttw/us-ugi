@@ -1,0 +1,46 @@
+app_admin_serviceoptions:
+    path:     /
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::indexAction }
+
+app_admin_serviceoptions_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::ajaxListAction }
+
+app_admin_serviceoptions_client_ajax:
+    path:     /ajax
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::ajaxListAction }
+
+app_admin_serviceoptions_create:
+    path:     /create
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::createAction }
+    methods:  POST
+
+app_admin_serviceoptions_data:
+    path:     /{id}/data
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::ajaxDataAction }
+
+app_admin_serviceoptions_delete:
+    path:     /{id}/delete
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::deleteAction }
+
+app_admin_serviceoptions_edit:
+    path:     /{id}/edit
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::editAction }
+
+app_admin_serviceoptions_new:
+    path:     /new
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::newAction }
+
+app_admin_serviceoptions_remove:
+    path:     /{id}/remove
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::removeAction }
+    methods:  [POST, DELETE]
+
+app_admin_serviceoptions_show:
+    path:     /{id}/show
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::showAction }
+
+app_admin_serviceoptions_update:
+    path:     /{id}/update
+    defaults: { _controller: AppBundle\Controller\ServiceOptionsController::updateAction }
+    methods:  [POST, PUT]
